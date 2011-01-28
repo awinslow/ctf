@@ -12,7 +12,7 @@ public class main extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        Button signin = (Button)findViewById(0x7f050000); //id is button 1
+        Button signin = (Button)findViewById(R.id.MainSignin); //id is button 1
         signin.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -25,7 +25,7 @@ public class main extends Activity {
 			}
 		});
         
-        Button createchar = (Button)findViewById(0x7f050001); //id is button 2
+        Button createchar = (Button)findViewById(R.id.MainCreate); //id is button 2
         createchar.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -35,7 +35,7 @@ public class main extends Activity {
 			}
 		});
         
-        Button exitb = (Button)findViewById(0x7f050002); //id is button 3
+        Button exitb = (Button)findViewById(R.id.MainExit); //id is button 3
         exitb.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
