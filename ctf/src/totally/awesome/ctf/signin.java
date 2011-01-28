@@ -12,7 +12,7 @@ public class signin extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.signin);
-        Button back = (Button)findViewById(0x7f05000a);
+        Button back = (Button)findViewById(R.id.Signinback);
         back.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
