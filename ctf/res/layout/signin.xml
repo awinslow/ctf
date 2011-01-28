@@ -19,5 +19,7 @@
 
 <Button android:text="Sign In" android:layout_width="wrap_content" android:id="@+id/SigninSignIn" android:layout_height="wrap_content"></Button>
 <Button android:text="Back" android:id="@+id/Signinback" android:layout_width="wrap_content" android:layout_height="wrap_content"></Button>
+<Button android:id="@+id/Signinchange" android:layout_height="wrap_content" android:layout_width="wrap_content" android:text="Change Password"></Button>
+<Button android:id="@+id/Signinforgot" android:layout_height="wrap_content" android:layout_width="wrap_content" android:text="Forgot Username/Password"></Button>
 
 </TableLayout>
