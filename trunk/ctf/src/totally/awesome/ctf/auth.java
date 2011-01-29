@@ -123,6 +123,10 @@ public class auth {
 		return token;	
 	}	
 	
+	public void setToken(String t){
+		token = t;	
+	}	
+	
 	public boolean logout(){
 		String r="bad";
         URL u;
