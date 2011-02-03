@@ -1,5 +1,12 @@
 package totally.awesome.ctf;
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import com.google.android.c2dm.C2DMessaging;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -7,6 +14,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -74,12 +82,50 @@ public class signin extends Activity {
             	info.theAuth=a;
             	
             
-				Context context = getApplicationContext();
-				CharSequence text = a.getToken();
-				int duration = Toast.LENGTH_SHORT;
+				//Context context = getApplicationContext();
+				//CharSequence text = a.getToken();
+				//int duration = Toast.LENGTH_SHORT;
 
-				Toast toast = Toast.makeText(context, text, duration);
+				Toast toast = Toast.makeText(getApplicationContext(), a.getToken(), Toast.LENGTH_SHORT);
 				toast.show();
+				String registrationId = C2DMessaging.getRegistrationId(getApplicationContext());
+				URL u;
+    			try {
+    				u = new URL("http://ctf.awins.info/c2dm.php?register=1&rid="+registrationId+"&token="+a.getToken());
+    				
+    				HttpURLConnection h = (HttpURLConnection) u.openConnection();
+    				h.setRequestMethod("GET");
+    				h.connect();
+    				if(h.getResponseCode()==200){
+	    				Context context = getApplicationContext();
+	    				CharSequence text = "You are now signed in";
+	    				int duration = Toast.LENGTH_SHORT;
+	
+	    				Toast toast2 = Toast.makeText(context, text, duration);
+	    				toast2.show();
+    				}
+    				else{
+	    				Context context = getApplicationContext();
+	    				CharSequence text = "Error registering device";
+	    				int duration = Toast.LENGTH_SHORT;
+	
+	    				Toast toast2 = Toast.makeText(context, text, duration);
+	    				toast2.show();   					
+    					
+    				}
+    				Log.i("a", new String(Integer.toString(h.getResponseCode())));
+    	            Log.i("a","opened");
+    	            //Log.i("a","http://141.212.113.248/c2dm.php?register=1&rid="+registrationId+"&a="+id);
+    			} catch (MalformedURLException e1) {
+    				// TODO Auto-generated catch block
+    				Log.i("a","error");
+    				e1.printStackTrace();
+    			}catch (IOException e1) {
+    				// TODO Auto-generated catch block
+    				Log.i("a","error");
+    				e1.printStackTrace();
+    			}
+				
 			}
 		});
         Button cpass = (Button) findViewById(R.id.Signinchange);
