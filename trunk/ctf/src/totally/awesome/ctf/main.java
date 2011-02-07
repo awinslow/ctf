@@ -116,5 +116,18 @@ public class main extends Activity {
     		Toast toast = Toast.makeText(context2, text, duration);
     		toast.show();
         }
+        Button battle = (Button)findViewById(R.id.battle); //id is button 1
+        battle.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				//requestWindowFeature(Window.FEATURE_NO_TITLE);
+				Intent i = new Intent();
+				i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.Battle");
+				startActivity(i);
+			}
+		});
+        
     }
 }
