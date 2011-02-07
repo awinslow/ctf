@@ -15,4 +15,5 @@
 <Button android:layout_height="wrap_content" android:id="@+id/MainCreate" android:text="Create A Character" android:layout_width="wrap_content"></Button>
 <Button android:text="Exit" android:id="@+id/MainExit" android:layout_width="wrap_content" android:layout_height="wrap_content"></Button>
 <Button android:text="Logout" android:id="@+id/logout" android:layout_width="wrap_content" android:layout_height="wrap_content"></Button>
+<Button android:text="Battle" android:id="@+id/battle" android:layout_width="wrap_content" android:layout_height="wrap_content"></Button>
 </LinearLayout>
