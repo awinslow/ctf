@@ -97,6 +97,19 @@ public class main extends Activity {
 			}
 		});
         
+        Button battle = (Button)findViewById(R.id.battle); //id is button 1
+        battle.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				//requestWindowFeature(Window.FEATURE_NO_TITLE);
+				Intent i = new Intent();
+				i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.Battle");
+				startActivity(i);
+			}
+		});
+        
         registrationId = C2DMessaging.getRegistrationId(this);
         if(registrationId != null && !"".equals(registrationId)){
             Log.i("GenericNotifier", "Already registered. registrationId is " + registrationId);
@@ -116,18 +129,7 @@ public class main extends Activity {
     		Toast toast = Toast.makeText(context2, text, duration);
     		toast.show();
         }
-        Button battle = (Button)findViewById(R.id.battle); //id is button 1
-        battle.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				//requestWindowFeature(Window.FEATURE_NO_TITLE);
-				Intent i = new Intent();
-				i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.Battle");
-				startActivity(i);
-			}
-		});
+
         
     }
 }

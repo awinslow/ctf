@@ -17,6 +17,8 @@
         </activity>
         <activity android:name=".newUser">
         </activity>
+        <activity android:name=".Battle">
+        </activity>
         <service android:name=".C2DMReceiver" />
         <receiver android:name="com.google.android.c2dm.C2DMBroadcastReceiver"
               android:permission="com.google.android.c2dm.permission.SEND">

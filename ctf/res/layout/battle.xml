@@ -7,49 +7,45 @@
     	<TableRow>
     		<TextView
     			android:text="Enemy"
-    			android:id="@+id/textView3"
     			android:layout_width="0dip"
     			android_layout_height="wrap_content"
     			android:padding="10dip"
     			android:layout_weight="1"
     			android:layout_margin="4dip"
-    			android:gravity="center_horizontal">
+    			android:gravity="center_horizontal" android:id="@+id/enemyName">
     		</TextView>
     		<TextView
     		    android:text="You"
-    			android:id="@+id/textView4"
     			android:layout_width="0dip"
     			android_layout_height="wrap_content"
     			android:padding="10dip"
     			android:layout_weight="1"
     			android:layout_margin="4dip"
-    			android:gravity="center_horizontal">
+    			android:gravity="center_horizontal" android:id="@+id/yourName">
     		</TextView>
     	</TableRow>
     	<TableRow>
-    		<ImageView android:id="@+id/imageView1" android:layout_width="0dip" android:layout_height="wrap_content" android:padding="10dip" android:layout_weight="1" android:layout_margin="4dip" android:src="@drawable/icon"></ImageView>
-    		<ImageView android:id="@+id/imageView2" android:layout_width="0dip" android:layout_height="wrap_content" android:padding="10dip" android:layout_weight="1" android:layout_margin="4dip" android:src="@drawable/icon"></ImageView>
+    		<ImageView android:layout_width="0dip" android:layout_height="wrap_content" android:padding="10dip" android:layout_weight="1" android:layout_margin="4dip" android:src="@drawable/icon" android:id="@+id/enemyPic"></ImageView>
+    		<ImageView android:layout_width="0dip" android:layout_height="wrap_content" android:padding="10dip" android:layout_weight="1" android:layout_margin="4dip" android:src="@drawable/icon" android:id="@+id/yourPic"></ImageView>
     	</TableRow>
     	<TableRow>
     	    <TextView 
     			android:text="Health: %" 
-    			android:id="@+id/textView1" 
     			android:layout_width="0dip" 
     			android:layout_height="wrap_content" 
     			android:padding="10dip" 
     			android:layout_weight="1" 
     			android:layout_margin="4dip"
-    			android:gravity="center_horizontal">
+    			android:gravity="center_horizontal" android:id="@+id/enemyHealth">
     		</TextView>
     		<TextView 
     			android:text="Health: %" 
-    			android:id="@+id/textView2" 
     			android:layout_width="0dip" 
     			android:layout_height="wrap_content" 
     			android:padding="10dip" 
     			android:layout_weight="1" 
     			android:layout_margin="4dip"
-    			android:gravity="center_horizontal">
+    			android:gravity="center_horizontal" android:id="@+id/yourHealth">
     		</TextView>
     	</TableRow>
     	<TableRow>
@@ -87,34 +83,31 @@
     	</TableRow>
     	<TableRow>
     		<Button
-    			android:id="@+id/button1"
     			android:text="Use Item"
     			android:layout_width="0dip" 
     			android:layout_height="wrap_content" 
     			android:padding="10dip" 
     			android:layout_weight="1" 
     			android:layout_margin="4dip"
-    			android:gravity="center_horizontal">
+    			android:gravity="center_horizontal" android:id="@+id/UseItem">
     		</Button>
     		<Button
-    		    android:id="@+id/button2"
     		    android:text="Use Special"
     			android:layout_width="0dip" 
     			android:layout_height="wrap_content" 
     			android:padding="10dip" 
     			android:layout_weight="1" 
     			android:layout_margin="4dip"
-    			android:gravity="center_horizontal">
+    			android:gravity="center_horizontal" android:id="@+id/UseSpecial">
     		</Button>
     		<Button
-    			android:id="@+id/button3"
     			android:text="Attack!"
     			android:layout_width="0dip" 
     			android:layout_height="wrap_content" 
     			android:padding="10dip" 
     			android:layout_weight="1" 
     			android:layout_margin="4dip"
-    			android:gravity="center_horizontal">
+    			android:gravity="center_horizontal" android:id="@+id/attack">
     		</Button>
     	</TableRow>
     	<TableRow>

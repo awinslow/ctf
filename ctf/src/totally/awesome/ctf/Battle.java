@@ -16,15 +16,15 @@ public class Battle extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.battle);
         
-        Button attack = (Button)findViewById(R.id.newUserBack);
+        Button attack = (Button)findViewById(R.id.attack);
         attack.setOnClickListener(new View.OnClickListener() {			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				//requestWindowFeature(Window.FEATURE_NO_TITLE);
-				Intent i = new Intent();
-				i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.main");
-				startActivity(i);
+				//Intent i = new Intent();
+				//i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.main");
+				//startActivity(i);
 			}
 		});
         
