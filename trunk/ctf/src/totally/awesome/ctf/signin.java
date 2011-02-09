@@ -78,6 +78,7 @@ public class signin extends Activity {
             		editor.remove("user");
             		editor.remove("password");
             	}
+            	editor.putString("token", a.getToken());
             	editor.commit();
             	info.theAuth=a;
             	
@@ -87,7 +88,7 @@ public class signin extends Activity {
 				//int duration = Toast.LENGTH_SHORT;
 
 				Toast toast = Toast.makeText(getApplicationContext(), a.getToken(), Toast.LENGTH_SHORT);
-				toast.show();
+				//toast.show();
 				String registrationId = C2DMessaging.getRegistrationId(getApplicationContext());
 				URL u;
     			try {
@@ -125,7 +126,12 @@ public class signin extends Activity {
     				Log.i("a","error");
     				e1.printStackTrace();
     			}
-				
+			
+    			
+				Intent i = new Intent();
+				i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.select");
+				startActivity(i);   			
+    			
 			}
 		});
         Button cpass = (Button) findViewById(R.id.Signinchange);
