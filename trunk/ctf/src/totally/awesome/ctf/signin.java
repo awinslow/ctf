@@ -81,7 +81,7 @@ public class signin extends Activity {
             	editor.putString("token", a.getToken());
             	editor.commit();
             	info.theAuth=a;
-            	
+            
             
 				//Context context = getApplicationContext();
 				//CharSequence text = a.getToken();
@@ -98,8 +98,16 @@ public class signin extends Activity {
     				h.setRequestMethod("GET");
     				h.connect();
     				if(h.getResponseCode()==200){
+    					
+    					
 	    				Context context = getApplicationContext();
-	    				CharSequence text = "You are now signed in";
+	    				CharSequence text = "Incorrect username or password";
+	    				if(!info.theAuth.getToken().equals("-1")){
+	    					text = "You are now signed in";
+	    					info.theAuth = null;
+	    				}
+	    					 
+	    				
 	    				int duration = Toast.LENGTH_SHORT;
 	
 	    				Toast toast2 = Toast.makeText(context, text, duration);
@@ -127,11 +135,11 @@ public class signin extends Activity {
     				e1.printStackTrace();
     			}
 			
-    			
-				Intent i = new Intent();
-				i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.select");
-				startActivity(i);   			
-    			
+    			if(info.theAuth == null){
+					Intent i = new Intent();
+					i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.select");
+					startActivity(i);   			
+    			}
 			}
 		});
         Button cpass = (Button) findViewById(R.id.Signinchange);
