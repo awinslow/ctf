@@ -40,76 +40,11 @@ public class Battle extends Activity{
         ImageView enemp = (ImageView)findViewById(R.id.enemyPic);
         enemp.setImageDrawable(info.getPic(info.currentFight.enemyID));
         
-        /*
-		final AlertDialog.Builder alert = new AlertDialog.Builder(this);
-	        final EditText input = new EditText(this);
-	        alert.setTitle("Battle Challenge");
-	        alert.setMessage("Who do you want to challenge?");
-	        alert.setView(input);
-	        alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-	            public void onClick(DialogInterface dialog, int whichButton) {
-					URL u;
-	    			try {
-	    				u = new URL("http://ctf.awins.info/battle.php?challenge=1&target="+input.getText().toString()+"&token="+info.theAuth.getToken());
-	    				
-	    				HttpURLConnection h = (HttpURLConnection) u.openConnection();
-	    				h.setRequestMethod("GET");
-	    				h.connect();
-	    				if(h.getResponseCode()==200){
-	    					CharSequence text = "challenge sent";
-		    				//Context context = message.this;
-	    					BufferedReader in = new BufferedReader(
-	    	                        new InputStreamReader(
-	    	                        h.getInputStream()));
-	    					String inputLine;
-	    					
-	    					while ((inputLine = in.readLine()) != null) 
-	    					    text=inputLine;
-	    					in.close();
-		    				
-		    				int duration = Toast.LENGTH_SHORT;
-		if(text.subSequence(0, 3).equals("id")) text = "challenge sent";
-		    				Toast toast2 = Toast.makeText(getApplicationContext(), text, duration);
-		    				toast2.show();
-	    				}
-	    				else{
-		    				//Context context = getApplicationContext();
-		    				CharSequence text = "Error";
-		    				int duration = Toast.LENGTH_SHORT;
-		
-		    				Toast toast2 = Toast.makeText(getApplicationContext(), text, duration);
-		    				toast2.show();   					
-	    					
-	    				}
-	    				Log.i("a", new String(Integer.toString(h.getResponseCode())));
-	    	            Log.i("a","opened");
-	    	            //Log.i("a","http://141.212.113.248/c2dm.php?register=1&rid="+registrationId+"&a="+id);
-	    			} catch (MalformedURLException e1) {
-	    				// TODO Auto-generated catch block
-	    				Log.i("a","error");
-	    				e1.printStackTrace();
-	    			}catch (IOException e1) {
-	    				// TODO Auto-generated catch block
-	    				Log.i("a","error");
-	    				e1.printStackTrace();
-	    			}
-	            }
-	        });
-
-	        alert.setNegativeButton("Cancel",
-	                new DialogInterface.OnClickListener() {
-	                    public void onClick(DialogInterface dialog, int whichButton) {
-	                        dialog.cancel();
-	                    }
-	                });
-	        alert.show();		
-       */
+        TextView enemh = (TextView)findViewById(R.id.enemyHealth);
+        enemh.setText("Health: " + Integer.toString(info.currentFight.getEnemyHealth()) + " / " + Integer.toString(info.currentFight.enemyMaxHealth));
         
-        
-        
-        
-        
-        
+        TextView youh = (TextView)findViewById(R.id.yourHealth);
+        youh.setText("Health: " + Integer.toString(info.currentFight.getMyHealth()) + " / " + Integer.toString(info.currentFight.myMaxHealth));
         
         
         Button attack = (Button)findViewById(R.id.attack);
