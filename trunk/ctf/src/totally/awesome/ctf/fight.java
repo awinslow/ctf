@@ -39,7 +39,114 @@ public class fight {
 		InitializeStats(true);//Enemy Stats
 		InitializeStats(false);//My Stats
 		
+		/*
+		//myMaxHealth = m;
+		//enemyMaxHealth = e;
 
+		
+		try {
+			String text = "";
+			String inputLine;
+			
+			//ME
+			
+			URL u = new URL("http://ctf.awins.info/stats.php?uid=" + Integer.toString(myId));
+
+			HttpURLConnection h = (HttpURLConnection) u.openConnection();
+			h.setRequestMethod("GET");
+			h.connect();
+			if(h.getResponseCode()==200){
+
+				BufferedReader in = new BufferedReader(
+                        new InputStreamReader(
+                        h.getInputStream()));
+				
+				while ((inputLine = in.readLine()) != null)
+				{
+				    text=inputLine;
+				    
+				    if(text.indexOf("Health:") != -1)
+				    {
+				    	setMyMaxHealth(Integer.parseInt(text.substring(7).trim()));
+				    }
+				    else if(text.indexOf("Attack:") != -1)
+				    {
+				    	myAttackVal = Integer.parseInt(text.substring(7).trim());
+				    }
+				    else if(text.indexOf("Defense:") != -1)
+				    {
+				    	myDefenseVal = Integer.parseInt(text.substring(8).trim());
+				    }
+				    else if(text.indexOf("Username:") != -1)
+				    {
+				    	myName = text.substring(10);
+				    }
+				    else
+				    {
+				    	//Not parsing correctly
+				    }
+				}
+				in.close();
+			}
+			else{
+				
+				Log.i("Fight initialization error:", "Response code NOT 200!!! for ME");
+			}
+				
+			//ENEMY
+			u = new URL("http://ctf.awins.info/stats.php?uid=" + Integer.toString(enemyID));
+
+			h = (HttpURLConnection) u.openConnection();
+			h.setRequestMethod("GET");
+			h.connect();
+			if(h.getResponseCode()==200){
+
+				BufferedReader in = new BufferedReader(
+                        new InputStreamReader(
+                        h.getInputStream()));
+				
+				while ((inputLine = in.readLine()) != null)
+				{
+				    text=inputLine;
+				    
+				    if(text.indexOf("Health:") != -1)
+				    {
+				    	setEnemyMaxHealth(Integer.parseInt(text.substring(7).trim()));
+				    }
+				    else if(text.indexOf("Attack:") != -1)
+				    {
+				    	enemyAttackVal = Integer.parseInt(text.substring(7).trim());
+				    }
+				    else if(text.indexOf("Defense:") != -1)
+				    {
+				    	enemyDefenseVal = Integer.parseInt(text.substring(8).trim());
+				    }
+				    else if(text.indexOf("Username:") != -1)
+				    {
+				    	enemyName = text.substring(10);
+				    }
+				    else
+				    {
+				    	//Not parsing correctly
+				    }
+				}
+				in.close();
+			
+				}
+				else{
+			
+					Log.i("Fight initialization error:", "Response code NOT 200!!! for ENEMY");
+				}
+			
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Log.i("URL BREAKING SHIT", "Malformed URL");
+		} catch (IOException e){
+			e.printStackTrace();
+			Log.i("IO", "IO exception in fight constructor");
+		}
+		*/
 	}
 	
 	void InitializeStats(boolean isEnemy)
@@ -76,9 +183,15 @@ public class fight {
 				    if(text.indexOf("Health:") != -1)
 				    {
 				    	if(!isEnemy)
+				    	{
 				    		myMaxHealth = (Integer.parseInt(text.substring(7).trim()));
+				    		myHealth = myMaxHealth;
+				    	}
 				    	else
+				    	{
 				    		enemyMaxHealth = (Integer.parseInt(text.substring(7).trim()));
+				    		enemyHealth = enemyMaxHealth;
+				    	}
 
 				    }
 				    else if(text.indexOf("Attack:") != -1)
