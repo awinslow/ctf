@@ -9,7 +9,6 @@ import java.net.URL;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,6 +16,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class Battle extends Activity{
@@ -26,6 +27,11 @@ public class Battle extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.battle);
   
+        TextView you = (TextView)findViewById(R.id.yourName);
+        you.setText(info.theAuth.name);
+        
+        ImageView youp = (ImageView)findViewById(R.id.yourPic);
+        youp.setImageDrawable(info.getPic(info.theAuth.id));
         
 		final AlertDialog.Builder alert = new AlertDialog.Builder(this);
 	        final EditText input = new EditText(this);

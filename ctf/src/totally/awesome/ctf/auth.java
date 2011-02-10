@@ -1,9 +1,7 @@
 package totally.awesome.ctf;
 
 import java.io.BufferedReader;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
@@ -13,16 +11,15 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Hashtable;
 
-import org.apache.http.HttpConnection;
-
-import totally.awesome.ctf.HttpMultipartRequest;
-
 import android.util.Log;
 
 public class auth {
 	String token;
+	int id;
+	String name;
 	public auth(){/*ONLY USE IF TOKEN ISNT NEEDED */}
 	public auth(String user, String pword){
+		name = user;
 		try{
 			String tmp = pword+user;
 			MessageDigest md = MessageDigest.getInstance("SHA-256");
@@ -52,16 +49,35 @@ public class auth {
 					
 					while ((inputLine = in.readLine()) != null) 
 					    token=inputLine;
-					
-					if (token.equals("Username or password not correct")) token = "-1";
-					
 					in.close();
 				}
 				else{
 					Log.i("error", "URL connection errored with code: "+Integer.toString((h.getResponseCode())));
 					
 				}
-			} catch (MalformedURLException e1) {
+				
+		        u = new URL("http://ctf.awins.info/auth.php?validate=1&token="+token);
+		        h = (HttpURLConnection) u.openConnection();
+		        h.setRequestMethod("GET");
+		        h.connect();
+		        	if (h.getResponseCode()==200){
+		        		//userid=h.getResponseMessage();
+		        		BufferedReader getinfo = new BufferedReader(new InputStreamReader(h.getInputStream()));
+		        		String inputLine;
+		        		
+		        		while ((inputLine = getinfo.readLine()) != null) {
+		        			try {
+		        				id = Integer.parseInt(inputLine);
+		        			} catch (NumberFormatException nfe)
+		        		    	{
+		        			      System.out.println("NumberFormatException: " + nfe.getMessage());
+		        			    }
+		        		}
+		        		getinfo.close();
+		        	}
+		     //name = user;
+		     
+		       } catch (MalformedURLException e1) {
 				// TODO Auto-generated catch block
 				Log.i("a","errormalform");
 			
@@ -104,14 +120,33 @@ public class auth {
 					
 					while ((inputLine = in.readLine()) != null) 
 					    r=inputLine;
-					
-				
 					in.close();
 				}
 				else{
 					Log.i("error", "URL connection errored with code: "+Integer.toString((h.getResponseCode())));
 					
 				}
+		        u = new URL("http://ctf.awins.info/auth.php?Validate=1&"+token);
+		        h = (HttpURLConnection) u.openConnection();
+		        h.setRequestMethod("GET");
+		        h.connect();
+		        	if (h.getResponseCode()==200){
+		        		//userid=h.getResponseMessage();
+		        		BufferedReader getinfo = new BufferedReader(new InputStreamReader(h.getInputStream()));
+		        		String inputLine;
+		        		
+		        		while ((inputLine = getinfo.readLine()) != null)
+		        		{
+		        			try {
+		        				id = Integer.parseInt(inputLine);
+		        			getinfo.close();
+		        			} catch (NumberFormatException nfe)
+		        		    	{
+		        			      System.out.println("NumberFormatException: " + nfe.getMessage());
+		        			    }
+		        		}
+		        	}
+		      name = user;
 			} catch (MalformedURLException e1) {
 				// TODO Auto-generated catch block
 				Log.i("a","error");
