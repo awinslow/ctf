@@ -27,12 +27,20 @@ public class Battle extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.battle);
   
+        
         TextView you = (TextView)findViewById(R.id.yourName);
         you.setText(info.theAuth.name);
         
         ImageView youp = (ImageView)findViewById(R.id.yourPic);
         youp.setImageDrawable(info.getPic(info.theAuth.id));
         
+        TextView enem = (TextView)findViewById(R.id.enemyName);
+        enem.setText(info.currentFight.enemyName);
+        
+        ImageView enemp = (ImageView)findViewById(R.id.enemyPic);
+        enemp.setImageDrawable(info.getPic(info.currentFight.enemyID));
+        
+        /*
 		final AlertDialog.Builder alert = new AlertDialog.Builder(this);
 	        final EditText input = new EditText(this);
 	        alert.setTitle("Battle Challenge");
@@ -95,7 +103,7 @@ public class Battle extends Activity{
 	                    }
 	                });
 	        alert.show();		
-       
+       */
         
         
         
@@ -123,7 +131,7 @@ public class Battle extends Activity{
 				// TODO Auto-generated method stub
 				//requestWindowFeature(Window.FEATURE_NO_TITLE);
 				Intent i = new Intent();
-				i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.main");
+				i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.select");
 				startActivity(i);
 			}
 		});
