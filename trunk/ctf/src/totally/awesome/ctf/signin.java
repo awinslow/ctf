@@ -5,8 +5,6 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import com.google.android.c2dm.C2DMessaging;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -20,6 +18,8 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.google.android.c2dm.C2DMessaging;
 
 public class signin extends Activity {
     /** Called when the activity is first created. */
@@ -104,7 +104,10 @@ public class signin extends Activity {
 	    				CharSequence text = "Incorrect username or password";
 	    				if(!info.theAuth.getToken().equals("-1")){
 	    					text = "You are now signed in";
-	    					info.theAuth = null;
+	    					//info.theAuth = null;
+	    					Intent i = new Intent();
+	    					i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.select");
+	    					startActivity(i);  
 	    				}
 	    					 
 	    				

@@ -26,7 +26,7 @@
     	</TableRow>
     	<TableRow>
     		<ImageView android:layout_width="0dip" android:layout_height="wrap_content" android:padding="10dip" android:layout_weight="1" android:layout_margin="4dip" android:src="@drawable/icon" android:id="@+id/enemyPic"></ImageView>
-    		<ImageView android:layout_width="0dip" android:layout_height="wrap_content" android:padding="10dip" android:layout_weight="1" android:layout_margin="4dip" android:src="@drawable/icon" android:id="@+id/yourPic"></ImageView>
+    		<ImageView android:padding="10dip" android:layout_weight="1" android:layout_margin="4dip" android:src="@drawable/icon" android:id="@+id/yourPic" android:layout_width="0dip" android:layout_height="wrap_content"></ImageView>
     	</TableRow>
     	<TableRow>
     	    <TextView 
