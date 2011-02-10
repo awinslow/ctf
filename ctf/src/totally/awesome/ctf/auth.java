@@ -52,6 +52,9 @@ public class auth {
 					
 					while ((inputLine = in.readLine()) != null) 
 					    token=inputLine;
+					
+					if (token.equals("Username or password not correct")) token = "-1";
+					
 					in.close();
 				}
 				else{
@@ -101,6 +104,8 @@ public class auth {
 					
 					while ((inputLine = in.readLine()) != null) 
 					    r=inputLine;
+					
+				
 					in.close();
 				}
 				else{
