@@ -4,11 +4,30 @@ public class fight {
 	int myHealth;
 	int enemyHealth;
 	int enemyID;
+	int myId;
+	String enemyName = "Name Not Set";
+	String myName;
+	int myMaxHealth;
+	int enemyMaxHealth;
 	
-	fight(int m, int e, int eid){
-		myHealth = m;
-		enemyHealth = e;
+	boolean myTurn;
+	
+	fight(int eid){
+		//myMaxHealth = m;
+		//enemyMaxHealth = e;
 		enemyID = eid;
+		myName = info.theAuth.name;
+		myId = info.theAuth.id;
+	}
+	
+	void setMyMaxHealth(int h)
+	{
+		myMaxHealth = h;
+	}
+	
+	void setEnemyMaxHealth(int h)
+	{
+		enemyMaxHealth = h;
 	}
 	
 	void didWin(boolean won){
@@ -34,4 +53,6 @@ public class fight {
 	int getEnemyHealth(){
 		return enemyHealth;
 	}
+	
+	//
 }

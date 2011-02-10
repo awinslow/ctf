@@ -31,7 +31,7 @@ public class select extends Activity{
 				// TODO Auto-generated method stub
 				//requestWindowFeature(Window.FEATURE_NO_TITLE);
 				Intent i = new Intent();
-				i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.Battle");
+				i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.Arena");
 				startActivity(i);
 			}
 		});
