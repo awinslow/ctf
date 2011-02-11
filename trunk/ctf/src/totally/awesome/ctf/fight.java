@@ -37,6 +37,8 @@ public class fight {
 		InitializeStats(true);//Enemy Stats
 		InitializeStats(false);//My Stats
 		
+		myTurn = false;
+		
 		
 	}
 	
@@ -148,6 +150,9 @@ public class fight {
 	
 	void setMyHealth(int h)
 	{
+		//If health going down then you were attacked.  It is now your turn
+		if(myHealth - h > 0)
+			myTurn = true;
 		myHealth = h;
 	}
 	void setEnemyHealth(int h)

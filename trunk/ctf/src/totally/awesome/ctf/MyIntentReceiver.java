@@ -35,6 +35,7 @@ public class MyIntentReceiver extends BroadcastReceiver {
 	//			CharSequence text1 = "You are now in battle";
 	//			int duration1 = Toast.LENGTH_SHORT;
 
+				info.currentFight.myTurn = true;
 				Toast toast2 = Toast.makeText(context, "You are now in battle", Toast.LENGTH_SHORT);
 				toast2.show();
 				
@@ -71,7 +72,7 @@ public class MyIntentReceiver extends BroadcastReceiver {
 			    				int duration = Toast.LENGTH_SHORT;
 			
 			    				Toast toast2 = Toast.makeText(context, text, duration);
-			    				toast2.show();   					
+			    				toast2.show();			
 		    					
 		    				}
 		    				Log.i("a", new String(Integer.toString(h.getResponseCode())));
@@ -151,7 +152,7 @@ public class MyIntentReceiver extends BroadcastReceiver {
 					    		{
 					    			int enemyH = (Integer.parseInt(inText2.substring(7).trim()));
 					    			Log.i("Battle", "ENEMYHEALTH: " + Integer.toString(enemyH));
-					    			info.currentFight.enemyHealth = enemyH;
+					    			info.currentFight.setEnemyHealth(enemyH);
 					    		}
 					    	}
 					    	else if(info.currentFight.myId == uid)
@@ -170,7 +171,7 @@ public class MyIntentReceiver extends BroadcastReceiver {
 					    		{
 					    			int myH = (Integer.parseInt(inText2.substring(7).trim()));
 					    			Log.i("Battle", "MYHEALTH" + Integer.toString(myH));
-					    			info.currentFight.myHealth = myH;
+					    			info.currentFight.setMyHealth(myH);
 					    		}
 					    	}
 					    	else
