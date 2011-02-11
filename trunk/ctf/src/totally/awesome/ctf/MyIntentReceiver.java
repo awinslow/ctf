@@ -36,7 +36,11 @@ public class MyIntentReceiver extends BroadcastReceiver {
 	//			int duration1 = Toast.LENGTH_SHORT;
 
 				Toast toast2 = Toast.makeText(context, "You are now in battle", Toast.LENGTH_SHORT);
-				toast2.show();				
+				toast2.show();
+				
+				Intent i = new Intent();
+				i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.Battle");
+			    context.startActivity(i);
 			}else{
 				
 				final AlertDialog.Builder alert = new AlertDialog.Builder(context);
