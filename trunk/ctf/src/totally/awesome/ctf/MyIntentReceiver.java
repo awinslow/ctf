@@ -1,10 +1,13 @@
 package totally.awesome.ctf;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
 import android.app.AlertDialog;
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -90,6 +93,139 @@ public class MyIntentReceiver extends BroadcastReceiver {
 		                });
 		        alert.show();		
 			}
+		}
+		else if(text.subSequence(0, 7).equals("checkin"))
+		{
+			Log.i("Battle", "Reached Check in");
+			String inText = "";
+			String inText2 = "";
+			String inputLine = "input line";
+			
+			URL u;
+			try {
+				u = new URL("http://ctf.awins.info/battle.php?token=" + info.theAuth.getToken() + "&stats=1");
+
+				Log.i("Battle", "Url: " + "http://ctf.awins.info/battle.php?token=" + info.theAuth.getToken() + "&stats=1");
+	
+				HttpURLConnection h = (HttpURLConnection) u.openConnection();
+				h.setRequestMethod("GET");
+				h.connect();
+				if(h.getResponseCode()==200){
+	
+					Log.i("Battle", "Connection made response code 200");
+					BufferedReader in = new BufferedReader(
+	                        new InputStreamReader(
+	                        h.getInputStream()));
+					
+					while (inputLine != null)
+					{
+						
+						inputLine = in.readLine();
+						Log.i("Battle", "Input Line: " + inputLine);
+						if(inputLine == null)
+						{
+							Log.i("Battle", "Input Line null");
+							break;
+						}
+					    inText=inputLine;
+					    if(inText.indexOf("uid:") != -1)
+					    {
+					    	int uid = (Integer.parseInt(inText.substring(4).trim()));
+					    	Log.i("Battle", "UID: " + Integer.toString(uid));
+					    	if(info.currentFight.enemyID == uid)
+					    	{
+					    		inputLine = in.readLine();
+					    		Log.i("Battle", "Input Line: " + inputLine);
+					    		if(inputLine == null)
+					    		{
+									Log.i("Battle", "Input Line null");
+									break;
+								}
+					    		inText2 = inputLine;
+					    		
+					    		if(inText2.indexOf("health:") != -1)
+					    		{
+					    			int enemyH = (Integer.parseInt(inText2.substring(7).trim()));
+					    			Log.i("Battle", "ENEMYHEALTH: " + Integer.toString(enemyH));
+					    			info.currentFight.enemyHealth = enemyH;
+					    		}
+					    	}
+					    	else if(info.currentFight.myId == uid)
+					    	{
+					    		inputLine = in.readLine();
+					    		Log.i("Battle", "Input Line: " + inputLine);
+					    		if(inputLine == null)
+					    		{
+									Log.i("Battle", "Input Line null");
+									break;
+								}
+					    		
+					    		inText2 = inputLine;
+					    		
+					    		if(inText2.indexOf("health:") != -1)
+					    		{
+					    			int myH = (Integer.parseInt(inText2.substring(7).trim()));
+					    			Log.i("Battle", "MYHEALTH" + Integer.toString(myH));
+					    			info.currentFight.myHealth = myH;
+					    		}
+					    	}
+					    	else
+					    	{
+					    		Log.i("Battle", "Battle update info not parsing correctly uid inner");
+					    	}
+					    }
+					    else
+					    {
+					    	Log.i("Battle", "Battle update info not parsing correctly uid");
+					    }
+					}
+					in.close();
+					
+					Log.i("Battle", "Starting Battle Refresh");
+
+					Intent i = new Intent();
+					i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.Battle");
+				    context.startActivity(i);
+
+				}
+				else{
+					
+					Log.i("Battle", "Response code NOT 200!!! for Attack");
+				}
+			} catch (MalformedURLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		else if(text.subSequence(0,3).equals("won"))
+		{
+			Log.i("Battle", "WINNER!!!!!!!!!!!!!!!!!!!!!!");
+			Toast winner = Toast.makeText(context, "Congratulations, you WON THE BATTLE!", Toast.LENGTH_LONG);
+			winner.show();
+			
+			Log.i("Battle", "About to go to select");
+			Intent i = new Intent();
+			i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.select");
+		    context.startActivity(i);
+		}
+		else if(text.subSequence(0, 4).equals("lost"))
+		{
+			Log.i("Battle", "LOSER!!!!!!!!!!!!!!!!!!!");
+			Toast loser = Toast.makeText(context, "Sorry, you lost the battle", Toast.LENGTH_LONG);
+			loser.show();
+			
+			Log.i("Battle", "About to go to select");
+			Intent i = new Intent();
+			i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.select");
+		    context.startActivity(i);
+		}
+		else
+		{
+			Log.i("Battle", "C2DM text: " + text.toString());
 		}
 	}
 }
