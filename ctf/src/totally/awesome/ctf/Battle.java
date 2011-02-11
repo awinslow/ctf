@@ -29,10 +29,10 @@ public class Battle extends Activity{
   
         
         TextView you = (TextView)findViewById(R.id.yourName);
-        you.setText(info.theAuth.name);
+        you.setText(info.currentFight.myName);
         
         ImageView youp = (ImageView)findViewById(R.id.yourPic);
-        youp.setImageDrawable(info.getPic(info.theAuth.id));
+        youp.setImageDrawable(info.getPic(info.currentFight.myId));
         
         TextView enem = (TextView)findViewById(R.id.enemyName);
         enem.setText(info.currentFight.enemyName);
