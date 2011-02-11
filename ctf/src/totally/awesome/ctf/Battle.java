@@ -49,6 +49,8 @@ public class Battle extends Activity{
         
         
         Button attack = (Button)findViewById(R.id.attack);
+        if(!info.currentFight.myTurn)
+        	attack.setEnabled(false);
         attack.setOnClickListener(new View.OnClickListener() {	
 			@Override
 			public void onClick(View v) {
@@ -68,6 +70,10 @@ public class Battle extends Activity{
     				if(h.getResponseCode()==200)
     				{
     					Log.i("Battle", "Attack sent");
+    					
+    					Button attk = (Button)findViewById(R.id.attack);
+    					attk.setEnabled(false);
+    					info.currentFight.myTurn = false;
     				}
     				else
     				{
@@ -81,12 +87,15 @@ public class Battle extends Activity{
 				} catch (MalformedURLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+					Log.i("Battle", "Malformed URL in attack send");
 				} catch (ProtocolException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+					Log.i("Battle", "Protocol exception in attack send to server");
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+					Log.i("Battle", "IOException in attack send to server");
 				}
 
 			}
