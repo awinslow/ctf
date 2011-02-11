@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.net.URL;
 
 import android.app.Activity;
@@ -48,7 +49,7 @@ public class Battle extends Activity{
         
         
         Button attack = (Button)findViewById(R.id.attack);
-        attack.setOnClickListener(new View.OnClickListener() {			
+        attack.setOnClickListener(new View.OnClickListener() {	
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
@@ -56,6 +57,38 @@ public class Battle extends Activity{
 				//Intent i = new Intent();
 				//i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.main");
 				//startActivity(i);
+				
+				try {
+					URL u = new URL("http://ctf.awins.info/battle.php?attack=1&target="+Integer.toString(info.currentFight.enemyID)+"&token="+info.theAuth.getToken());
+				
+    				HttpURLConnection h = (HttpURLConnection) u.openConnection();
+    				h.setRequestMethod("GET");
+    				h.connect();
+    				
+    				if(h.getResponseCode()==200)
+    				{
+    					Log.i("Battle", "Attack sent");
+    				}
+    				else
+    				{
+	    				CharSequence text = "Attack message to server failed";
+	    				int duration = Toast.LENGTH_SHORT;
+	
+	    				Toast toast2 = Toast.makeText(getApplicationContext(), text, duration);
+	    				toast2.show();  
+    				}
+				
+				} catch (MalformedURLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (ProtocolException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
 			}
 		});
         
