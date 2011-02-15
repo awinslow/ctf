@@ -38,14 +38,18 @@ public class Battle extends Activity{
        // enemyHBar.setMinimumWidth(10);
        // youHBar.setMinimumWidth(10);
         //youHBar.set
-        enemyHBar = (ProgressBar)findViewById(R.id.ProgressBar01);
+        enemyHBar = (ProgressBar)findViewById(R.id.EnemyHealthBar);
         enemyHBar.setProgress((int) (((float)info.currentFight.getEnemyHealth()/(float)info.currentFight.enemyMaxHealth)*100));
-        youHBar = (ProgressBar)findViewById(R.id.ProgressBar02);
+        youHBar = (ProgressBar)findViewById(R.id.MyHealthBar);
         youHBar.setProgress((int) (((float)info.currentFight.getMyHealth()/(float)info.currentFight.myMaxHealth)*100));
-        Log.i("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", Integer.toString((int) (((float)info.currentFight.getEnemyHealth()/(float)info.currentFight.enemyMaxHealth)*100))); 
+        Log.i("Battle", Integer.toString((int) (((float)info.currentFight.getEnemyHealth()/(float)info.currentFight.enemyMaxHealth)*100))); 
         TextView you = (TextView)findViewById(R.id.yourName);
+        
         if(info.currentFight.myName != null)
+        {
+        	Log.i("Battle", "Fight name null in current fight!");
         	you.setText(info.currentFight.myName);
+        }
         
         ImageView youp = (ImageView)findViewById(R.id.yourPic);
         youp.setImageDrawable(info.getPic(info.currentFight.myId));
