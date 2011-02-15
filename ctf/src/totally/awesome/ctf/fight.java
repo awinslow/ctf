@@ -11,12 +11,12 @@ import android.util.Log;
 
 
 public class fight {
-	int myHealth;
-	int enemyHealth;
-	int enemyID;
-	int myId;
+	int myHealth = -1;
+	int enemyHealth = -1;
+	int enemyID = -1;
+	int myId = -1;
 	String enemyName = "Name Not Set";
-	String myName;
+	String myName = "Name Not Set";
 	int myMaxHealth;
 	int enemyMaxHealth;
 	
@@ -106,9 +106,13 @@ public class fight {
 				    else if(text.indexOf("Username:") != -1)
 				    {
 				    	if(!isEnemy)
-				    		myName = text.substring(10);
+				    	{
+				    		//myName = text.substring(10);
+				    	}
 				    	else
+				    	{
 				    		enemyName = text.substring(10);
+				    	}
 
 				    }
 				    else
@@ -143,9 +147,6 @@ public class fight {
 		enemyMaxHealth = h;
 	}
 	
-	void didWin(boolean won){
-		
-	}
 
 	
 	void setMyHealth(int h)

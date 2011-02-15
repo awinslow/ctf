@@ -24,13 +24,20 @@ import android.widget.Toast;
 public class Battle extends Activity{
 	public String enemy;
 	public int enemyID;
+	public TextView enemh;
+	public TextView youh;
+
 	public void onCreate(Bundle savedInstanceState) {
+		
+		info.battleInst = this;
+		
         super.onCreate(savedInstanceState);
         setContentView(R.layout.battle);
   
         
         TextView you = (TextView)findViewById(R.id.yourName);
-        you.setText(info.currentFight.myName);
+        if(info.currentFight.myName != null)
+        	you.setText(info.currentFight.myName);
         
         ImageView youp = (ImageView)findViewById(R.id.yourPic);
         youp.setImageDrawable(info.getPic(info.currentFight.myId));
@@ -41,10 +48,10 @@ public class Battle extends Activity{
         ImageView enemp = (ImageView)findViewById(R.id.enemyPic);
         enemp.setImageDrawable(info.getPic(info.currentFight.enemyID));
         
-        TextView enemh = (TextView)findViewById(R.id.enemyHealth);
+        enemh = (TextView)findViewById(R.id.enemyHealth);
         enemh.setText("Health: " + Integer.toString(info.currentFight.getEnemyHealth()) + " / " + Integer.toString(info.currentFight.enemyMaxHealth));
         
-        TextView youh = (TextView)findViewById(R.id.yourHealth);
+        youh = (TextView)findViewById(R.id.yourHealth);
         youh.setText("Health: " + Integer.toString(info.currentFight.getMyHealth()) + " / " + Integer.toString(info.currentFight.myMaxHealth));
         
         
@@ -110,6 +117,7 @@ public class Battle extends Activity{
 				Intent i = new Intent();
 				i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.select");
 				startActivity(i);
+				
 			}
 		});
 	}

@@ -39,6 +39,7 @@ public class select extends Activity{
 				Intent i = new Intent();
 				i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.Arena");
 				startActivity(i);
+
 			}
 		});
         
