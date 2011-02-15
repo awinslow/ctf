@@ -9,6 +9,7 @@ public class info {
 	public static auth theAuth;
 	public static int myHealth;
 	public static fight currentFight;
+	public static Battle battleInst;
 	public static Drawable getPic(int id){
         try
         {

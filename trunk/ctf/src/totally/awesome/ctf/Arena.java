@@ -82,6 +82,8 @@ public class Arena extends Activity{
     	            Intent i = new Intent();
     				i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.Battle");
     				startActivity(i);
+    				
+    				finish();
     			} catch (MalformedURLException e1) {
     				// TODO Auto-generated catch block
     				Log.i("a","error");
@@ -103,6 +105,7 @@ public class Arena extends Activity{
                         Intent i = new Intent();
                         i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.select");
                         startActivity(i);
+
                     }
                 });
         
