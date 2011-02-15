@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,15 +27,22 @@ public class Battle extends Activity{
 	public int enemyID;
 	public TextView enemh;
 	public TextView youh;
-
+	ProgressBar youHBar;
+	ProgressBar enemyHBar;
 	public void onCreate(Bundle savedInstanceState) {
 		
 		info.battleInst = this;
 		
         super.onCreate(savedInstanceState);
         setContentView(R.layout.battle);
-  
-        
+       // enemyHBar.setMinimumWidth(10);
+       // youHBar.setMinimumWidth(10);
+        //youHBar.set
+        enemyHBar = (ProgressBar)findViewById(R.id.ProgressBar01);
+        enemyHBar.setProgress((int) (((float)info.currentFight.getEnemyHealth()/(float)info.currentFight.enemyMaxHealth)*100));
+        youHBar = (ProgressBar)findViewById(R.id.ProgressBar02);
+        youHBar.setProgress((int) (((float)info.currentFight.getMyHealth()/(float)info.currentFight.myMaxHealth)*100));
+        Log.i("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", Integer.toString((int) (((float)info.currentFight.getEnemyHealth()/(float)info.currentFight.enemyMaxHealth)*100))); 
         TextView you = (TextView)findViewById(R.id.yourName);
         if(info.currentFight.myName != null)
         	you.setText(info.currentFight.myName);
