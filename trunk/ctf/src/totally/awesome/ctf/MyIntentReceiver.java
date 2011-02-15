@@ -32,7 +32,37 @@ public class MyIntentReceiver extends BroadcastReceiver {
 		
 		Log.i("Battle", "C2DM Received!!	 Text: " + text.toString());
 		
-		if(text.subSequence(0, 7).equals("battle.")){
+		
+		if(text.subSequence(0,3).equals("won"))
+		{
+			Log.i("Battle", "WINNER!!!!!!!!!!!!!!!!!!!!!!");
+			//Toast winner = Toast.makeText(context, "Congratulations, you WON THE BATTLE!", Toast.LENGTH_LONG);
+			//winner.show();
+			
+			
+			Log.i("Battle", "About to go to select");
+			Intent i = new Intent();
+			i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.select");
+		    context.startActivity(i);
+		    
+		    info.battleInst.finish();
+		}
+		else if(text.subSequence(0, 4).equals("lost"))
+		{
+			Log.i("Battle", "LOSER!!!!!!!!!!!!!!!!!!!");
+			//Toast loser = Toast.makeText(context, "Sorry, you lost the battle", Toast.LENGTH_LONG);
+			//loser.show();
+			
+			
+			Log.i("Battle", "About to go to select");
+			Intent i = new Intent();
+			i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.select");
+		    context.startActivity(i);
+		    
+		    info.battleInst.finish();
+		}
+		else if(text.subSequence(0, 7).equals("battle."))
+		{
 			if(text.subSequence(7, 8).equals("a")){
 	//			CharSequence text1 = "You are now in battle";
 	//			int duration1 = Toast.LENGTH_SHORT;
@@ -218,34 +248,6 @@ public class MyIntentReceiver extends BroadcastReceiver {
 				e.printStackTrace();
 			}
 			
-		}
-		else if(text.subSequence(0,3).equals("won"))
-		{
-			Log.i("Battle", "WINNER!!!!!!!!!!!!!!!!!!!!!!");
-			//Toast winner = Toast.makeText(context, "Congratulations, you WON THE BATTLE!", Toast.LENGTH_LONG);
-			//winner.show();
-			
-			
-			Log.i("Battle", "About to go to select");
-			Intent i = new Intent();
-			i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.select");
-		    context.startActivity(i);
-		    
-		    info.battleInst.finish();
-		}
-		else if(text.subSequence(0, 4).equals("lost"))
-		{
-			Log.i("Battle", "LOSER!!!!!!!!!!!!!!!!!!!");
-			//Toast loser = Toast.makeText(context, "Sorry, you lost the battle", Toast.LENGTH_LONG);
-			//loser.show();
-			
-			
-			Log.i("Battle", "About to go to select");
-			Intent i = new Intent();
-			i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.select");
-		    context.startActivity(i);
-		    
-		    info.battleInst.finish();
 		}
 		else
 		{
