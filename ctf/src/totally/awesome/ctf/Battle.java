@@ -29,6 +29,7 @@ public class Battle extends Activity{
 	public TextView youh;
 	ProgressBar youHBar;
 	ProgressBar enemyHBar;
+	Button attack;
 	public void onCreate(Bundle savedInstanceState) {
 		
 		info.battleInst = this;
@@ -67,7 +68,7 @@ public class Battle extends Activity{
         youh.setText("Health: " + Integer.toString(info.currentFight.getMyHealth()) + " / " + Integer.toString(info.currentFight.myMaxHealth));
         
         
-        Button attack = (Button)findViewById(R.id.attack);
+        attack = (Button)findViewById(R.id.attack);
         if(!info.currentFight.myTurn)
         	attack.setEnabled(false);
         attack.setOnClickListener(new View.OnClickListener() {	

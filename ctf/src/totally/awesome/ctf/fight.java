@@ -154,6 +154,7 @@ public class fight {
 		//If health going down then you were attacked.  It is now your turn
 		if(myHealth - h > 0)
 			myTurn = true;
+			info.battleInst.attack.setEnabled(true);
 		myHealth = h;
 	}
 	void setEnemyHealth(int h)
