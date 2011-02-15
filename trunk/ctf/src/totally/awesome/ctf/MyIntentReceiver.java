@@ -95,6 +95,10 @@ public class MyIntentReceiver extends BroadcastReceiver {
 			    				CharSequence text = "You are now in battle";
 			    				int duration = Toast.LENGTH_SHORT;
 			    				
+			    				int eid = Integer.parseInt(text.subSequence(7, text.length()).toString().trim());
+			    				
+			    				info.currentFight = new fight(eid);
+			    				
 								Intent i = new Intent();
 								i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.Battle");
 								context.startActivity(i);	
@@ -228,7 +232,7 @@ public class MyIntentReceiver extends BroadcastReceiver {
 					info.battleInst.youh.setText("Health: " + Integer.toString(info.currentFight.getMyHealth()) + " / " + Integer.toString(info.currentFight.myMaxHealth));
 					info.battleInst.enemyHBar.setProgress((int) (((float) info.currentFight.getEnemyHealth()/(float)info.currentFight.enemyMaxHealth)*100));
 					info.battleInst.youHBar.setProgress((int) (((float) info.currentFight.getMyHealth()/(float)info.currentFight.myMaxHealth)*100));
-
+					
 				       Log.i("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", Integer.toString((int) (((float)info.currentFight.getEnemyHealth()/(float)info.currentFight.enemyMaxHealth)*100))); 
 				       
 					//Intent i = new Intent();
