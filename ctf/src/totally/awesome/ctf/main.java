@@ -34,6 +34,7 @@ public class main extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         String registrationId;
+        
         MyIntentReceiver intentReceiver = new MyIntentReceiver();
         IntentFilter intentFilter = new IntentFilter("totally.awesome.ctf.HI");
         intentFilter.setPriority(1);

@@ -23,10 +23,10 @@ public class select extends Activity{
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.select);
-        
         MyIntentReceiver intentReceiver = new MyIntentReceiver();
         IntentFilter intentFilter = new IntentFilter("totally.awesome.ctf.HI");
         intentFilter.setPriority(1);
+
         registerReceiver(intentReceiver, intentFilter); 
         
         Button battle = (Button)findViewById(R.id.battleMode); //id is button 1

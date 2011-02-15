@@ -25,29 +25,18 @@
     		</TextView>
     	</TableRow>
     	<TableRow>
-    		<ImageView android:layout_width="0dip" android:layout_height="wrap_content" android:padding="10dip" android:layout_weight="1" android:layout_margin="4dip" android:src="@drawable/icon" android:id="@+id/enemyPic" android:adjustViewBounds="true"></ImageView>
-    		<ImageView android:padding="10dip" android:layout_weight="1" android:layout_margin="4dip" android:src="@drawable/icon" android:id="@+id/yourPic" android:layout_width="0dip" android:layout_height="wrap_content" android:adjustViewBounds="true"></ImageView>
+    		<ImageView android:layout_width="0dip" android:layout_height="wrap_content" android:padding="10dip" android:layout_weight="1" android:layout_margin="4dip" android:src="@drawable/icon" android:id="@+id/enemyPic" android:adjustViewBounds="true"></ImageView>  
+ 		<ImageView android:padding="10dip" android:layout_weight="1" android:layout_margin="4dip" android:src="@drawable/icon" android:id="@+id/yourPic" android:layout_width="0dip" android:layout_height="wrap_content" android:adjustViewBounds="true"></ImageView>
     	</TableRow>
     	<TableRow>
-    	    <TextView 
-    			android:text="Health: %" 
-    			android:layout_width="0dip" 
-    			android:layout_height="wrap_content" 
-    			android:padding="10dip" 
-    			android:layout_weight="1" 
-    			android:layout_margin="4dip"
-    			android:gravity="center_horizontal" android:id="@+id/enemyHealth">
-    		</TextView>
-    		<TextView 
-    			android:text="Health: %" 
-    			android:layout_width="0dip" 
-    			android:layout_height="wrap_content" 
-    			android:padding="10dip" 
-    			android:layout_weight="1" 
-    			android:layout_margin="4dip"
-    			android:gravity="center_horizontal" android:id="@+id/yourHealth">
-    		</TextView>
-    	</TableRow>
+    	    <ProgressBar android:id="@+id/ProgressBar01" android:layout_width="120dip" android:layout_height="wrap_content" style="?android:attr/progressBarStyleHorizontal"></ProgressBar>
+    		
+    	
+<ProgressBar android:id="@+id/ProgressBar02" android:layout_width="120dip" android:layout_height="wrap_content" style="?android:attr/progressBarStyleHorizontal"></ProgressBar>
+
+
+
+</TableRow>
     	<TableRow>
     		<TextView 
     			android:text="Items:" 
@@ -112,6 +101,10 @@
     	</TableRow>
     	<TableRow>
     	    <Button android:text="Back" android:id="@+id/battleBack" android:layout_width="wrap_content" android:layout_height="wrap_content"></Button>
-    	</TableRow>
+    	
+
+<TextView android:id="@+id/yourHealth" android:padding="10dip" android:layout_weight="1" android:layout_width="0dip" android:gravity="center_horizontal" android:layout_margin="4dip" android:text="Health: %" android:layout_height="wrap_content"></TextView><TextView android:id="@+id/enemyHealth" android:padding="10dip" android:layout_weight="1" android:layout_width="0dip" android:gravity="center_horizontal" android:layout_margin="4dip" android:text="Health: %" android:layout_height="wrap_content"></TextView>
+
+</TableRow>
     </TableLayout>
 </LinearLayout>
