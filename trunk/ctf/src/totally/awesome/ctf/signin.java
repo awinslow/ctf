@@ -52,6 +52,8 @@ public class signin extends Activity {
 				Intent i = new Intent();
 				i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.main");
 				startActivity(i);
+				
+				finish();
 			}
 		});
         Button signIn = (Button) findViewById(R.id.SigninSignIn);
@@ -108,6 +110,8 @@ public class signin extends Activity {
 	    					Intent i = new Intent();
 	    					i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.select");
 	    					startActivity(i);  
+	    					
+	    					finish();
 	    				}
 	    					 
 	    				
@@ -141,7 +145,9 @@ public class signin extends Activity {
     			if(info.theAuth == null){
 					Intent i = new Intent();
 					i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.select");
-					startActivity(i);   			
+					startActivity(i);
+					
+					finish();
     			}
 			}
 		});
@@ -155,6 +161,8 @@ public class signin extends Activity {
 				Intent i = new Intent();
 				i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.changePass");
 				startActivity(i);
+				
+				finish();
 			}
 		});
         
