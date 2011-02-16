@@ -46,6 +46,7 @@ public class MyIntentReceiver extends BroadcastReceiver {
 		    context.startActivity(i);
 		    
 		    info.battleInst.finish();
+		    
 		}
 		else if(text.subSequence(0, 4).equals("lost"))
 		{
@@ -67,7 +68,7 @@ public class MyIntentReceiver extends BroadcastReceiver {
 	//			CharSequence text1 = "You are now in battle";
 	//			int duration1 = Toast.LENGTH_SHORT;
 
-				info.currentFight.myTurn = true;
+				info.currentFight.setTurn(info.currentFight.myId);
 				Toast toast2 = Toast.makeText(context, "You are now in battle", Toast.LENGTH_SHORT);
 				toast2.show();
 				
@@ -76,6 +77,7 @@ public class MyIntentReceiver extends BroadcastReceiver {
 			    context.startActivity(i);
 			}else{
 				
+				Log.i("Battle", "Entering Battle accept dialog");
 				final AlertDialog.Builder alert = new AlertDialog.Builder(context);
 		       // final EditText input = new EditText(context);
 		        alert.setTitle("Battle Challenge");
@@ -84,16 +86,19 @@ public class MyIntentReceiver extends BroadcastReceiver {
 		        alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 		            public void onClick(DialogInterface dialog, int whichButton) {
 						URL u;
+						Log.i("Battle", "Button accepted clicked");
 		    			try {
 		    				u = new URL("http://ctf.awins.info/battle.php?accept=1&target="+text.subSequence(7, text.length())+"&token="+info.theAuth.getToken());
 		    				
 		    				HttpURLConnection h = (HttpURLConnection) u.openConnection();
 		    				h.setRequestMethod("GET");
 		    				h.connect();
+		    				Log.i("Battle", "Battle accept url connected to");
 		    				if(h.getResponseCode()==200){
+		    					
+		    					Log.i("Battle", "Response code 200");
 			    				//Context context = message.this;
-			    				CharSequence text = "You are now in battle";
-			    				int duration = Toast.LENGTH_SHORT;
+
 			    				
 			    				int eid = Integer.parseInt(text.subSequence(7, text.length()).toString().trim());
 			    				
@@ -104,10 +109,14 @@ public class MyIntentReceiver extends BroadcastReceiver {
 								i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.Battle");
 								context.startActivity(i);	
 								
-			    				Toast toast2 = Toast.makeText(context, text, duration);
+								
+			    				int duration = Toast.LENGTH_SHORT;
+			    				Toast toast2 = Toast.makeText(context, "You are now in battle", duration);
 			    				toast2.show();
 		    				}
 		    				else{
+		    					
+		    					Log.i("Battle", "Response Code not 200: " + h.getResponseCode());
 			    				//Context context = getApplicationContext();
 			    				CharSequence text = "Error";
 			    				int duration = Toast.LENGTH_SHORT;
@@ -116,16 +125,15 @@ public class MyIntentReceiver extends BroadcastReceiver {
 			    				toast2.show();			
 		    					
 		    				}
-		    				Log.i("a", new String(Integer.toString(h.getResponseCode())));
-		    	            Log.i("a","opened");
+
 		    	            //Log.i("a","http://141.212.113.248/c2dm.php?register=1&rid="+registrationId+"&a="+id);
 		    			} catch (MalformedURLException e1) {
 		    				// TODO Auto-generated catch block
-		    				Log.i("a","error");
+		    				Log.i("Battle","Malformed URL Exception: " + e1);
 		    				e1.printStackTrace();
 		    			}catch (IOException e1) {
 		    				// TODO Auto-generated catch block
-		    				Log.i("a","error");
+		    				Log.i("Battle","IOException: " + e1);
 		    				e1.printStackTrace();
 		    			}
 		            }
@@ -240,7 +248,7 @@ public class MyIntentReceiver extends BroadcastReceiver {
 					info.battleInst.enemyHBar.setProgress((int) (((float) info.currentFight.getEnemyHealth()/(float)info.currentFight.enemyMaxHealth)*100));
 					info.battleInst.youHBar.setProgress((int) (((float) info.currentFight.getMyHealth()/(float)info.currentFight.myMaxHealth)*100));
 					
-				       Log.i("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", Integer.toString((int) (((float)info.currentFight.getEnemyHealth()/(float)info.currentFight.enemyMaxHealth)*100))); 
+				    Log.i("Battle", Integer.toString((int) (((float)info.currentFight.getEnemyHealth()/(float)info.currentFight.enemyMaxHealth)*100))); 
 				       
 					//Intent i = new Intent();
 					//i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.Battle");

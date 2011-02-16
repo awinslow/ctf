@@ -86,11 +86,11 @@ public class Arena extends Activity{
     				finish();
     			} catch (MalformedURLException e1) {
     				// TODO Auto-generated catch block
-    				Log.i("a","error");
+    				Log.i("Arena","Malformed URL Exception: " + e1);
     				e1.printStackTrace();
     			}catch (IOException e1) {
     				// TODO Auto-generated catch block
-    				Log.i("a","error");
+    				Log.i("Arena","IOException: " + e1);
     				e1.printStackTrace();
     			}
             }
@@ -105,7 +105,9 @@ public class Arena extends Activity{
                         Intent i = new Intent();
                         i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.select");
                         startActivity(i);
-
+                        
+                        Log.i("Arena", "Battle initiation canceled by user");
+                        finish();
                     }
                 });
         

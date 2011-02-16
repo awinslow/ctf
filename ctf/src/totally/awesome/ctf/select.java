@@ -40,6 +40,7 @@ public class select extends Activity{
 				i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.Arena");
 				startActivity(i);
 
+				finish();
 			}
 		});
         
