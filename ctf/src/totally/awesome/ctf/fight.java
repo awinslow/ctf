@@ -153,8 +153,10 @@ public class fight {
 	{
 		//If health going down then you were attacked.  It is now your turn
 		if(myHealth - h > 0)
+		{
 			myTurn = true;
-			info.battleInst.attack.setEnabled(true);
+			//info.battleInst.attack.setEnabled(true);
+		}
 		myHealth = h;
 	}
 	void setEnemyHealth(int h)
@@ -169,4 +171,17 @@ public class fight {
 		return enemyHealth;
 	}
 	
+	void setTurn(int id)
+	{
+		if(id == myId)
+		{
+			myTurn = true;
+			info.battleInst.attack.setEnabled(true);
+		}
+		else if(id == enemyID)
+		{
+			myTurn = false;
+			info.battleInst.attack.setEnabled(false);
+		}
+	}
 }

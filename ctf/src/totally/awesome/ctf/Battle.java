@@ -91,8 +91,8 @@ public class Battle extends Activity{
     				{
     					Log.i("Battle", "Attack sent");
     					
-    					Button attk = (Button)findViewById(R.id.attack);
-    					attk.setEnabled(false);
+    					//Button attk = (Button)findViewById(R.id.attack);
+    					//attk.setEnabled(false);
     					info.currentFight.myTurn = false;
     				}
     				else

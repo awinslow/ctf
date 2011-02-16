@@ -97,6 +97,7 @@ public class MyIntentReceiver extends BroadcastReceiver {
 			    				
 			    				int eid = Integer.parseInt(text.subSequence(7, text.length()).toString().trim());
 			    				
+			    				Log.i("Battle", "Accepted Battle.  Enemy ID: " + Integer.toString(eid));
 			    				info.currentFight = new fight(eid);
 			    				
 								Intent i = new Intent();
@@ -219,6 +220,12 @@ public class MyIntentReceiver extends BroadcastReceiver {
 					    		Log.i("Battle", "Battle update info not parsing correctly uid inner");
 					    	}
 					    }
+					    else if(inText.indexOf("turn:") != -1)
+					    {
+					    	int curTurn = Integer.parseInt(inText.substring(5).trim());
+					    	info.currentFight.setTurn(curTurn);
+					    	Log.i("Battle", "Setting turn to: " + Integer.toString(curTurn));
+					    }
 					    else
 					    {
 					    	Log.i("Battle", "Battle update info not parsing correctly uid");
@@ -247,9 +254,11 @@ public class MyIntentReceiver extends BroadcastReceiver {
 			} catch (MalformedURLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				Log.i("Battle", "Malformed URL Exception: " + e);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				Log.i("Battle", "IOException: " + e);
 			}
 			
 		}
