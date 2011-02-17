@@ -22,6 +22,8 @@ public class newUser extends Activity {
 				Intent i = new Intent();
 				i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.main");
 				startActivity(i);
+				
+				finish();
 			}
 		});
         
@@ -69,6 +71,8 @@ public class newUser extends Activity {
         				Intent i = new Intent();
         				i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.signin");
         				startActivity(i);
+        				
+        				finish();
             		//}
             	}
 
