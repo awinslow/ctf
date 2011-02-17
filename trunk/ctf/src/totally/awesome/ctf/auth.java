@@ -73,6 +73,9 @@ public class auth {
 		        			      System.out.println("NumberFormatException: " + nfe.getMessage());
 		        			    }
 		        		}
+		        		
+		        		info.setPic(id,false);
+		        		
 		        		getinfo.close();
 		        	}
 		     //name = user;

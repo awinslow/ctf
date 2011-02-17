@@ -53,13 +53,13 @@ public class Battle extends Activity{
         }
         
         ImageView youp = (ImageView)findViewById(R.id.yourPic);
-        youp.setImageDrawable(info.getPic(info.currentFight.myId));
+        youp.setImageDrawable(info.myPicture);
         
         TextView enem = (TextView)findViewById(R.id.enemyName);
         enem.setText(info.currentFight.enemyName);
         
         ImageView enemp = (ImageView)findViewById(R.id.enemyPic);
-        enemp.setImageDrawable(info.getPic(info.currentFight.enemyID));
+        enemp.setImageDrawable(info.currentFight.enemyPic);
         
         enemh = (TextView)findViewById(R.id.enemyHealth);
         enemh.setText("Health: " + Integer.toString(info.currentFight.getEnemyHealth()) + " / " + Integer.toString(info.currentFight.enemyMaxHealth));
