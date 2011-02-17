@@ -4,6 +4,7 @@ import java.io.InputStream;
 import java.net.URL;
 
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 
 public class info {
 	public static auth theAuth;
@@ -13,12 +14,11 @@ public class info {
 	public static Player myPlayer;
 	static Drawable myPicture;
 	public static Drawable getPic(int id){
-		
 		return myPicture;
 	}
        
 	
-	public static void setPic(int id)
+	public static void setPic(int id, boolean isEnemy)
 	{
 		try
 	    {
@@ -27,7 +27,20 @@ public class info {
         	URL u;
         	u = new URL("http://ctf.awins.info/pics/"+theID+".jpg");
         	InputStream is = (InputStream) u.getContent();
-        	myPicture = Drawable.createFromStream(is, "src name");
+        	if (isEnemy)
+        	{
+        		if (info.currentFight == null)
+        		{
+        			Log.i("error","CURRENT FIGHT NOT INITIALIZED");
+        		}
+        		else
+        			info.currentFight.enemyPic = Drawable.createFromStream(is, "src name");
+        	}
+        	if (!isEnemy)
+        	{
+        		myPicture = Drawable.createFromStream(is, "src name");
+        	}
+        	
         }catch (Exception e) {
         	e.printStackTrace();
         	System.out.println("Exc="+e);

@@ -7,6 +7,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 
 
@@ -15,6 +16,8 @@ public class fight {
 	int enemyHealth = -1;
 	int enemyID = -1;
 	int myId = -1;
+	Drawable enemyPic;
+	
 	String enemyName = "Name Not Set";
 	String myName = "Name Not Set";
 	int myMaxHealth;
@@ -33,7 +36,7 @@ public class fight {
 		enemyID = eid;
 		myName = info.theAuth.name;
 		myId = info.theAuth.id;
-		
+	    info.setPic(eid, true);
 		InitializeStats(true);//Initialize Enemy Stats
 		InitializeStats(false);//Initialize my Stats
 		
