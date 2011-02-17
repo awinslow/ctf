@@ -21,6 +21,8 @@ public class changePass extends Activity {
 				Intent i = new Intent();
 				i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.signin");
 				startActivity(i);
+				
+				finish();
 			}
 		});
         Button submit = (Button)findViewById(R.id.ChangepassSubmit);
@@ -67,6 +69,8 @@ public class changePass extends Activity {
         				Intent i = new Intent();
         				i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.signin");
         				startActivity(i);
+        				
+        				finish();
             		}
             	}
 

@@ -72,6 +72,10 @@ public class MyIntentReceiver extends BroadcastReceiver {
 				Toast toast2 = Toast.makeText(context, "You are now in battle", Toast.LENGTH_SHORT);
 				toast2.show();
 				
+				if(info.battleInst != null)
+				{
+					info.battleInst.finish();
+				}
 				Intent i = new Intent();
 				i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.Battle");
 			    context.startActivity(i);
@@ -104,6 +108,11 @@ public class MyIntentReceiver extends BroadcastReceiver {
 			    				
 			    				Log.i("Battle", "Accepted Battle.  Enemy ID: " + Integer.toString(eid));
 			    				info.currentFight = new fight(eid);
+			    				
+			    				if(info.battleInst != null)
+			    				{
+			    					info.battleInst.finish();
+			    				}
 			    				
 								Intent i = new Intent();
 								i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.Battle");
@@ -148,7 +157,7 @@ public class MyIntentReceiver extends BroadcastReceiver {
 		        alert.show();		
 			}
 		}
-		else if(text.subSequence(0, 7).equals("checkin"))
+		else if(text.subSequence(0, 7).equals("checkin"))//Ask server for updated stats
 		{
 			Log.i("Battle", "Reached Check in");
 			String inText = "";

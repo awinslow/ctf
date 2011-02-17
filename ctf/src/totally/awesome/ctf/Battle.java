@@ -131,6 +131,8 @@ public class Battle extends Activity{
 				i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.select");
 				startActivity(i);
 				
+				finish();
+				
 			}
 		});
 	}

@@ -67,6 +67,8 @@ public class main extends Activity {
 						Intent i = new Intent();
 						i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.main");
 						startActivity(i);
+						
+						finish();
 					}else{
 		                String value = "Error logging out";
 		                Toast.makeText(getApplicationContext(), value,
@@ -92,6 +94,8 @@ public class main extends Activity {
 				Intent i = new Intent();
 				i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.signin");
 				startActivity(i);
+				
+				finish();
 			}
 		});
         
@@ -105,6 +109,8 @@ public class main extends Activity {
 				Intent i = new Intent();
 				i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.newUser");
 				startActivity(i);
+				
+				finish();
 			}
 		});
         
@@ -130,6 +136,8 @@ public class main extends Activity {
 				Intent i = new Intent();
 				i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.select");
 				startActivity(i);
+				
+				finish();
 			}
 		});
         

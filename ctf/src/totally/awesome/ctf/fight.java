@@ -34,8 +34,8 @@ public class fight {
 		myName = info.theAuth.name;
 		myId = info.theAuth.id;
 		
-		InitializeStats(true);//Enemy Stats
-		InitializeStats(false);//My Stats
+		InitializeStats(true);//Initialize Enemy Stats
+		InitializeStats(false);//Initialize my Stats
 		
 		myTurn = false;
 		
