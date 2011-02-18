@@ -17,6 +17,7 @@ public class fight {
 	int enemyID = -1;
 	int myId = -1;
 	Drawable enemyPic;
+	int curTurn;
 	
 	String enemyName = "Name Not Set";
 	String myName = "Name Not Set";

@@ -34,27 +34,15 @@ public class Battle extends Activity{
 	Button attack;
 	static RefreshHandler mRedrawHandler = new RefreshHandler();
     static class RefreshHandler extends Handler {
-
         @Override
-
         public void handleMessage(Message msg) {
         	Log.i("GUI UPDATE", "Time to update the GUI");
 			info.battleInst.enemh.setText("Health: " + Integer.toString(info.currentFight.getEnemyHealth()) + " / " + Integer.toString(info.currentFight.enemyMaxHealth));
 			info.battleInst.youh.setText("Health: " + Integer.toString(info.currentFight.getMyHealth()) + " / " + Integer.toString(info.currentFight.myMaxHealth));
 			info.battleInst.enemyHBar.setProgress((int) (((float) info.currentFight.getEnemyHealth()/(float)info.currentFight.enemyMaxHealth)*100));
 			info.battleInst.youHBar.setProgress((int) (((float) info.currentFight.getMyHealth()/(float)info.currentFight.myMaxHealth)*100));
+			info.currentFight.setTurn(info.currentFight.curTurn);
         }
-
-
-
-        public void sleep(long delayMillis) {
-
-          this.removeMessages(0);
-
-          sendMessageDelayed(obtainMessage(0), delayMillis);
-
-        }
-
       };
 	
 	public void onCreate(Bundle savedInstanceState) {
@@ -162,7 +150,7 @@ public class Battle extends Activity{
 		});
 
            
-        heartbeat h = new heartbeat();
-        h.start();
+        info.h = new heartbeat();
+        info.h.start();
 	}
 }
