@@ -12,7 +12,6 @@ import android.util.Log;
 
 public class heartbeat extends Thread{
 	heartbeat(){
-		
 	}
 	
 	public void run(){
@@ -40,7 +39,7 @@ public class heartbeat extends Thread{
 					
 					while (inputLine != null)
 					{
-						if(inputLine.equals("User not in battle!")) valid = false;
+						//if(inputLine.equals("User not in battle!")) valid = false;
 						if(valid){
 							inputLine = in.readLine();
 							Log.i("Battle", "Input Line: " + inputLine);
@@ -132,7 +131,7 @@ public class heartbeat extends Thread{
 			}
 			
 			try {
-				Thread.sleep(200);
+				Thread.sleep(1000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
