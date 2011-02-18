@@ -13,6 +13,7 @@ public class info {
 	public static Battle battleInst;
 	public static Player myPlayer;
 	static Drawable myPicture;
+	static heartbeat h;
 	public static Drawable getPic(int id){
 		return myPicture;
 	}

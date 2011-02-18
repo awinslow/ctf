@@ -39,7 +39,7 @@ public class MyIntentReceiver extends BroadcastReceiver {
 			//Toast winner = Toast.makeText(context, "Congratulations, you WON THE BATTLE!", Toast.LENGTH_LONG);
 			//winner.show();
 			
-			
+			info.h.stop();
 			Log.i("Battle", "About to go to select");
 			Intent i = new Intent();
 			i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.select");
@@ -54,7 +54,7 @@ public class MyIntentReceiver extends BroadcastReceiver {
 			//Toast loser = Toast.makeText(context, "Sorry, you lost the battle", Toast.LENGTH_LONG);
 			//loser.show();
 			
-			
+			info.h.stop();
 			Log.i("Battle", "About to go to select");
 			Intent i = new Intent();
 			i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.select");
