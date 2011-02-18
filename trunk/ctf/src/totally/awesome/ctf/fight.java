@@ -36,11 +36,14 @@ public class fight {
 		enemyID = eid;
 		myName = info.theAuth.name;
 		myId = info.theAuth.id;
+		info.currentFight = this;
 	    info.setPic(eid, true);
 		InitializeStats(true);//Initialize Enemy Stats
 		InitializeStats(false);//Initialize my Stats
 		
 		myTurn = false;
+		
+		
 		
 		
 	}
