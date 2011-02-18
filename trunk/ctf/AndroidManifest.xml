@@ -23,6 +23,8 @@
         </activity>
         <activity android:name=".Arena">
         </activity>
+        <activity android:name=".classes">
+        </activity>
         <service android:name=".C2DMReceiver" />
         <receiver android:name="com.google.android.c2dm.C2DMBroadcastReceiver"
               android:permission="com.google.android.c2dm.permission.SEND">
