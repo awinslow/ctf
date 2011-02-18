@@ -68,14 +68,16 @@ public class MyIntentReceiver extends BroadcastReceiver {
 	//			CharSequence text1 = "You are now in battle";
 	//			int duration1 = Toast.LENGTH_SHORT;
 
+				Log.i("Battle", "battle.a received");
+				
 				info.currentFight.setTurn(info.currentFight.myId);
 				Toast toast2 = Toast.makeText(context, "You are now in battle", Toast.LENGTH_SHORT);
 				toast2.show();
 				
-				if(info.battleInst != null)
-				{
-					info.battleInst.finish();
-				}
+				//if(info.battleInst != null)
+				//{
+				//	info.battleInst.finish();
+				//}
 				Intent i = new Intent();
 				i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.Battle");
 			    context.startActivity(i);
