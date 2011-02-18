@@ -13,6 +13,8 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -30,6 +32,31 @@ public class Battle extends Activity{
 	ProgressBar youHBar;
 	ProgressBar enemyHBar;
 	Button attack;
+	static RefreshHandler mRedrawHandler = new RefreshHandler();
+    static class RefreshHandler extends Handler {
+
+        @Override
+
+        public void handleMessage(Message msg) {
+        	Log.i("GUI UPDATE", "Time to update the GUI");
+			info.battleInst.enemh.setText("Health: " + Integer.toString(info.currentFight.getEnemyHealth()) + " / " + Integer.toString(info.currentFight.enemyMaxHealth));
+			info.battleInst.youh.setText("Health: " + Integer.toString(info.currentFight.getMyHealth()) + " / " + Integer.toString(info.currentFight.myMaxHealth));
+			info.battleInst.enemyHBar.setProgress((int) (((float) info.currentFight.getEnemyHealth()/(float)info.currentFight.enemyMaxHealth)*100));
+			info.battleInst.youHBar.setProgress((int) (((float) info.currentFight.getMyHealth()/(float)info.currentFight.myMaxHealth)*100));
+        }
+
+
+
+        public void sleep(long delayMillis) {
+
+          this.removeMessages(0);
+
+          sendMessageDelayed(obtainMessage(0), delayMillis);
+
+        }
+
+      };
+	
 	public void onCreate(Bundle savedInstanceState) {
 		
 		info.battleInst = this;
@@ -135,5 +162,9 @@ public class Battle extends Activity{
 				
 			}
 		});
+
+           
+        heartbeat h = new heartbeat();
+        h.start();
 	}
 }
