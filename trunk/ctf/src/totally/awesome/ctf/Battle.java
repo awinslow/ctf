@@ -151,6 +151,6 @@ public class Battle extends Activity{
 
            
         info.h = new heartbeat();
-        info.h.start();
+       info.h.start();
 	}
 }
