@@ -207,7 +207,6 @@ public class Arena extends Activity{
     	
     	Button start = (Button)findViewById(R.id.StartBattle);
     	start.setOnClickListener(new View.OnClickListener() {	
-			@Override
 			public void onClick(View v) {
 				
 				//ProgressDialog dialog = ProgressDialog.show(Arena.this, "", 

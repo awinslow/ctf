@@ -39,7 +39,6 @@ public class signin extends Activity {
         Button back = (Button)findViewById(R.id.Signinback);
         back.setOnClickListener(new View.OnClickListener() {
 			
-			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				//requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -65,7 +64,6 @@ public class signin extends Activity {
     	}
         signIn.setOnClickListener(new View.OnClickListener() {
 			
-			@Override
 			public void onClick(View v) {
             	EditText uname = (EditText) findViewById(R.id.EditText01);
             	user=uname.getText().toString();
@@ -154,7 +152,6 @@ public class signin extends Activity {
         Button cpass = (Button) findViewById(R.id.Signinchange);
         cpass.setOnClickListener(new View.OnClickListener() {
 			
-			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				//requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -169,7 +166,6 @@ public class signin extends Activity {
         Button rpass = (Button) findViewById(R.id.Signinforgot);
         rpass.setOnClickListener(new View.OnClickListener() {
 			
-			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				//requestWindowFeature(Window.FEATURE_NO_TITLE);

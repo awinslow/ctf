@@ -32,7 +32,6 @@ public class select extends Activity{
         Button battle = (Button)findViewById(R.id.battleMode); //id is button 1
         battle.setOnClickListener(new View.OnClickListener() {
 			
-			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				//requestWindowFeature(Window.FEATURE_NO_TITLE);

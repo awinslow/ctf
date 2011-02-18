@@ -99,7 +99,6 @@ public class Battle extends Activity{
         if(!info.currentFight.myTurn)
         	attack.setEnabled(false);
         attack.setOnClickListener(new View.OnClickListener() {	
-			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				//requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -150,7 +149,6 @@ public class Battle extends Activity{
         
         Button back = (Button)findViewById(R.id.battleBack);
         back.setOnClickListener(new View.OnClickListener() {			
-			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				//requestWindowFeature(Window.FEATURE_NO_TITLE);

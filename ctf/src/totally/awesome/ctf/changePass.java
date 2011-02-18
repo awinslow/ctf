@@ -14,7 +14,6 @@ public class changePass extends Activity {
         setContentView(R.layout.changepword);
         Button back = (Button)findViewById(R.id.ChangepassBack);
         back.setOnClickListener(new View.OnClickListener() {			
-			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				//requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -27,7 +26,6 @@ public class changePass extends Activity {
 		});
         Button submit = (Button)findViewById(R.id.ChangepassSubmit);
         submit.setOnClickListener(new View.OnClickListener() {			
-			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				//requestWindowFeature(Window.FEATURE_NO_TITLE);

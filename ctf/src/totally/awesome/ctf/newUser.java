@@ -15,7 +15,6 @@ public class newUser extends Activity {
         setContentView(R.layout.newuser);
         Button back = (Button)findViewById(R.id.newUserBack);
         back.setOnClickListener(new View.OnClickListener() {			
-			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				//requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -29,7 +28,6 @@ public class newUser extends Activity {
         
         Button submit = (Button)findViewById(R.id.newUserSubmit);
         submit.setOnClickListener(new View.OnClickListener() {			
-			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				//requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -66,10 +64,10 @@ public class newUser extends Activity {
         				Toast toast = Toast.makeText(context, text, duration);
         				toast.show();             			
             		}else{*/
-        				Toast toast = Toast.makeText(getApplicationContext(), "User Created",  Toast.LENGTH_SHORT);
-        				toast.show();    
+        				/*Toast toast = Toast.makeText(getApplicationContext(), "User Created",  Toast.LENGTH_SHORT);
+        				toast.show();    */
         				Intent i = new Intent();
-        				i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.signin");
+        				i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.classes");
         				startActivity(i);
         				
         				finish();

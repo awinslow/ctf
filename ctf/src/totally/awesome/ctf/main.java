@@ -52,7 +52,6 @@ public class main extends Activity {
         
         Button l = (Button)findViewById(R.id.logout); //id is button 2
         l.setOnClickListener(new View.OnClickListener() {
-			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				//requestWindowFeature(Window.);
@@ -87,7 +86,6 @@ public class main extends Activity {
         Button signin = (Button)findViewById(R.id.MainSignin); //id is button 1
         signin.setOnClickListener(new View.OnClickListener() {
 			
-			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				//requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -102,7 +100,6 @@ public class main extends Activity {
         Button createchar = (Button)findViewById(R.id.MainCreate); //id is button 2
         createchar.setOnClickListener(new View.OnClickListener() {
 			
-			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				//requestWindowFeature(Window.);
@@ -117,7 +114,6 @@ public class main extends Activity {
         Button exitb = (Button)findViewById(R.id.MainExit); //id is button 3
         exitb.setOnClickListener(new View.OnClickListener() {
 			
-			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				//requestWindowFeature(Window.);
@@ -129,7 +125,6 @@ public class main extends Activity {
         if(info.theAuth==null) battle.setEnabled(false);
         battle.setOnClickListener(new View.OnClickListener() {
 			
-			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				//requestWindowFeature(Window.FEATURE_NO_TITLE);
