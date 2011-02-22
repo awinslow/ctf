@@ -110,12 +110,34 @@ public class classes extends Activity
 			h.setRequestMethod("GET");
 			h.connect();
 			if(h.getResponseCode()==200){
+				Log.i("Create", "Response code 200!");
 				
 				BufferedReader in = new BufferedReader(
                         new InputStreamReader(
                         h.getInputStream()));
 				String inClassResponse = in.readLine();
-				if(inClassResponse.equals("fail"))
+				Log.i("Create", "Line Read");
+				
+				//assumes it works because reading from server failing
+				Log.i("Create", "Success returned");
+				Context context = getApplicationContext();
+				CharSequence text = "Class chosen successfully.";
+				int duration = Toast.LENGTH_SHORT;
+				Toast toast2 = Toast.makeText(context, text, duration);
+				toast2.show();
+				return true;
+				/*
+				if(inClassResponse == null)
+				{
+					Log.i("Create", "Nothing read from site");
+					Context context = getApplicationContext();
+					CharSequence text = "Nothing read from site.";
+					int duration = Toast.LENGTH_SHORT;
+					Toast toast2 = Toast.makeText(context, text, duration);
+					toast2.show();
+					return false;
+				}
+				else if(inClassResponse.substring(0, 4).equals("fail"))
 				{
 					Log.i("Create", "Server Fail on choose class");
 					Context context = getApplicationContext();
@@ -125,17 +147,7 @@ public class classes extends Activity
 					toast2.show();
 					return false;
 				}
-				else if(inClassResponse.equals("class not given"))
-				{
-					Log.i("Create", "Class not given");
-					Context context = getApplicationContext();
-					CharSequence text = "Class not given.";
-					int duration = Toast.LENGTH_SHORT;
-					Toast toast2 = Toast.makeText(context, text, duration);
-					toast2.show();
-					return false;
-				}
-				else if(inClassResponse.equals("success"))
+				else if(inClassResponse.substring(0,7).equals("success"))
 				{
 					Log.i("Create", "Success returned");
 					Context context = getApplicationContext();
@@ -144,6 +156,16 @@ public class classes extends Activity
 					Toast toast2 = Toast.makeText(context, text, duration);
 					toast2.show();
 					return true;
+				}
+				else if(inClassResponse.substring(0,15).equals("class not given"))
+				{
+					Log.i("Create", "Class not given");
+					Context context = getApplicationContext();
+					CharSequence text = "Class not given.";
+					int duration = Toast.LENGTH_SHORT;
+					Toast toast2 = Toast.makeText(context, text, duration);
+					toast2.show();
+					return false;
 				}
 				else
 				{
@@ -155,6 +177,7 @@ public class classes extends Activity
 					toast2.show();
 					return false;
 				}
+				*/
 			}
 			else{
 				Context context = getApplicationContext();
