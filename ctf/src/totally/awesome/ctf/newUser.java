@@ -56,6 +56,7 @@ public class newUser extends Activity {
     				toast.show();           		
             	}else{
             		auth a = new auth(user, password, email);
+            		info.theAuth = a;
             		/*if(!a.reset(user, password, newPassword)){
         				Context context = getApplicationContext();
         				CharSequence text = "Error changing password";
