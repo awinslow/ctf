@@ -54,7 +54,17 @@ public class newUser extends Activity {
 
     				Toast toast = Toast.makeText(context, text, duration);
     				toast.show();           		
-            	}else{
+            	}
+            	else if(user.length() > 14)
+            	{
+            		Context context = getApplicationContext();
+    				CharSequence text = "User Name must be less than 15 characters.";
+    				int duration = Toast.LENGTH_SHORT;
+
+    				Toast toast = Toast.makeText(context, text, duration);
+    				toast.show();       
+            	}
+            	else{
             		auth a = new auth(user, password, email);
             		info.theAuth = a;
             		/*if(!a.reset(user, password, newPassword)){
