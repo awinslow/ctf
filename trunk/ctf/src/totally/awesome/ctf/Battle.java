@@ -89,49 +89,22 @@ public class Battle extends Activity{
         attack.setOnClickListener(new View.OnClickListener() {	
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				//requestWindowFeature(Window.FEATURE_NO_TITLE);
-				//Intent i = new Intent();
-				//i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.main");
-				//startActivity(i);
 				
-				try {
-					URL u = new URL("http://ctf.awins.info/battle.php?attack=1&target="+Integer.toString(info.currentFight.enemyID)+"&token="+info.theAuth.getToken());
-				
-    				HttpURLConnection h = (HttpURLConnection) u.openConnection();
-    				h.setRequestMethod("GET");
-    				h.connect();
-    				
-    				if(h.getResponseCode()==200)
-    				{
-    					Log.i("Battle", "Attack sent");
-    					
-    					//Button attk = (Button)findViewById(R.id.attack);
-    					//attk.setEnabled(false);
-    					info.currentFight.myTurn = false;
-    				}
-    				else
-    				{
-	    				CharSequence text = "Attack message to server failed";
-	    				int duration = Toast.LENGTH_SHORT;
+				if (!info.myPlayer.attack0())
+				{
+					CharSequence text = "Attack message to server failed";
+					int duration = Toast.LENGTH_SHORT;
 	
-	    				Toast toast2 = Toast.makeText(getApplicationContext(), text, duration);
-	    				toast2.show();  
-    				}
-				
-				} catch (MalformedURLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-					Log.i("Battle", "Malformed URL in attack send");
-				} catch (ProtocolException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-					Log.i("Battle", "Protocol exception in attack send to server");
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-					Log.i("Battle", "IOException in attack send to server");
+					Toast toast2 = Toast.makeText(getApplicationContext(), text, duration);
+					toast2.show();
 				}
-
+				else {
+					Log.i("Battle", "Attack sent");
+					
+					//Button attk = (Button)findViewById(R.id.attack);
+					//attk.setEnabled(false);
+					info.currentFight.myTurn = false;
+				}
 			}
 		});
         
