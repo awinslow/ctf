@@ -1,5 +1,14 @@
 package totally.awesome.ctf;
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
+import java.net.URL;
+
+import android.util.Log;
+import android.widget.Toast;
+
 public abstract class Player {
 	
 	String name0, name1, name2, name3;
@@ -8,18 +17,138 @@ public abstract class Player {
 	{
 		name0 = "Attack!";
 	}
-	void attack0()
+	boolean attack0()
 	{
+		//boolean output = false;
 		//Basic Attack
+		try {
+			URL u = new URL("http://ctf.awins.info/battle.php?attack=1&target="+Integer.toString(info.currentFight.enemyID)+"&token="+info.theAuth.getToken());
+		
+			HttpURLConnection h = (HttpURLConnection) u.openConnection();
+			h.setRequestMethod("GET");
+			h.connect();
+			
+			if(h.getResponseCode()==200)
+			{
+				return true;
+			}
+			else
+				return false; 
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Log.i("Battle", "Malformed URL in attack send");
+		} catch (ProtocolException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Log.i("Battle", "Protocol exception in attack send to server");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Log.i("Battle", "IOException in attack send to server");
+		}
+		return false;
 	}
 	
-	abstract void attack1();
+	boolean attack1(int type)
+	{
+		try {
+			URL u = new URL("http://ctf.awins.info/battle.php?attack1=1&target="+Integer.toString(info.currentFight.enemyID)+"&token="+info.theAuth.getToken()
+					+"&class="+type);
+		
+			HttpURLConnection h = (HttpURLConnection) u.openConnection();
+			h.setRequestMethod("GET");
+			h.connect();
+			
+			if(h.getResponseCode()==200)
+			{
+				return true;
+			}
+			else
+				return false; 
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Log.i("Battle", "Malformed URL in attack send");
+		} catch (ProtocolException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Log.i("Battle", "Protocol exception in attack send to server");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Log.i("Battle", "IOException in attack send to server");
+		}
+		return false;
+	}
 	
-	abstract void attack2();
+	boolean attack2(int type)
+	{
+		try {
+			URL u = new URL("http://ctf.awins.info/battle.php?attack2=1&target="+Integer.toString(info.currentFight.enemyID)+"&token="+info.theAuth.getToken()
+					+"&class="+type);
+		
+			HttpURLConnection h = (HttpURLConnection) u.openConnection();
+			h.setRequestMethod("GET");
+			h.connect();
+			
+			if(h.getResponseCode()==200)
+			{
+				return true;
+			}
+			else
+				return false; 
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Log.i("Battle", "Malformed URL in attack send");
+		} catch (ProtocolException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Log.i("Battle", "Protocol exception in attack send to server");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Log.i("Battle", "IOException in attack send to server");
+		}
+		return false;
+	}
 	
-	abstract void attack3();
+	boolean attack3(int type)
+	{
+		try {
+			URL u = new URL("http://ctf.awins.info/battle.php?attack3=1&target="+Integer.toString(info.currentFight.enemyID)+"&token="+info.theAuth.getToken()
+					+"&class="+type);
+		
+			HttpURLConnection h = (HttpURLConnection) u.openConnection();
+			h.setRequestMethod("GET");
+			h.connect();
+			
+			if(h.getResponseCode()==200)
+			{
+				return true;
+			}
+			else
+				return false; 
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Log.i("Battle", "Malformed URL in attack send");
+		} catch (ProtocolException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Log.i("Battle", "Protocol exception in attack send to server");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Log.i("Battle", "IOException in attack send to server");
+		}
+		return false;
+	}
 	
 	abstract String getName();
+	
+	abstract int getNumber();
 	
 
 }

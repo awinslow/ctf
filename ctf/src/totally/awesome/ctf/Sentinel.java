@@ -1,35 +1,41 @@
 package totally.awesome.ctf;
 
 public class Sentinel extends Player {
-
 	
 	public Sentinel()
 	{
-		
+		name1 = "";
+		name2 = "";
+		name3 = "";
 	}
 	
 	@Override
-	void attack1() {
-		// TODO Auto-generated method stub
-
+	boolean attack1(int type) {
+		return super.attack1(getNumber());
 	}
 
 	@Override
-	void attack2() {
+	boolean attack2(int type) {
 		// TODO Auto-generated method stub
-
+		return super.attack2(getNumber());
 	}
 
 	@Override
-	void attack3() {
+	boolean attack3(int type) {
 		// TODO Auto-generated method stub
-
+		return super.attack3(getNumber());
 	}
 	
 	@Override
 	String getName()
 	{
 		return "Sentinel";
+	}
+	
+	@Override
+	int getNumber()
+	{
+		return 1;
 	}
 
 }
