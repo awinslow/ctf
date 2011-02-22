@@ -122,7 +122,7 @@ public class auth {
 					String inputLine;
 					
 					while ((inputLine = in.readLine()) != null) 
-					    r=inputLine;
+					    id=Integer.parseInt(inputLine);
 					in.close();
 				}
 				else{
