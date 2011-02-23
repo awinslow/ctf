@@ -60,12 +60,18 @@ public class Battle extends Activity{
         youHBar.setProgress((int) (((float)info.currentFight.getMyHealth()/(float)info.currentFight.myMaxHealth)*100));
         Log.i("Battle", Integer.toString((int) (((float)info.currentFight.getEnemyHealth()/(float)info.currentFight.enemyMaxHealth)*100))); 
         TextView you = (TextView)findViewById(R.id.yourName);
-        
         if(info.currentFight.myName != null)
         {
         	Log.i("Battle", "Fight name null in current fight!");
         	you.setText(info.currentFight.myName);
         }
+        
+        TextView enemClass = (TextView)findViewById(R.id.enemyClass);
+        enemClass.setText(info.currentFight.enemyClass);
+        
+        TextView myClass = (TextView)findViewById(R.id.yourClass);
+        myClass.setText(info.myPlayer.getName());
+        
         
         ImageView youp = (ImageView)findViewById(R.id.yourPic);
         youp.setImageDrawable(info.myPicture);
