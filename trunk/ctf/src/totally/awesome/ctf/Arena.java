@@ -16,6 +16,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -23,22 +25,23 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-/*
 
-class Match extends Thread{
-
-    ProgressDialog dialog;
-    Match(ProgressDialog d) {
-    	dialog=d;
-    }
-
-    public void run() {
-        // compute primes larger than minPrime
-
+class findPlayer extends Thread{
+	int ID;
+	
+	findPlayer(){
+		ID=-1;
+	}
+	findPlayer(int in){
+		ID=in;
+	}
+	
+	public void run(){
+		Log.i("Match Making", "Starting Matchmaking...");
 		boolean haveSomeone = false;
 		int target = -1;
-		while(!haveSomeone){
-			URL u;
+		URL u;
+		if(ID==-1){			
 			try {
 				u = new URL("http://ctf.awins.info/match.php?token="+info.theAuth.getToken());
 				
@@ -50,10 +53,10 @@ class Match extends Thread{
 				h.connect();
 				if(h.getResponseCode()==200){
 					//CharSequence text = "challenge sent";
-    				//Context context = message.this;
+					//Context context = message.this;
 					BufferedReader in = new BufferedReader(
-	                        new InputStreamReader(
-	                        h.getInputStream()));
+		                    new InputStreamReader(
+		                    h.getInputStream()));
 					String inputLine;
 					
 					inputLine = in.readLine();
@@ -70,32 +73,38 @@ class Match extends Thread{
 							}
 						}
 						target=(Integer.parseInt(inputLine.substring(inputLine.indexOf("ID:")+4,end).trim()));
+					} else{
+						info.loading.dismiss();
+						Message m = new Message();
+						m.arg1=0;
+						Arena.startBattle.sendMessage(m);
+						
 					}
 					
 					//Toast myToast = Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG);
 					//myToast.show();
-    				
-    				//int duration = Toast.LENGTH_SHORT;
-    			//if(text.subSequence(0, 3).equals("id")) text = "challenge sent";
-    				//Toast toast2 = Toast.makeText(getApplicationContext(), text, duration);
-    				//toast2.show();
+					
+					//int duration = Toast.LENGTH_SHORT;
+				//if(text.subSequence(0, 3).equals("id")) text = "challenge sent";
+					//Toast toast2 = Toast.makeText(getApplicationContext(), text, duration);
+					//toast2.show();
 				}
 				else{
-    				//Context context = getApplicationContext();
-    				CharSequence text = "Error";
-    				int duration = Toast.LENGTH_SHORT;
-
-    				//Toast toast2 = Toast.makeText(getApplicationContext(), text, duration);
-    				//toast2.show();   					
+					//Context context = getApplicationContext();
+					CharSequence text = "Error";
+					int duration = Toast.LENGTH_SHORT;
+					Log.i("Match Making", "Noone to fight...");
+					//Toast toast2 = Toast.makeText(getApplicationContext(), text, duration);
+					//toast2.show();   					
 					
 				}
 				//Log.i("a", new String(Integer.toString(h.getResponseCode())));
-	            //Log.i("a","opened");
-	            //Log.i("a","http://141.212.113.248/c2dm.php?register=1&rid="+registrationId+"&a="+id);
-
-	            
-	            //Go to Battle!
-	            //Intent i = new Intent();
+		        //Log.i("a","opened");
+		        //Log.i("a","http://141.212.113.248/c2dm.php?register=1&rid="+registrationId+"&a="+id);
+		
+		        
+		        //Go to Battle!
+		        //Intent i = new Intent();
 				//i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.Battle");
 				//startActivity(i);
 				
@@ -109,75 +118,137 @@ class Match extends Thread{
 				Log.i("Arena","IOException: " + e1);
 				e1.printStackTrace();
 			}
-        }
-		
-		
-		URL u;
-		try {
-			u = new URL("http://ctf.awins.info/battle.php?challenge=1&target="+target+"&token="+info.theAuth.getToken());
-			
-			int eid = target;
-			info.currentFight = new fight(eid);
-			
-			HttpURLConnection h = (HttpURLConnection) u.openConnection();
-			h.setRequestMethod("GET");
-			h.connect();
-			if(h.getResponseCode()==200){
-				CharSequence text = "challenge sent";
-				//Context context = message.this;
-				BufferedReader in = new BufferedReader(
-                        new InputStreamReader(
-                        h.getInputStream()));
-				String inputLine;
-				
-				while ((inputLine = in.readLine()) != null) 
-				    text=inputLine;
-				in.close();
-				
-				
-				Toast myToast = Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG);
-				myToast.show();
-				
-				int duration = Toast.LENGTH_SHORT;
-			if(text.subSequence(0, 3).equals("id")) text = "challenge sent";
-				//Toast toast2 = Toast.makeText(getApplicationContext(), text, duration);
-				//toast2.show();
-			}
-			else{
-				//Context context = getApplicationContext();
-				CharSequence text = "Error";
-				int duration = Toast.LENGTH_SHORT;
-
-				//Toast toast2 = Toast.makeText(getApplicationContext(), text, duration);
-				//toast2.show();   					
-				
-			}
-			Log.i("a", new String(Integer.toString(h.getResponseCode())));
-            Log.i("a","opened");
-            //Log.i("a","http://141.212.113.248/c2dm.php?register=1&rid="+registrationId+"&a="+id);
-
-            
-            //Go to Battle!
-            Intent i = new Intent();
-			i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.Battle");
-			startActivity(i);
-			
-			finish();
-		} catch (MalformedURLException e1) {
-			// TODO Auto-generated catch block
-			Log.i("Arena","Malformed URL Exception: " + e1);
-			e1.printStackTrace();
-		}catch (IOException e1) {
-			// TODO Auto-generated catch block
-			Log.i("Arena","IOException: " + e1);
-			e1.printStackTrace();
+		} else {
+			target=ID;
+			haveSomeone=true;
 		}
-		
-	dialog.dismiss();	
-    }
 	
+		if(haveSomeone)
+		{
+			Log.i("Match Making", "Found a target...");
+			try {
+				u = new URL("http://ctf.awins.info/battle.php?challenge=1&target="+target+"&token="+info.theAuth.getToken());
+				
+				int eid = target;
+				info.currentFight = new fight(eid);
+				
+				HttpURLConnection h = (HttpURLConnection) u.openConnection();
+				h.setRequestMethod("GET");
+				h.connect();
+				if(h.getResponseCode()==200){
+					CharSequence text = "challenge sent";
+					//Context context = message.this;
+					BufferedReader in = new BufferedReader(
+	                        new InputStreamReader(
+	                        h.getInputStream()));
+					String inputLine;
+					
+					while ((inputLine = in.readLine()) != null) 
+					    text=inputLine;
+					in.close();
+					
+					
+				//	Toast myToast = Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG);
+				//	myToast.show();
+					
+					int duration = Toast.LENGTH_SHORT;
+				if(text.subSequence(0, 3).equals("id")) text = "challenge sent";
+					//Toast toast2 = Toast.makeText(getApplicationContext(), text, duration);
+					//toast2.show();
+				}
+				else{
+					//Context context = getApplicationContext();
+					CharSequence text = "Error";
+					int duration = Toast.LENGTH_SHORT;
+	
+					//Toast toast2 = Toast.makeText(getApplicationContext(), text, duration);
+					//toast2.show();   					
+					
+				}
+				Log.i("a", new String(Integer.toString(h.getResponseCode())));
+	            Log.i("a","opened");
+	            //Log.i("a","http://141.212.113.248/c2dm.php?register=1&rid="+registrationId+"&a="+id);
+	
+	           // info.loading.dismiss();
+	            //Go to Battle!
+	            
+	            String inputLine = "User not in battle!";
+	            while(inputLine.trim().equals("User not in battle!")){
+	            	Log.i("Match Making", "Waiting for approval...");
+
+	    			URL u1;
+	    			try {
+	    				u1 = new URL("http://ctf.awins.info/battle.php?token=" + info.theAuth.getToken() + "&stats=1");
+	    	
+	    				Log.i("Battle", "Url: " + "http://ctf.awins.info/battle.php?token=" + info.theAuth.getToken() + "&stats=1");
+	    	
+	    				HttpURLConnection h1 = (HttpURLConnection) u1.openConnection();
+	    				h1.setRequestMethod("GET");
+	    				h1.connect();
+	    				if(h1.getResponseCode()==200){
+	    	
+	    					Log.i("Battle", "Connection made response code 200");
+	    					BufferedReader in = new BufferedReader(
+	    	                        new InputStreamReader(
+	    	                        h1.getInputStream()));
+	    					
+	    					//while (inputLine != null)
+	    					//{
+	    							inputLine = in.readLine();
+	    							//Log.i("i got ", inputLine);
+	    					//}
+	    					in.close();
+	    				}
+	    				else{
+	    					
+	    					Log.i("Battle", "Response code NOT 200!!! for Attack");
+	    				}
+	    			} catch (MalformedURLException e) {
+	    				// TODO Auto-generated catch block
+	    				e.printStackTrace();
+	    				Log.i("Battle", "Malformed URL Exception: " + e);
+	    			} catch (IOException e) {
+	    				// TODO Auto-generated catch block
+	    				e.printStackTrace();
+	    				Log.i("Battle", "IOException: " + e);
+	    			}
+	    			
+	    			try {
+	    				Thread.sleep(1000);
+	    			} catch (InterruptedException e) {
+	    				// TODO Auto-generated catch block
+	    				e.printStackTrace();
+	    			}
+	    			
+	    		}
+	            
+	            Log.i("Match Making", "Finshed with Matchmaking...");
+	            info.loading.dismiss();
+	            Message m = new Message();
+	            m.arg1=1;
+	            Arena.startBattle.sendMessage(m);
+
+			} catch (MalformedURLException e1) {
+				// TODO Auto-generated catch block
+				Log.i("Arena","Malformed URL Exception: " + e1);
+				e1.printStackTrace();
+			}catch (IOException e1) {
+				// TODO Auto-generated catch block
+				Log.i("Arena","IOException: " + e1);
+				e1.printStackTrace();
+			}
+			
+	    }
+		else
+		{
+			//Toast curToast = Toast.makeText(getApplicationContext(), "No Users Found on Server", Toast.LENGTH_SHORT);
+			//curToast.show();
+		}
+	}
 }
-*/
+
+
+
 public class Arena extends Activity{
 	String Uname = "uname";
 	//String theClass = info.myPlayer.getName();
@@ -186,8 +257,29 @@ public class Arena extends Activity{
 	String MaxH = "maxh";
 	String Attk = "attk";
 	String Def = "def";
-	//String theClass;
+
+	static RefreshHandler startBattle;
+	class RefreshHandler extends Handler {
+	    @Override
+	    public void handleMessage(Message msg) {
+	    	if(msg.arg1==1){
+		    	Log.i("Match Macking", "Starting Handler to  switch to battle...");
+	            Intent i = new Intent();
+				i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.Battle");
+				Arena.this.startActivity(i);
+				
+				Arena.this.finish();
+	    	}
+	    	else{
+	    		Toast curToast = Toast.makeText(getApplicationContext(), "Sorry, noone can battle you right now!", Toast.LENGTH_SHORT);
+				curToast.show();
+	    	}
+	    }
+	  };
+	  
+
 	public void onCreate(Bundle savedInstanceState) {
+		startBattle = new RefreshHandler();
 		setStats();
 		super.onCreate(savedInstanceState);
     	setContentView(R.layout.arenamode);
@@ -211,156 +303,46 @@ public class Arena extends Activity{
     	start.setOnClickListener(new View.OnClickListener() {	
 			public void onClick(View v) {
 				
-				//ProgressDialog dialog = ProgressDialog.show(Arena.this, "", 
-                 //       "Please wait while we find you a challenger", true);
-				//Match m = new Match(dialog);
-    			//m.start();
-				boolean haveSomeone = false;
-				int target = -1;
-				URL u;
-				try {
-					u = new URL("http://ctf.awins.info/match.php?token="+info.theAuth.getToken());
-					
-					//int eid = Integer.parseInt(input.getText().toString().trim());
-					//info.currentFight = new fight(eid);
-					
-					HttpURLConnection h = (HttpURLConnection) u.openConnection();
-					h.setRequestMethod("GET");
-					h.connect();
-					if(h.getResponseCode()==200){
-						//CharSequence text = "challenge sent";
-	    				//Context context = message.this;
-						BufferedReader in = new BufferedReader(
-		                        new InputStreamReader(
-		                        h.getInputStream()));
-						String inputLine;
-						
-						inputLine = in.readLine();
-						   
-						in.close();
-						
-						if (!inputLine.equals("No players are in arena mode")){
-							haveSomeone=true;
-							int end=0;
-							for(int a = inputLine.indexOf("ID:")+4; a<inputLine.length();a++){
-								if(inputLine.charAt(a) == ' ') {
-									end = a;
-									break;
-								}
-							}
-							target=(Integer.parseInt(inputLine.substring(inputLine.indexOf("ID:")+4,end).trim()));
-						}
-						
-						//Toast myToast = Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG);
-						//myToast.show();
-	    				
-	    				//int duration = Toast.LENGTH_SHORT;
-	    			//if(text.subSequence(0, 3).equals("id")) text = "challenge sent";
-	    				//Toast toast2 = Toast.makeText(getApplicationContext(), text, duration);
-	    				//toast2.show();
-					}
-					else{
-	    				//Context context = getApplicationContext();
-	    				CharSequence text = "Error";
-	    				int duration = Toast.LENGTH_SHORT;
-
-	    				//Toast toast2 = Toast.makeText(getApplicationContext(), text, duration);
-	    				//toast2.show();   					
-						
-					}
-					//Log.i("a", new String(Integer.toString(h.getResponseCode())));
-		            //Log.i("a","opened");
-		            //Log.i("a","http://141.212.113.248/c2dm.php?register=1&rid="+registrationId+"&a="+id);
-
-		            
-		            //Go to Battle!
-		            //Intent i = new Intent();
-					//i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.Battle");
-					//startActivity(i);
-					
-					//finish();
-				} catch (MalformedURLException e1) {
-					// TODO Auto-generated catch block
-					Log.i("Arena","Malformed URL Exception: " + e1);
-					e1.printStackTrace();
-				}catch (IOException e1) {
-					// TODO Auto-generated catch block
-					Log.i("Arena","IOException: " + e1);
-					e1.printStackTrace();
-				}
-			
-			
-				if(haveSomeone)
-				{
-					try {
-						u = new URL("http://ctf.awins.info/battle.php?challenge=1&target="+target+"&token="+info.theAuth.getToken());
-						
-						int eid = target;
-						info.currentFight = new fight(eid);
-						
-						HttpURLConnection h = (HttpURLConnection) u.openConnection();
-						h.setRequestMethod("GET");
-						h.connect();
-						if(h.getResponseCode()==200){
-							CharSequence text = "challenge sent";
-							//Context context = message.this;
-							BufferedReader in = new BufferedReader(
-			                        new InputStreamReader(
-			                        h.getInputStream()));
-							String inputLine;
-							
-							while ((inputLine = in.readLine()) != null) 
-							    text=inputLine;
-							in.close();
-							
-							
-							Toast myToast = Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG);
-							myToast.show();
-							
-							int duration = Toast.LENGTH_SHORT;
-						if(text.subSequence(0, 3).equals("id")) text = "challenge sent";
-							//Toast toast2 = Toast.makeText(getApplicationContext(), text, duration);
-							//toast2.show();
-						}
-						else{
-							//Context context = getApplicationContext();
-							CharSequence text = "Error";
-							int duration = Toast.LENGTH_SHORT;
-	
-							//Toast toast2 = Toast.makeText(getApplicationContext(), text, duration);
-							//toast2.show();   					
-							
-						}
-						Log.i("a", new String(Integer.toString(h.getResponseCode())));
-			            Log.i("a","opened");
-			            //Log.i("a","http://141.212.113.248/c2dm.php?register=1&rid="+registrationId+"&a="+id);
-	
-			            
-			            //Go to Battle!
-			            Intent i = new Intent();
-						i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.Battle");
-						startActivity(i);
-						
-						finish();
-					} catch (MalformedURLException e1) {
-						// TODO Auto-generated catch block
-						Log.i("Arena","Malformed URL Exception: " + e1);
-						e1.printStackTrace();
-					}catch (IOException e1) {
-						// TODO Auto-generated catch block
-						Log.i("Arena","IOException: " + e1);
-						e1.printStackTrace();
-					}
-					
-	            }
-				else
-				{
-					Toast curToast = Toast.makeText(getApplicationContext(), "No Users Found on Server", Toast.LENGTH_SHORT);
-					curToast.show();
-				}
+				info.loading = ProgressDialog.show(Arena.this, "", 
+                        "Please wait while we find you a challenger", true);
+				new findPlayer().start();
 			}
+		});
+    	Button startID = (Button)findViewById(R.id.StartBattleID);
+    	startID.setOnClickListener(new View.OnClickListener() {	
+    		
+			public void onClick(View v) {
+				final AlertDialog.Builder alert = new AlertDialog.Builder(Arena.this);
+		        final EditText input = new EditText(Arena.this);
+		        alert.setTitle("Battle Challenge");
+		        alert.setMessage("Who do you want to challenge?");
+		        alert.setView(input);
+		        alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+		            public void onClick(DialogInterface dialog, int whichButton) {
+						info.loading = ProgressDialog.show(Arena.this, "", 
+		                        "Please wait while we connect you to your target", true);
+						new findPlayer(Integer.parseInt(input.getText().toString())).start();		            
+		            }
+		            });
 
-				
+		        alert.setNegativeButton("Cancel",
+		                new DialogInterface.OnClickListener() {
+		                    public void onClick(DialogInterface dialog, int whichButton) {
+		                        dialog.cancel();
+		                        
+		                        //Go back to select page
+		                        //Intent i = new Intent();
+		                        //i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.select");
+		                        //tartActivity(i);
+		                        
+		                        Log.i("Arena", "Battle initiation canceled by user");
+		                        //finish();
+		                    }
+		                });
+		        
+		        alert.show();	
+
+			}
 		});
     	//How to get this to show up onclick?
     	/*
