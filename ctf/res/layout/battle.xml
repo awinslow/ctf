@@ -24,6 +24,26 @@
     			android:gravity="center_horizontal" android:id="@+id/yourName">
     		</TextView>
     	</TableRow>
+    	    <TableRow>
+    		<TextView
+    			android:text="Enemy Class"
+    			android:layout_width="0dip"
+    			android_layout_height="wrap_content"
+    			android:padding="10dip"
+    			android:layout_weight="1"
+    			android:layout_margin="4dip"
+    			android:gravity="center_horizontal" android:id="@+id/enemyClass">
+    		</TextView>
+    		<TextView
+    		    android:text="Your Class"
+    			android:layout_width="0dip"
+    			android_layout_height="wrap_content"
+    			android:padding="10dip"
+    			android:layout_weight="1"
+    			android:layout_margin="4dip"
+    			android:gravity="center_horizontal" android:id="@+id/yourClass">
+    		</TextView>
+    	</TableRow>
     	<TableRow>
     		<ImageView android:layout_width="0dip" android:layout_height="wrap_content" android:padding="10dip" android:layout_weight="1" android:layout_margin="4dip" android:src="@drawable/icon" android:id="@+id/enemyPic" android:adjustViewBounds="true"></ImageView>  
  			<ImageView android:padding="10dip" android:layout_weight="1" android:layout_margin="4dip" android:src="@drawable/icon" android:id="@+id/yourPic" android:layout_width="0dip" android:layout_height="wrap_content" android:adjustViewBounds="true"></ImageView>
@@ -38,8 +58,8 @@
 		</TableRow>
     	<TableRow>
     		<TextView 
-    			android:text="Items:" 
-    			android:id="@+id/textView5" 
+    			android:text="AP:" 
+    			android:id="@+id/apcount" 
     			android:layout_width="0dip" 
     			android:layout_height="wrap_content" 
     			android:padding="10dip" 
@@ -47,26 +67,24 @@
     			android:layout_margin="4dip"
     			android:gravity="center_horizontal">
     		</TextView>
-    		<TextView 
-    			android:text="Specials:" 
-    			android:id="@+id/textView6" 
+    		<Button
+    			android:text="Attack 0"
     			android:layout_width="0dip" 
     			android:layout_height="wrap_content" 
     			android:padding="10dip" 
     			android:layout_weight="1" 
     			android:layout_margin="4dip"
-    			android:gravity="center_horizontal">
-    		</TextView>
-    		<TextView 
-    			android:text="Attacks:" 
-    			android:id="@+id/textView7" 
+    			android:gravity="center_horizontal" android:id="@+id/attack0">
+    		</Button>
+    		<Button
+    			android:text="Attack 1"
     			android:layout_width="0dip" 
     			android:layout_height="wrap_content" 
     			android:padding="10dip" 
     			android:layout_weight="1" 
     			android:layout_margin="4dip"
-    			android:gravity="center_horizontal">
-    		</TextView>
+    			android:gravity="center_horizontal" android:id="@+id/attack1">
+    		</Button>
     		
     	</TableRow>
     	<TableRow>
@@ -80,27 +98,34 @@
     			android:gravity="center_horizontal" android:id="@+id/UseItem">
     		</Button>
     		<Button
-    		    android:text="Use Special"
+    		    android:text="Attack 2"
     			android:layout_width="0dip" 
     			android:layout_height="wrap_content" 
     			android:padding="10dip" 
     			android:layout_weight="1" 
     			android:layout_margin="4dip"
-    			android:gravity="center_horizontal" android:id="@+id/UseSpecial">
+    			android:gravity="center_horizontal" android:id="@+id/attack2">
     		</Button>
     		<Button
-    			android:text="Attack!"
+    			android:text="Attack 3"
     			android:layout_width="0dip" 
     			android:layout_height="wrap_content" 
     			android:padding="10dip" 
     			android:layout_weight="1" 
     			android:layout_margin="4dip"
-    			android:gravity="center_horizontal" android:id="@+id/attack">
+    			android:gravity="center_horizontal" android:id="@+id/attack3">
     		</Button>
     	</TableRow>
     	<TableRow>
-    	    <Button android:text="Back" android:id="@+id/battleBack" android:layout_width="wrap_content" android:layout_height="wrap_content"></Button>
-    	
+    		<Button
+				android:text="Back"
+				android:layout_width="0dip"
+				android:layout_height="wrap_content"
+				android:padding="10dip"
+				android:layout_weight="1"
+				android:layout_margin="4dip"
+				android:gravity="center_horizontal" android:id="@+id/battleBack">
+			</Button>
 
 
 </TableRow>
