@@ -120,7 +120,10 @@ class findPlayer extends Thread{
 			}
 		} else {
 			target=ID;
-			haveSomeone=true;
+			haveSomeone=true;			
+			
+			
+			
 		}
 	
 		if(haveSomeone)
@@ -143,7 +146,8 @@ class findPlayer extends Thread{
 	                        h.getInputStream()));
 					String inputLine;
 					
-					while ((inputLine = in.readLine()) != null) 
+					//while ((inputLine = in.readLine()) != null) 
+						inputLine = in.readLine();
 					    text=inputLine;
 					in.close();
 					
@@ -152,17 +156,24 @@ class findPlayer extends Thread{
 				//	myToast.show();
 					
 					int duration = Toast.LENGTH_SHORT;
-				if(text.subSequence(0, 3).equals("id")) text = "challenge sent";
+				if(text.subSequence(0, 2).equals("id")) text = "challenge sent";
+				else{
+					info.loading.dismiss();
+					Message m = new Message();
+					m.arg1=2;
+					Arena.startBattle.sendMessage(m);	
+					this.stop();
+					
+				}
 					//Toast toast2 = Toast.makeText(getApplicationContext(), text, duration);
 					//toast2.show();
 				}
 				else{
-					//Context context = getApplicationContext();
-					CharSequence text = "Error";
-					int duration = Toast.LENGTH_SHORT;
-	
-					//Toast toast2 = Toast.makeText(getApplicationContext(), text, duration);
-					//toast2.show();   					
+					info.loading.dismiss();
+					Message m = new Message();
+					m.arg1=2;
+					Arena.startBattle.sendMessage(m);	
+					this.stop();
 					
 				}
 				Log.i("a", new String(Integer.toString(h.getResponseCode())));
@@ -269,6 +280,9 @@ public class Arena extends Activity{
 				Arena.this.startActivity(i);
 				
 				Arena.this.finish();
+	    	} else if(msg.arg1==2){
+	    		Toast curToast = Toast.makeText(getApplicationContext(), "Sorry, There was an error connecting to player.  They may already be in a battle", Toast.LENGTH_SHORT);
+				curToast.show();	    		
 	    	}
 	    	else{
 	    		Toast curToast = Toast.makeText(getApplicationContext(), "Sorry, noone can battle you right now!", Toast.LENGTH_SHORT);
