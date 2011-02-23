@@ -21,6 +21,7 @@ public class fight {
 	
 	String enemyName = "Name Not Set";
 	String myName = "Name Not Set";
+	String enemyClass = "";
 	int myMaxHealth;
 	int enemyMaxHealth;
 	
@@ -119,6 +120,26 @@ public class fight {
 				    	else
 				    	{
 				    		enemyName = text.substring(10);
+				    	}
+
+				    }
+				    if(text.indexOf("Class:") != -1)
+				    {
+				    	if(!isEnemy)
+				    	{
+				    		info.setPlayerClass(Integer.parseInt(text.substring(6).trim()));
+				    	}
+				    	else
+				    	{
+				    		switch (Integer.parseInt(text.substring(6).trim()))
+				    		{
+				    			case 0: enemyClass = "Soldier";
+				    				break;
+				    			case 1: enemyClass = "Sentinel";
+			    					break;
+				    			case 2: enemyClass = "Hacker";
+			    					break;
+				    		}
 				    	}
 
 				    }
