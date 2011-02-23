@@ -12,6 +12,6 @@
     <EditText android:layout_width="match_parent" android:text="" android:layout_height="wrap_content" android:id="@+id/newUserConfirm" android:inputType="textPassword"></EditText>
     <TextView android:text="Email" android:id="@+id/textView4" android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
     <EditText android:layout_width="match_parent" android:text="" android:layout_height="wrap_content" android:id="@+id/newUserEmail"></EditText>
-    <Button android:text="Submit" android:id="@+id/newUserSubmit" android:layout_width="wrap_content" android:layout_height="wrap_content"></Button>
-    <Button android:text="Back" android:id="@+id/newUserBack" android:layout_width="wrap_content" android:layout_height="wrap_content"></Button>
+    <Button android:text="Submit" android:id="@+id/newUserSubmit" android:layout_height="wrap_content" android:layout_width="match_parent"></Button>
+    <Button android:text="Back" android:id="@+id/newUserBack" android:layout_height="wrap_content" android:layout_width="match_parent"></Button>
 </LinearLayout>
