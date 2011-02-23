@@ -31,7 +31,7 @@ public class Battle extends Activity{
 	public TextView youh;
 	ProgressBar youHBar;
 	ProgressBar enemyHBar;
-	Button attack;
+	Button attack0,attack1,attack2,attack3;
 	static RefreshHandler mRedrawHandler = new RefreshHandler();
     static class RefreshHandler extends Handler {
         @Override
@@ -83,10 +83,11 @@ public class Battle extends Activity{
         youh.setText("Health: " + Integer.toString(info.currentFight.getMyHealth()) + " / " + Integer.toString(info.currentFight.myMaxHealth));
         
         
-        attack = (Button)findViewById(R.id.attack);
+        attack0 = (Button)findViewById(R.id.attack0);
+        attack0.setText(info.myPlayer.name0);
         if(!info.currentFight.myTurn)
-        	attack.setEnabled(false);
-        attack.setOnClickListener(new View.OnClickListener() {	
+        	attack0.setEnabled(false);
+        attack0.setOnClickListener(new View.OnClickListener() {	
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				
@@ -100,6 +101,84 @@ public class Battle extends Activity{
 				}
 				else {
 					Log.i("Battle", "Attack sent");
+					
+					//Button attk = (Button)findViewById(R.id.attack);
+					//attk.setEnabled(false);
+					info.currentFight.myTurn = false;
+				}
+			}
+		});
+        
+        attack1 = (Button)findViewById(R.id.attack1);
+        attack1.setText(info.myPlayer.name1);
+        if(!info.currentFight.myTurn)
+        	attack1.setEnabled(false);
+        attack1.setOnClickListener(new View.OnClickListener() {	
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				
+				if (!info.myPlayer.attack1(-1))
+				{
+					CharSequence text = "Attack message to server failed";
+					int duration = Toast.LENGTH_SHORT;
+	
+					Toast toast2 = Toast.makeText(getApplicationContext(), text, duration);
+					toast2.show();
+				}
+				else {
+					Log.i("Battle", "Attack1 sent");
+					
+					//Button attk = (Button)findViewById(R.id.attack);
+					//attk.setEnabled(false);
+					info.currentFight.myTurn = false;
+				}
+			}
+		});
+        
+        attack2 = (Button)findViewById(R.id.attack2);
+        attack2.setText(info.myPlayer.name2);
+        if(!info.currentFight.myTurn)
+        	attack2.setEnabled(false);
+        attack2.setOnClickListener(new View.OnClickListener() {	
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				
+				if (!info.myPlayer.attack2(-1))
+				{
+					CharSequence text = "Attack message to server failed";
+					int duration = Toast.LENGTH_SHORT;
+	
+					Toast toast2 = Toast.makeText(getApplicationContext(), text, duration);
+					toast2.show();
+				}
+				else {
+					Log.i("Battle", "Attack2 sent");
+					
+					//Button attk = (Button)findViewById(R.id.attack);
+					//attk.setEnabled(false);
+					info.currentFight.myTurn = false;
+				}
+			}
+		});
+        
+        attack3 = (Button)findViewById(R.id.attack3);
+        attack3.setText(info.myPlayer.name3);
+        if(!info.currentFight.myTurn)
+        	attack3.setEnabled(false);
+        attack3.setOnClickListener(new View.OnClickListener() {	
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				
+				if (!info.myPlayer.attack3(-1))
+				{
+					CharSequence text = "Attack message to server failed";
+					int duration = Toast.LENGTH_SHORT;
+	
+					Toast toast2 = Toast.makeText(getApplicationContext(), text, duration);
+					toast2.show();
+				}
+				else {
+					Log.i("Battle", "Attack3 sent");
 					
 					//Button attk = (Button)findViewById(R.id.attack);
 					//attk.setEnabled(false);
