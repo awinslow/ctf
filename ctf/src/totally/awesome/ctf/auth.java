@@ -78,7 +78,35 @@ public class auth {
 		        		
 		        		getinfo.close();
 		        	}
-		     //name = user;
+		        	else
+		        	{
+		        		Log.i("Auth", "Server Response code not 200: " + h.getResponseCode());
+		        	}
+		        	///////////
+		        
+		        u = new URL("http://ctf.awins.info/getClass.php?uid=" + id);
+		        h = (HttpURLConnection) u.openConnection();
+		        h.setRequestMethod("GET");
+		        h.connect();
+		        	if (h.getResponseCode()==200){
+		        		BufferedReader getinfo = new BufferedReader(new InputStreamReader(h.getInputStream()));
+		        		String inputLine = getinfo.readLine();
+		        		
+		        		if(inputLine.indexOf("Class:") != -1)
+					    {
+					    		info.setPlayerClass(Integer.parseInt(inputLine.substring(6).trim()));	
+					    }
+		        		else
+		        		{
+		        			Log.i("Auth", "Could not find Class on input: " + inputLine);
+		        		}
+		        		
+		        		getinfo.close();
+		        	}
+		        	else
+		        	{
+		        		Log.i("Auth", "Server Response code not 200: " + h.getResponseCode());
+		        	}
 		     
 		       } catch (MalformedURLException e1) {
 				// TODO Auto-generated catch block

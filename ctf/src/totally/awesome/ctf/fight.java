@@ -127,7 +127,7 @@ public class fight {
 				    {
 				    	if(!isEnemy)
 				    	{
-				    		info.setPlayerClass(Integer.parseInt(text.substring(6).trim()));
+				    		//info.setPlayerClass(Integer.parseInt(text.substring(6).trim()));
 				    	}
 				    	else
 				    	{
