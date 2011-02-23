@@ -186,7 +186,7 @@ public class Arena extends Activity{
 	String MaxH = "maxh";
 	String Attk = "attk";
 	String Def = "def";
-	String theClass;
+	//String theClass;
 	public void onCreate(Bundle savedInstanceState) {
 		setStats();
 		super.onCreate(savedInstanceState);
@@ -517,8 +517,8 @@ public class Arena extends Activity{
 			    	}
 			    	else if(inText.indexOf("Class:") != -1)
 			    	{
-			    		theClass = inText.substring(6).trim();
-			    		Log.i("Arena", "Experience: " + Exp);
+			    		//theClass = inText.substring(6).trim();
+			    		Log.i("Arena", "Class: " + inText.substring(6).trim());
 			    	}
 			    	else
 			    	{

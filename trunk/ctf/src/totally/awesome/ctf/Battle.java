@@ -83,8 +83,10 @@ public class Battle extends Activity{
         youh.setText("Health: " + Integer.toString(info.currentFight.getMyHealth()) + " / " + Integer.toString(info.currentFight.myMaxHealth));
         
         
+
         attack0 = (Button)findViewById(R.id.attack0);
         attack0.setText(info.myPlayer.name0);
+
         if(!info.currentFight.myTurn)
         	attack0.setEnabled(false);
         attack0.setOnClickListener(new View.OnClickListener() {	
