@@ -285,7 +285,9 @@ public class Arena extends Activity{
     	setContentView(R.layout.arenamode);
     	
     	TextView uname = (TextView)findViewById(R.id.username);
-    	uname.setText("Username: " + Uname);
+    	uname.setText("User Name: " + Uname);
+    	TextView uClass = (TextView)findViewById(R.id.Classme);
+    	uClass.setText("User Class: " + info.myPlayer.getName());
     	TextView exp = (TextView)findViewById(R.id.Experience);
     	exp.setText("Experience: " + Exp);
     	TextView lvl = (TextView)findViewById(R.id.level);
