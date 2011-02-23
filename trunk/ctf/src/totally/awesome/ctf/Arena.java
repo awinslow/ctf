@@ -39,6 +39,7 @@ class findPlayer extends Thread{
 	public void run(){
 		Log.i("Match Making", "Starting Matchmaking...");
 		boolean haveSomeone = false;
+		boolean cancel = false;
 		int target = -1;
 		URL u;
 		if(ID==-1){			
@@ -162,7 +163,7 @@ class findPlayer extends Thread{
 					Message m = new Message();
 					m.arg1=2;
 					Arena.startBattle.sendMessage(m);	
-					this.stop();
+					cancel=true;
 					
 				}
 					//Toast toast2 = Toast.makeText(getApplicationContext(), text, duration);
@@ -173,7 +174,7 @@ class findPlayer extends Thread{
 					Message m = new Message();
 					m.arg1=2;
 					Arena.startBattle.sendMessage(m);	
-					this.stop();
+					cancel=true;
 					
 				}
 				Log.i("a", new String(Integer.toString(h.getResponseCode())));
@@ -185,6 +186,11 @@ class findPlayer extends Thread{
 	            
 	            String inputLine = "User not in battle!";
 	            while(inputLine.trim().equals("User not in battle!")){
+	            	if(!info.loading.isShowing()){
+	            		Log.i("Match Making", "User canceled loading...");
+	            		cancel=true;
+	            		break;
+	            	}
 	            	Log.i("Match Making", "Waiting for approval...");
 
 	    			URL u1;
@@ -232,13 +238,13 @@ class findPlayer extends Thread{
 	    			}
 	    			
 	    		}
-	            
-	            Log.i("Match Making", "Finshed with Matchmaking...");
-	            info.loading.dismiss();
-	            Message m = new Message();
-	            m.arg1=1;
-	            Arena.startBattle.sendMessage(m);
-
+	            if(!cancel){
+		            Log.i("Match Making", "Finshed with Matchmaking...");
+		            info.loading.dismiss();
+		            Message m = new Message();
+		            m.arg1=1;
+		            Arena.startBattle.sendMessage(m);
+	            }
 			} catch (MalformedURLException e1) {
 				// TODO Auto-generated catch block
 				Log.i("Arena","Malformed URL Exception: " + e1);
@@ -321,6 +327,7 @@ public class Arena extends Activity{
 				
 				info.loading = ProgressDialog.show(Arena.this, "", 
                         "Please wait while we find you a challenger", true);
+				info.loading.setCancelable(true);
 				new findPlayer().start();
 			}
 		});
@@ -337,6 +344,7 @@ public class Arena extends Activity{
 		            public void onClick(DialogInterface dialog, int whichButton) {
 						info.loading = ProgressDialog.show(Arena.this, "", 
 		                        "Please wait while we connect you to your target", true);
+						info.loading.setCancelable(true);
 						new findPlayer(Integer.parseInt(input.getText().toString())).start();		            
 		            }
 		            });
