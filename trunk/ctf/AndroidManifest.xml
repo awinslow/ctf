@@ -11,19 +11,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".signin">
+        <activity android:name=".signin" android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".changePass">
+        <activity android:name=".changePass" android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".newUser">
+        <activity android:name=".newUser" android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".Battle">
+        <activity android:name=".Battle" android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".select">
+        <activity android:name=".select" android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".Arena">
+        <activity android:name=".Arena" android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".classes">
+        <activity android:name=".classes" android:screenOrientation="portrait">
         </activity>
         <service android:name=".C2DMReceiver" />
         <receiver android:name="com.google.android.c2dm.C2DMBroadcastReceiver"
