@@ -3,6 +3,7 @@ package totally.awesome.ctf;
 import java.io.InputStream;
 import java.net.URL;
 
+import android.app.ProgressDialog;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
 
@@ -14,6 +15,7 @@ public class info {
 	public static Player myPlayer;
 	static Drawable myPicture;
 	static heartbeat h;
+	static ProgressDialog loading;
 	public static Drawable getPic(int id){
 		return myPicture;
 	}
