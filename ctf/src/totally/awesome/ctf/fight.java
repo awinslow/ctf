@@ -204,12 +204,18 @@ public class fight {
 		if(id == myId)
 		{
 			myTurn = true;
-			info.battleInst.attack.setEnabled(true);
+			info.battleInst.attack0.setEnabled(true);
+			info.battleInst.attack1.setEnabled(true);
+			info.battleInst.attack2.setEnabled(true);
+			info.battleInst.attack3.setEnabled(true);
 		}
 		else if(id == enemyID)
 		{
 			myTurn = false;
-			info.battleInst.attack.setEnabled(false);
+			info.battleInst.attack0.setEnabled(false);
+			info.battleInst.attack1.setEnabled(false);
+			info.battleInst.attack2.setEnabled(false);
+			info.battleInst.attack3.setEnabled(false);
 		}
 	}
 }

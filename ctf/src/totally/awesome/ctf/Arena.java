@@ -180,11 +180,13 @@ class Match extends Thread{
 */
 public class Arena extends Activity{
 	String Uname = "uname";
+	//String theClass = info.myPlayer.getName();
 	String Exp = "exp";
 	String Lvl = "lvl";
 	String MaxH = "maxh";
 	String Attk = "attk";
 	String Def = "def";
+	String theClass;
 	public void onCreate(Bundle savedInstanceState) {
 		setStats();
 		super.onCreate(savedInstanceState);
@@ -511,6 +513,11 @@ public class Arena extends Activity{
 			    	else if(inText.indexOf("Experience:") != -1)
 			    	{
 			    		Exp = inText.substring(11).trim();
+			    		Log.i("Arena", "Experience: " + Exp);
+			    	}
+			    	else if(inText.indexOf("Class:") != -1)
+			    	{
+			    		theClass = inText.substring(6).trim();
 			    		Log.i("Arena", "Experience: " + Exp);
 			    	}
 			    	else

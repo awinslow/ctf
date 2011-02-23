@@ -4,9 +4,9 @@ public class Soldier extends Player {
 
 	public Soldier() {
 		// TODO Auto-generated constructor stub
-		name1 = "";
-		name2 = "";
-		name3 = "";
+		name1 = "Blink";
+		name2 = "Sugarcult";
+		name3 = "Milincolin";
 	}
 
 	@Override
