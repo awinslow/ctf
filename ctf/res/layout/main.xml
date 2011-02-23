@@ -11,9 +11,9 @@
     />
 
 
-<Button android:layout_height="wrap_content" android:id="@+id/MainSignin" android:text="Sign In" android:layout_width="wrap_content"></Button>
-<Button android:layout_height="wrap_content" android:id="@+id/MainCreate" android:text="Create A Character" android:layout_width="wrap_content"></Button>
-<Button android:text="Exit" android:id="@+id/MainExit" android:layout_width="wrap_content" android:layout_height="wrap_content"></Button>
-<Button android:text="Logout" android:id="@+id/logout" android:layout_width="wrap_content" android:layout_height="wrap_content"></Button>
-<Button android:text="Start" android:id="@+id/battle" android:layout_width="wrap_content" android:layout_height="wrap_content"></Button>
+<Button android:layout_height="wrap_content" android:id="@+id/MainSignin" android:text="Sign In" android:layout_width="match_parent"></Button>
+<Button android:layout_height="wrap_content" android:id="@+id/MainCreate" android:text="Create A Character" android:layout_width="match_parent"></Button>
+<Button android:text="Exit" android:id="@+id/MainExit" android:layout_height="wrap_content" android:layout_width="match_parent"></Button>
+<Button android:text="Logout" android:id="@+id/logout" android:layout_height="wrap_content" android:layout_width="match_parent"></Button>
+<Button android:text="Start" android:id="@+id/battle" android:layout_height="wrap_content" android:layout_width="match_parent"></Button>
 </LinearLayout>
