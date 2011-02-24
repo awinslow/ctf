@@ -22,7 +22,7 @@ public abstract class Player {
 		//boolean output = false;
 		//Basic Attack
 		try {
-			URL u = new URL("http://ctf.awins.info/battle.php?attack=1&target="+Integer.toString(info.currentFight.enemyID)+"&token="+info.theAuth.getToken());
+			URL u = new URL("http://ctf.awins.info/battle.php?attack=0&target="+Integer.toString(info.currentFight.enemyID)+"&token="+info.theAuth.getToken());
 		
 			HttpURLConnection h = (HttpURLConnection) u.openConnection();
 			h.setRequestMethod("GET");
@@ -53,7 +53,7 @@ public abstract class Player {
 	boolean attack1(int type)
 	{
 		try {
-			URL u = new URL("http://ctf.awins.info/battle.php?attack1=1&target="+Integer.toString(info.currentFight.enemyID)+"&token="+info.theAuth.getToken()
+			URL u = new URL("http://ctf.awins.info/battle.php?attack=1&target="+Integer.toString(info.currentFight.enemyID)+"&token="+info.theAuth.getToken()
 					+"&class="+type);
 		
 			HttpURLConnection h = (HttpURLConnection) u.openConnection();
@@ -85,7 +85,7 @@ public abstract class Player {
 	boolean attack2(int type)
 	{
 		try {
-			URL u = new URL("http://ctf.awins.info/battle.php?attack2=1&target="+Integer.toString(info.currentFight.enemyID)+"&token="+info.theAuth.getToken()
+			URL u = new URL("http://ctf.awins.info/battle.php?attack=2&target="+Integer.toString(info.currentFight.enemyID)+"&token="+info.theAuth.getToken()
 					+"&class="+type);
 		
 			HttpURLConnection h = (HttpURLConnection) u.openConnection();
@@ -117,7 +117,7 @@ public abstract class Player {
 	boolean attack3(int type)
 	{
 		try {
-			URL u = new URL("http://ctf.awins.info/battle.php?attack3=1&target="+Integer.toString(info.currentFight.enemyID)+"&token="+info.theAuth.getToken()
+			URL u = new URL("http://ctf.awins.info/battle.php?attack=3&target="+Integer.toString(info.currentFight.enemyID)+"&token="+info.theAuth.getToken()
 					+"&class="+type);
 		
 			HttpURLConnection h = (HttpURLConnection) u.openConnection();
