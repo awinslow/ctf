@@ -33,10 +33,7 @@ public class C2DMReceiver extends C2DMBaseReceiver{
           Log.i("GenericNotifier", message);
           Intent i = new Intent("totally.awesome.ctf.HI");
           i.putExtra("message", message);
-          sendBroadcast(i);
-
-         // Toast.makeText(main.this,"Hi! Bright Hub", Toast.LENGTH_SHORT).show();
-          
+          sendBroadcast(i);  
        }
     }
 

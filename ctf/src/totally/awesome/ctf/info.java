@@ -16,6 +16,7 @@ public class info {
 	static Drawable myPicture;
 	static heartbeat h;
 	static ProgressDialog loading;
+	static boolean inMatchMaking;
 	public static Drawable getPic(int id){
 		return myPicture;
 	}

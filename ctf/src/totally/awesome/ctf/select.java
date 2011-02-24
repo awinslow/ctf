@@ -20,16 +20,17 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class select extends Activity{
-
+	//MyIntentReceiver intentReceiver;
+	
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.select);
-        MyIntentReceiver intentReceiver = new MyIntentReceiver();
-        IntentFilter intentFilter = new IntentFilter("totally.awesome.ctf.HI");
-        intentFilter.setPriority(1);
+        //intentReceiver = new MyIntentReceiver();
+        //IntentFilter intentFilter = new IntentFilter("totally.awesome.ctf.HI");
+        //intentFilter.setPriority(1);
 
-        registerReceiver(intentReceiver, intentFilter); 
+        //registerReceiver(intentReceiver, intentFilter); 
         
         Button battle = (Button)findViewById(R.id.battleMode); //id is button 1
         battle.setOnClickListener(new View.OnClickListener() {
@@ -41,7 +42,7 @@ public class select extends Activity{
 				i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.Arena");
 				startActivity(i);
 
-				finish();
+				//finish();
 			}
 		});
         
@@ -55,7 +56,7 @@ public class select extends Activity{
 				i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.adventure");
 				startActivity(i);
 
-				finish();
+				//finish();
 			}
 		});
         

@@ -37,10 +37,6 @@ public class main extends Activity {
         setContentView(R.layout.main);
         String registrationId;
         
-        MyIntentReceiver intentReceiver = new MyIntentReceiver();
-        IntentFilter intentFilter = new IntentFilter("totally.awesome.ctf.HI");
-        intentFilter.setPriority(1);
-        registerReceiver(intentReceiver, intentFilter); 
         
         SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
         final SharedPreferences.Editor editor = settings.edit();     
@@ -95,7 +91,7 @@ public class main extends Activity {
 				i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.signin");
 				startActivity(i);
 				
-				finish();
+				//finish();
 			}
 		});
         
@@ -147,7 +143,7 @@ public class main extends Activity {
 			int duration = Toast.LENGTH_SHORT;
 
 			Toast toast = Toast.makeText(context, text, duration);
-			toast.show();
+			//toast.show();
         }else{
             Log.i("GenericNotifier", "No existing registrationId. Registering..");
             C2DMessaging.register(this, "amwinslo@umich.edu");
@@ -156,7 +152,7 @@ public class main extends Activity {
     		int duration = Toast.LENGTH_SHORT;
 
     		Toast toast = Toast.makeText(context2, text, duration);
-    		toast.show();
+    		//toast.show();
         }
 
      // Acquire a reference to the system Location Manager

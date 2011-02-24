@@ -2,6 +2,7 @@ package totally.awesome.ctf;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -28,8 +29,23 @@ public class Battle extends Activity{
 	ProgressBar youHBar;
 	ProgressBar enemyHBar;
 	Button attack0,attack1,attack2,attack3;
+	MyIntentReceiver intentReceiver;
 
+	public void onPause(){		
+		super.onPause();
+		info.h.interrupt();
+		unregisterReceiver(intentReceiver);
+	}
 	
+	public void onResume(){
+		super.onResume();
+		info.inMatchMaking=false;
+        intentReceiver = new MyIntentReceiver();
+        IntentFilter intentFilter = new IntentFilter("totally.awesome.ctf.HI");
+        intentFilter.setPriority(1);
+
+        registerReceiver(intentReceiver, intentFilter); 
+	}
 	static RefreshHandler mRedrawHandler = new RefreshHandler();
     static class RefreshHandler extends Handler {
         @Override
