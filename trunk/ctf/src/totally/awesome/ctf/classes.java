@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -20,6 +21,7 @@ public class classes extends Activity
 {
     public void onCreate(Bundle savedInstanceState) 
     {
+    	requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.classes);
         Button soldier = (Button)findViewById(R.id.soldier);

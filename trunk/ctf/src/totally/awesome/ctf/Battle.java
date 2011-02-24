@@ -17,6 +17,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -46,7 +47,7 @@ public class Battle extends Activity{
       };
 	
 	public void onCreate(Bundle savedInstanceState) {
-		
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		info.battleInst = this;
 		
         super.onCreate(savedInstanceState);

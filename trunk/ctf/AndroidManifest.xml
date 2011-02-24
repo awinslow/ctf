@@ -4,6 +4,7 @@
       android:versionCode="1"
       android:versionName="1.0">
     <application android:icon="@drawable/icon" android:label="@string/app_name">
+    	<uses-library android:name="com.google.android.maps" />
         <activity android:name=".main"
                   android:label="@string/app_name">
             <intent-filter>
@@ -24,6 +25,8 @@
         <activity android:name=".Arena" android:screenOrientation="portrait">
         </activity>
         <activity android:name=".classes" android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".adventure" android:screenOrientation="portrait">
         </activity>
         <service android:name=".C2DMReceiver" />
         <receiver android:name="com.google.android.c2dm.C2DMBroadcastReceiver"
