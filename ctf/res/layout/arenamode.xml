@@ -5,7 +5,7 @@
   android:layout_height="match_parent" android:orientation="vertical">
     <TextView android:text="TextView" android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/username"></TextView>
     <TextView android:text="Class Here" android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/Classme"></TextView>
-    <ImageView android:layout_width="wrap_content" android:src="@drawable/icon" android:layout_height="wrap_content" android:id="@+id/userIcon" android:adjustViewBounds="true"></ImageView>
+    <ImageView android:layout_width="wrap_content" android:src="@drawable/icon" android:layout_height="120dip" android:id="@+id/userIcon" android:adjustViewBounds="true"></ImageView>
     <TextView android:text="TextView" android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/level"></TextView>
     <TextView android:text="TextView" android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/Experience"></TextView>
     <TextView android:text="TextView" android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/maxHealth"></TextView>
