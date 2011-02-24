@@ -12,6 +12,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -64,6 +66,47 @@ public class signin extends Activity {
     		uname.setText(settings.getString("user", "~~~~~~~~~~~~~~~~~~~~"));
     		pword.setText(settings.getString("password", "~~~~~~~~~~~~~~~~~~~~"));
     	}
+    	
+    	uname.addTextChangedListener(new TextWatcher() {
+			
+			public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+				// TODO Auto-generated method stub
+				CheckBox c = (CheckBox)findViewById(R.id.CheckBox01);
+				c.setChecked(false);
+			}
+			
+			public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
+					int arg3) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			public void afterTextChanged(Editable arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+
+    	pword.addTextChangedListener(new TextWatcher() {
+			
+			public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+				// TODO Auto-generated method stub
+				CheckBox c = (CheckBox)findViewById(R.id.CheckBox01);
+				c.setChecked(false);
+			}
+			
+			public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
+					int arg3) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			public void afterTextChanged(Editable arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+    	
         signIn.setOnClickListener(new View.OnClickListener() {
 			
 			public void onClick(View v) {
@@ -101,10 +144,10 @@ public class signin extends Activity {
     				h.connect();
     				if(h.getResponseCode()==200){
     					
-    					
 	    				Context context = getApplicationContext();
 	    				CharSequence text = "Incorrect username or password";
-	    				if(!info.theAuth.getToken().equals("-1")){
+	    				if(!info.theAuth.getToken().equals("-1")
+	    						&& !info.theAuth.getToken().subSequence(0, 4).equals("User")){
 	    					text = "You are now signed in";
 	    					//info.theAuth = null;
 	    					Intent i = new Intent();

@@ -1,26 +1,18 @@
 package totally.awesome.ctf;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
-import java.net.URL;
-
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.Window;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,16 +20,28 @@ import android.widget.Toast;
 public class Battle extends Activity{
 	public String enemy;
 	public int enemyID;
+	public static int oldHealth = info.currentFight.myMaxHealth;
+	public static Animation shake;
+    static LinearLayout screen;
 	public TextView enemh;
 	public TextView youh;
 	ProgressBar youHBar;
 	ProgressBar enemyHBar;
 	Button attack0,attack1,attack2,attack3;
+
+	
 	static RefreshHandler mRedrawHandler = new RefreshHandler();
     static class RefreshHandler extends Handler {
         @Override
         public void handleMessage(Message msg) {
         	Log.i("GUI UPDATE", "Time to update the GUI");
+       	
+        	if (oldHealth > info.currentFight.getMyHealth())
+        	{
+        		Log.i("SCREEN SHAKING","Screen should shake RIGHT NOWWWWW");
+        		oldHealth = info.currentFight.getMyHealth();
+        		screen.startAnimation(shake);
+        	}
 			info.battleInst.enemh.setText("Health: " + Integer.toString(info.currentFight.getEnemyHealth()) + " / " + Integer.toString(info.currentFight.enemyMaxHealth));
 			info.battleInst.youh.setText("Health: " + Integer.toString(info.currentFight.getMyHealth()) + " / " + Integer.toString(info.currentFight.myMaxHealth));
 			info.battleInst.enemyHBar.setProgress((int) (((float) info.currentFight.getEnemyHealth()/(float)info.currentFight.enemyMaxHealth)*100));
@@ -52,13 +56,21 @@ public class Battle extends Activity{
 		
         super.onCreate(savedInstanceState);
         setContentView(R.layout.battle);
+       // oldHealth;
        // enemyHBar.setMinimumWidth(10);
        // youHBar.setMinimumWidth(10);
         //youHBar.set
+        shake = AnimationUtils.loadAnimation(this, R.anim.shake);
+        screen = (LinearLayout)findViewById(R.id.BattleScreen);
         enemyHBar = (ProgressBar)findViewById(R.id.EnemyHealthBar);
         enemyHBar.setProgress((int) (((float)info.currentFight.getEnemyHealth()/(float)info.currentFight.enemyMaxHealth)*100));
         youHBar = (ProgressBar)findViewById(R.id.MyHealthBar);
         youHBar.setProgress((int) (((float)info.currentFight.getMyHealth()/(float)info.currentFight.myMaxHealth)*100));
+        
+        //youHBar.set
+
+        
+        
         Log.i("Battle", Integer.toString((int) (((float)info.currentFight.getEnemyHealth()/(float)info.currentFight.enemyMaxHealth)*100))); 
         TextView you = (TextView)findViewById(R.id.yourName);
         if(info.currentFight.myName != null)
@@ -209,8 +221,7 @@ public class Battle extends Activity{
 				
 			}
 		});
-
-           
+        
         info.h = new heartbeat();
        info.h.start();
 	}
