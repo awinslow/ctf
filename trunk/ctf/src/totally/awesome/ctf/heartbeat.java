@@ -15,7 +15,9 @@ public class heartbeat extends Thread{
 	}
 	
 	public void run(){
-		while(true){
+		boolean go = true;
+		while(go){
+			if(this.isInterrupted()) break;
 			Log.i("Battle", "Reached Check in");
 			String inText = "";
 			String inText2 = "";
@@ -134,6 +136,7 @@ public class heartbeat extends Thread{
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
+				go=false;
 				e.printStackTrace();
 			}
 			

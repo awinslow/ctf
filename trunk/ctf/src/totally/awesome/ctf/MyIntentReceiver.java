@@ -23,12 +23,11 @@ public class MyIntentReceiver extends BroadcastReceiver {
 
 	@Override
 	public void onReceive(final Context context, Intent intent) {
-		//Context context2 = Context.getApplicationContext();
 		final CharSequence text = intent.getStringExtra("message");
-		int duration = Toast.LENGTH_SHORT;
+		/*int duration = Toast.LENGTH_SHORT;
 		
 		Toast toast = Toast.makeText(context, text, duration);
-		toast.show();
+		toast.show();*/
 		
 		Log.i("Battle", "C2DM Received!!	 Text: " + text.toString());
 		
@@ -36,10 +35,9 @@ public class MyIntentReceiver extends BroadcastReceiver {
 		if(text.subSequence(0,3).equals("won"))
 		{
 			Log.i("Battle", "WINNER!!!!!!!!!!!!!!!!!!!!!!");
-			//Toast winner = Toast.makeText(context, "Congratulations, you WON THE BATTLE!", Toast.LENGTH_LONG);
-			//winner.show();
-			
-			info.h.stop();
+			Toast toast2 = Toast.makeText(context, "Congrats, you won!", Toast.LENGTH_SHORT);
+			toast2.show();
+			info.h.interrupt();
 			Log.i("Battle", "About to go to select");
 			Intent i = new Intent();
 			i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.select");
@@ -51,10 +49,9 @@ public class MyIntentReceiver extends BroadcastReceiver {
 		else if(text.subSequence(0, 4).equals("lost"))
 		{
 			Log.i("Battle", "LOSER!!!!!!!!!!!!!!!!!!!");
-			//Toast loser = Toast.makeText(context, "Sorry, you lost the battle", Toast.LENGTH_LONG);
-			//loser.show();
-			
-			info.h.stop();
+			Toast toast2 = Toast.makeText(context, "Sorry, you lost!", Toast.LENGTH_SHORT);
+			toast2.show();
+			info.h.interrupt();
 			Log.i("Battle", "About to go to select");
 			Intent i = new Intent();
 			i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.select");
@@ -65,98 +62,146 @@ public class MyIntentReceiver extends BroadcastReceiver {
 		else if(text.subSequence(0, 7).equals("battle."))
 		{
 			if(text.subSequence(7, 8).equals("a")){
-	//			CharSequence text1 = "You are now in battle";
-	//			int duration1 = Toast.LENGTH_SHORT;
-
 				Log.i("Battle", "battle.a received");
 				
 				info.currentFight.setTurn(info.currentFight.myId);
 				Toast toast2 = Toast.makeText(context, "You are now in battle", Toast.LENGTH_SHORT);
 				toast2.show();
 				
-				//if(info.battleInst != null)
-				//{
-				//	info.battleInst.finish();
-				//}
 				Intent i = new Intent();
 				i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.Battle");
 			    context.startActivity(i);
 			}else{
-				
-				Log.i("Battle", "Entering Battle accept dialog");
-				final AlertDialog.Builder alert = new AlertDialog.Builder(context);
-		       // final EditText input = new EditText(context);
-		        alert.setTitle("Battle Challenge");
-		        alert.setMessage(text.subSequence(7, text.length())+" Has challenged you to battle! Accept?");
-		      //  alert.setView(input);
-		        alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-		            public void onClick(DialogInterface dialog, int whichButton) {
-						URL u;
-						Log.i("Battle", "Button accepted clicked");
-		    			try {
-		    				u = new URL("http://ctf.awins.info/battle.php?accept=1&target="+text.subSequence(7, text.length())+"&token="+info.theAuth.getToken());
+				if(info.inMatchMaking){
+					info.loading.dismiss();
+					URL u;
+					Log.i("Battle", "Accepting bc in match making");
+	    			try {
+	    				u = new URL("http://ctf.awins.info/battle.php?accept=1&target="+text.subSequence(7, text.length())+"&token="+info.theAuth.getToken());
+	    				
+	    				HttpURLConnection h = (HttpURLConnection) u.openConnection();
+	    				h.setRequestMethod("GET");
+	    				h.connect();
+	    				Log.i("Battle", "Battle accept url connected to");
+	    				if(h.getResponseCode()==200){
+	    					
+	    					Log.i("Battle", "Response code 200");
+		    				//Context context = message.this;
+
 		    				
-		    				HttpURLConnection h = (HttpURLConnection) u.openConnection();
-		    				h.setRequestMethod("GET");
-		    				h.connect();
-		    				Log.i("Battle", "Battle accept url connected to");
-		    				if(h.getResponseCode()==200){
-		    					
-		    					Log.i("Battle", "Response code 200");
-			    				//Context context = message.this;
+		    				int eid = Integer.parseInt(text.subSequence(7, text.length()).toString().trim());
+		    				
+		    				Log.i("Battle", "Accepted Battle.  Enemy ID: " + Integer.toString(eid));
+		    				info.currentFight = new fight(eid);
+		    				
+		    				if(info.battleInst != null)
+		    				{
+		    					info.battleInst.finish();
+		    				}
+		    				
+							Intent i = new Intent();
+							i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.Battle");
+							context.startActivity(i);	
+							
+							
+		    				int duration = Toast.LENGTH_SHORT;
+		    				Toast toast2 = Toast.makeText(context, "You are now in battle", duration);
+		    				toast2.show();
+	    				}
+	    				else{
+	    					
+	    					Log.i("Battle", "Response Code not 200: " + h.getResponseCode());
 
+		    				
+		    				int duration = Toast.LENGTH_SHORT;
+		
+		    				Toast toast2 = Toast.makeText(context, "Error", duration);
+		    				toast2.show();			
+	    					
+	    				}
+
+	    			} catch (MalformedURLException e1) {
+	    				// TODO Auto-generated catch block
+	    				Log.i("Battle","Malformed URL Exception: " + e1);
+	    				e1.printStackTrace();
+	    			}catch (IOException e1) {
+	    				// TODO Auto-generated catch block
+	    				Log.i("Battle","IOException: " + e1);
+	    				e1.printStackTrace();
+	    			}
+	            
+				}else{
+					Log.i("Battle", "Entering Battle accept dialog");
+					final AlertDialog.Builder alert = new AlertDialog.Builder(context);
+			        alert.setTitle("Battle Challenge");
+			        alert.setMessage(text.subSequence(7, text.length())+" Has challenged you to battle! Accept?");
+			        alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+			            public void onClick(DialogInterface dialog, int whichButton) {
+							URL u;
+							Log.i("Battle", "Button accepted clicked");
+			    			try {
+			    				u = new URL("http://ctf.awins.info/battle.php?accept=1&target="+text.subSequence(7, text.length())+"&token="+info.theAuth.getToken());
 			    				
-			    				int eid = Integer.parseInt(text.subSequence(7, text.length()).toString().trim());
-			    				
-			    				Log.i("Battle", "Accepted Battle.  Enemy ID: " + Integer.toString(eid));
-			    				info.currentFight = new fight(eid);
-			    				
-			    				if(info.battleInst != null)
-			    				{
-			    					info.battleInst.finish();
+			    				HttpURLConnection h = (HttpURLConnection) u.openConnection();
+			    				h.setRequestMethod("GET");
+			    				h.connect();
+			    				Log.i("Battle", "Battle accept url connected to");
+			    				if(h.getResponseCode()==200){
+			    					h.disconnect();
+			    					Log.i("Battle", "Response code 200");
+				    				
+				    				int eid = Integer.parseInt(text.subSequence(7, text.length()).toString().trim());
+				    				
+				    				Log.i("Battle", "Accepted Battle.  Enemy ID: " + Integer.toString(eid));
+				    				Log.i("Battle", "Making a new fight");
+				    				info.currentFight = new fight(eid);
+				    				Log.i("Battle", "Done Making fight");
+				    				if(info.battleInst != null)
+				    				{
+				    					info.battleInst.finish();
+				    				}
+				    				
+									Intent i = new Intent();
+									i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.Battle");
+									context.startActivity(i);	
+									
+									
+				    				int duration = Toast.LENGTH_SHORT;
+				    				Toast toast2 = Toast.makeText(context, "You are now in battle", duration);
+				    				toast2.show();
 			    				}
-			    				
-								Intent i = new Intent();
-								i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.Battle");
-								context.startActivity(i);	
-								
-								
-			    				int duration = Toast.LENGTH_SHORT;
-			    				Toast toast2 = Toast.makeText(context, "You are now in battle", duration);
-			    				toast2.show();
-		    				}
-		    				else{
-		    					
-		    					Log.i("Battle", "Response Code not 200: " + h.getResponseCode());
-			    				//Context context = getApplicationContext();
-			    				CharSequence text = "Error";
-			    				int duration = Toast.LENGTH_SHORT;
-			
-			    				Toast toast2 = Toast.makeText(context, text, duration);
-			    				toast2.show();			
-		    					
-		    				}
-
-		    	            //Log.i("a","http://141.212.113.248/c2dm.php?register=1&rid="+registrationId+"&a="+id);
-		    			} catch (MalformedURLException e1) {
-		    				// TODO Auto-generated catch block
-		    				Log.i("Battle","Malformed URL Exception: " + e1);
-		    				e1.printStackTrace();
-		    			}catch (IOException e1) {
-		    				// TODO Auto-generated catch block
-		    				Log.i("Battle","IOException: " + e1);
-		    				e1.printStackTrace();
-		    			}
-		            }
-		        });
+			    				else{
+			    					
+			    					Log.i("Battle", "Response Code not 200: " + h.getResponseCode());
 	
-		        alert.setNegativeButton("Cancel",
-		                new DialogInterface.OnClickListener() {
-		                    public void onClick(DialogInterface dialog, int whichButton) {
-		                        dialog.cancel();
-		                    }
-		                });
-		        alert.show();		
+				    				CharSequence text = "Error";
+				    				int duration = Toast.LENGTH_SHORT;
+				
+				    				Toast toast2 = Toast.makeText(context, text, duration);
+				    				toast2.show();			
+			    					
+			    				}
+	
+			    			} catch (MalformedURLException e1) {
+			    				// TODO Auto-generated catch block
+			    				Log.i("Battle","Malformed URL Exception: " + e1);
+			    				e1.printStackTrace();
+			    			}catch (IOException e1) {
+			    				// TODO Auto-generated catch block
+			    				Log.i("Battle","IOException: " + e1);
+			    				e1.printStackTrace();
+			    			}
+			            }
+			        });
+		
+			        alert.setNegativeButton("Cancel",
+			                new DialogInterface.OnClickListener() {
+			                    public void onClick(DialogInterface dialog, int whichButton) {
+			                        dialog.cancel();
+			                    }
+			                });
+			        alert.show();		
+				}
 			}
 		}
 		else if(text.subSequence(0, 7).equals("checkin"))//Ask server for updated stats
@@ -261,10 +306,6 @@ public class MyIntentReceiver extends BroadcastReceiver {
 					
 				    Log.i("Battle", Integer.toString((int) (((float)info.currentFight.getEnemyHealth()/(float)info.currentFight.enemyMaxHealth)*100))); 
 				       
-					//Intent i = new Intent();
-					//i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.Battle");
-				    //context.startActivity(i);
-
 				}
 				else{
 					
