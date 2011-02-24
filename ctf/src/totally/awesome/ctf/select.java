@@ -14,6 +14,7 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -21,6 +22,7 @@ import android.widget.Toast;
 public class select extends Activity{
 
 	public void onCreate(Bundle savedInstanceState) {
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.select);
         MyIntentReceiver intentReceiver = new MyIntentReceiver();
@@ -37,6 +39,20 @@ public class select extends Activity{
 				//requestWindowFeature(Window.FEATURE_NO_TITLE);
 				Intent i = new Intent();
 				i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.Arena");
+				startActivity(i);
+
+				finish();
+			}
+		});
+        
+        Button adventure = (Button)findViewById(R.id.adventureMode); //id is button 1
+        adventure.setOnClickListener(new View.OnClickListener() {
+			
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				//requestWindowFeature(Window.FEATURE_NO_TITLE);
+				Intent i = new Intent();
+				i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.adventure");
 				startActivity(i);
 
 				finish();
