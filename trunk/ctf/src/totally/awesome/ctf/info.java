@@ -9,7 +9,7 @@ import android.util.Log;
 
 public class info {
 	public static auth theAuth;
-	public static int myHealth;
+	//public static int myHealth;
 	public static fight currentFight;
 	public static Battle battleInst;
 	public static Player myPlayer;
