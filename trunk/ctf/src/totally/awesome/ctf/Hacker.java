@@ -4,9 +4,9 @@ public class Hacker extends Player {
 	
 	public Hacker()
 	{
-		name1 = "Hack!";
-		name2 = "Kill!";
-		name3 = "Da Adam Buttun!";
+		name1 = "Steal AP";
+		name2 = "Steal Health";
+		name3 = "Disable Move";
 	}
 
 	@Override

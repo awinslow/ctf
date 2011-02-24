@@ -4,9 +4,9 @@ public class Sentinel extends Player {
 	
 	public Sentinel()
 	{
-		name1 = "Sam";
-		name2 = "Is";
-		name3 = "Cool";
+		name1 = "Increase Agil";
+		name2 = "Sacfifice";
+		name3 = "Sneak Attack";
 	}
 	
 	@Override
