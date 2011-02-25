@@ -235,6 +235,20 @@ class findPlayer extends Thread{
 	            	if(!info.loading.isShowing()){
 	            		Log.i("Match Making", "User canceled loading...");
 	            		info.inMatchMaking=false;
+	            		try {
+	            			URL u1 = new URL("http://ctf.awins.info/join.php?gid=-1&token="+info.theAuth.getToken());
+	            			HttpURLConnection h1 = (HttpURLConnection) u1.openConnection();
+	            			h1.setRequestMethod("GET");
+	            			h1.connect();
+	            			if(h1.getResponseCode()!=200) Log.i("Arena", "The shit hit the fan while trying to add to game");
+	            			h1.disconnect();
+	            		} catch (MalformedURLException e) {
+	            			// TODO Auto-generated catch block
+	            			e.printStackTrace();
+	            		} catch (IOException e) {
+	            			// TODO Auto-generated catch block
+	            			e.printStackTrace();
+	            		}
 	            		cancel=true;
 	            		break;
 	            	}
