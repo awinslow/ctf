@@ -1,16 +1,18 @@
 package totally.awesome.ctf;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.Vibrator;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -19,13 +21,20 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class Battle extends Activity{
+	//public static Context thisContext = this;
 	public String enemy;
 	public int enemyID;
-	public static int oldHealth = info.currentFight.myMaxHealth;
+	public static int myOldHealth = info.currentFight.myMaxHealth;
+	public static int enemOldHealth = info.currentFight.enemyMaxHealth;
+	public static TextView myDmgAnim;
+	public static TextView enemDmgAnim;
+	public static Vibrator v;
 	public static Animation shake;
+	public static Animation fadein;
     static LinearLayout screen;
 	public TextView enemh;
 	public TextView youh;
+	public static ImageView enemp;
 	ProgressBar youHBar;
 	ProgressBar enemyHBar;
 	Button attack0,attack1,attack2,attack3;
@@ -51,13 +60,28 @@ public class Battle extends Activity{
         @Override
         public void handleMessage(Message msg) {
         	Log.i("GUI UPDATE", "Time to update the GUI");
-       	
-        	if (oldHealth > info.currentFight.getMyHealth())
+       	String dmg;
+        	if (myOldHealth > info.currentFight.getMyHealth())
+        	{
+        		dmg = Integer.toString(myOldHealth - info.currentFight.getMyHealth());
+        		Log.i("SCREEN SHAKING","Screen should shake RIGHT NOWWWWW");
+        		myOldHealth = info.currentFight.getMyHealth();
+        		screen.startAnimation(shake);
+        		v.vibrate(300);
+        		myDmgAnim.setText("-"+dmg);
+        		//myDmgAnim.setTextColor(100);
+        		myDmgAnim.setVisibility(1);
+        		myDmgAnim.startAnimation(fadein);
+        		myDmgAnim.setVisibility(0);
+        	}
+        	
+        	if (enemOldHealth > info.currentFight.getEnemyHealth())
         	{
         		Log.i("SCREEN SHAKING","Screen should shake RIGHT NOWWWWW");
-        		oldHealth = info.currentFight.getMyHealth();
-        		screen.startAnimation(shake);
+        		enemOldHealth = info.currentFight.getEnemyHealth();
+        		enemp.startAnimation(shake);
         	}
+        	
 			info.battleInst.enemh.setText("Health: " + Integer.toString(info.currentFight.getEnemyHealth()) + " / " + Integer.toString(info.currentFight.enemyMaxHealth));
 			info.battleInst.youh.setText("Health: " + Integer.toString(info.currentFight.getMyHealth()) + " / " + Integer.toString(info.currentFight.myMaxHealth));
 			info.battleInst.enemyHBar.setProgress((int) (((float) info.currentFight.getEnemyHealth()/(float)info.currentFight.enemyMaxHealth)*100));
@@ -72,11 +96,13 @@ public class Battle extends Activity{
 		
         super.onCreate(savedInstanceState);
         setContentView(R.layout.battle);
-       // oldHealth;
+       // myOldHealth;
        // enemyHBar.setMinimumWidth(10);
        // youHBar.setMinimumWidth(10);
         //youHBar.set
+        v = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
         shake = AnimationUtils.loadAnimation(this, R.anim.shake);
+        fadein = AnimationUtils.loadAnimation(this, R.anim.damage);
         screen = (LinearLayout)findViewById(R.id.BattleScreen);
         enemyHBar = (ProgressBar)findViewById(R.id.EnemyHealthBar);
         enemyHBar.setProgress((int) (((float)info.currentFight.getEnemyHealth()/(float)info.currentFight.enemyMaxHealth)*100));
@@ -84,7 +110,6 @@ public class Battle extends Activity{
         youHBar.setProgress((int) (((float)info.currentFight.getMyHealth()/(float)info.currentFight.myMaxHealth)*100));
         
         //youHBar.set
-
         
         
         Log.i("Battle", Integer.toString((int) (((float)info.currentFight.getEnemyHealth()/(float)info.currentFight.enemyMaxHealth)*100))); 
@@ -108,7 +133,7 @@ public class Battle extends Activity{
         TextView enem = (TextView)findViewById(R.id.enemyName);
         enem.setText(info.currentFight.enemyName);
         
-        ImageView enemp = (ImageView)findViewById(R.id.enemyPic);
+        enemp = (ImageView)findViewById(R.id.enemyPic);
         enemp.setImageDrawable(info.currentFight.enemyPic);
         
         enemh = (TextView)findViewById(R.id.enemyHealth);
@@ -117,7 +142,8 @@ public class Battle extends Activity{
         youh = (TextView)findViewById(R.id.yourHealth);
         youh.setText("Health: " + Integer.toString(info.currentFight.getMyHealth()) + " / " + Integer.toString(info.currentFight.myMaxHealth));
         
-        
+        myDmgAnim = (TextView)findViewById(R.id.myDmg);
+        enemDmgAnim = (TextView)findViewById(R.id.enemyDmg);
 
         attack0 = (Button)findViewById(R.id.attack0);
         attack0.setText(info.myPlayer.name0);
