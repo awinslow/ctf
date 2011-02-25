@@ -45,6 +45,22 @@
     			android:gravity="center_horizontal" android:id="@+id/yourClass">
     		</TextView>
     	</TableRow>
+    	    <TableRow android:layout_width="wrap_content" android:layout_height="wrap_content">
+    	        <TextView android:text="Suck my balls"
+    			android:layout_width="0dip"
+    			android_layout_height="wrap_content"
+    			android:padding="0dip"
+    			android:layout_weight="1"
+    			android:layout_margin="4dip"
+    			android:gravity="center_horizontal" android:id="@+id/enemyDmg" android:visibility="invisible"/>
+    			<TextView android:text="Fuck Android XML"
+    			android:layout_width="0dip"
+    			android_layout_height="wrap_content"
+    			android:padding="0dip"
+    			android:layout_weight="1"
+    			android:layout_margin="4dip"
+    			android:gravity="center_horizontal" android:id="@+id/myDmg" android:visibility="invisible" />
+    		</TableRow>
     	<TableRow>
     		<ImageView android:layout_width="0dip" android:layout_height="120dip" android:padding="10dip" android:layout_weight="1" android:layout_margin="4dip" android:src="@drawable/icon" android:id="@+id/enemyPic" android:adjustViewBounds="true"></ImageView>  
  			<ImageView android:padding="10dip" android:layout_weight="1" android:layout_margin="4dip" android:src="@drawable/icon" android:id="@+id/yourPic" android:layout_width="0dip" android:layout_height="120dip" android:adjustViewBounds="true"></ImageView>
