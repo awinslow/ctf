@@ -3,8 +3,8 @@
   xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="fill_parent"
   android:layout_height="fill_parent" android:orientation="vertical">
-<Button android:text="Adventure Mode" android:id="@+id/adventureMode" android:layout_height="wrap_content" android:layout_width="match_parent"></Button>
-<Button android:text="Capture the Flag Mode" android:id="@+id/ctfMode" android:layout_height="wrap_content" android:layout_width="match_parent"></Button>
+<Button android:layout_margin="2dip" android:padding="10dip" android:textSize="20dp" android:background="#33CC00" android:typeface="monospace" android:text="Adventure Mode" android:id="@+id/adventureMode" android:layout_height="wrap_content" android:layout_width="match_parent"></Button>
+<Button android:layout_margin="2dip" android:padding="10dip" android:textSize="20dp" android:background="#33CC00" android:typeface="monospace" android:text="Capture the Flag Mode" android:id="@+id/ctfMode" android:layout_height="wrap_content" android:layout_width="match_parent"></Button>
 
-<Button android:text="Battle Mode" android:id="@+id/battleMode" android:layout_height="wrap_content" android:layout_width="match_parent"></Button>
+<Button android:layout_margin="2dip" android:padding="10dip" android:textSize="20dp" android:background="#33CC00" android:typeface="monospace" android:text="Battle Mode" android:id="@+id/battleMode" android:layout_height="wrap_content" android:layout_width="match_parent"></Button>
 </LinearLayout>

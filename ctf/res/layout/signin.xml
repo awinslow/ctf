@@ -10,18 +10,18 @@
 			xmlns:android="http://schemas.android.com/apk/res/android">
 
 
-<TextView android:layout_height="wrap_content" android:id="@+id/TextView01" android:gravity="top" android:layout_width="wrap_content" android:text="Name"></TextView>
-<EditText android:layout_height="wrap_content" android:id="@+id/EditText01" android:layout_width="wrap_content" android:inputType="text"></EditText>
-<TextView android:layout_height="wrap_content" android:id="@+id/TextView02" android:layout_gravity="bottom" android:layout_width="wrap_content" android:text="Password"></TextView>
-<EditText android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/EditText02" android:inputType="textPassword"></EditText>
+<TextView android:textColor="#33CC00" android:typeface="monospace" android:layout_height="wrap_content" android:id="@+id/TextView01" android:gravity="top" android:layout_width="wrap_content" android:text="Name:"></TextView>
+<EditText android:layout_margin="2dip" android:padding="20dip" android:background="#339900" android:typeface="monospace" android:layout_height="wrap_content" android:id="@+id/EditText01" android:layout_width="wrap_content" android:inputType="text"></EditText>
+<TextView android:textColor="#33CC00" android:typeface="monospace" android:layout_height="wrap_content" android:id="@+id/TextView02" android:layout_gravity="bottom" android:layout_width="wrap_content" android:text="Password:"></TextView>
+<EditText android:layout_margin="2dip" android:padding="20dip" android:background="#339900" android:typeface="monospace" android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/EditText02" android:inputType="textPassword"></EditText>
 
 
 
-<CheckBox android:text="Remember Password" android:checked="false" android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/CheckBox01"></CheckBox>
+<CheckBox android:textColor="#33CC00" android:typeface="monospace" android:text="Remember Password" android:checked="false" android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/CheckBox01"></CheckBox>
 
-<Button android:text="Sign In" android:layout_width="wrap_content" android:id="@+id/SigninSignIn" android:layout_height="wrap_content"></Button>
-<Button android:text="Back" android:id="@+id/Signinback" android:layout_width="wrap_content" android:layout_height="wrap_content"></Button>
-<Button android:id="@+id/Signinchange" android:layout_height="wrap_content" android:layout_width="wrap_content" android:text="Change Password"></Button>
-<Button android:id="@+id/Signinforgot" android:layout_height="wrap_content" android:layout_width="wrap_content" android:text="Forgot Username/Password"></Button>
+<Button android:layout_margin="2dip" android:padding="10dip" android:textSize="20dp" android:background="#33CC00" android:typeface="monospace" android:text="Sign In" android:layout_width="wrap_content" android:id="@+id/SigninSignIn" android:layout_height="wrap_content"></Button>
+<Button android:layout_margin="2dip" android:padding="10dip" android:textSize="20dp" android:background="#33CC00" android:typeface="monospace" android:text="Back" android:id="@+id/Signinback" android:layout_width="wrap_content" android:layout_height="wrap_content"></Button>
+<Button android:layout_margin="2dip" android:padding="10dip" android:textSize="20dp" android:background="#33CC00" android:typeface="monospace" android:id="@+id/Signinchange" android:layout_height="wrap_content" android:layout_width="wrap_content" android:text="Change Password"></Button>
+<Button android:layout_margin="2dip" android:padding="10dip" android:textSize="20dp" android:background="#33CC00" android:typeface="monospace" android:id="@+id/Signinforgot" android:layout_height="wrap_content" android:layout_width="wrap_content" android:text="Forgot Username/Password"></Button>
 
 </TableLayout>
