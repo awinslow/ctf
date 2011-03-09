@@ -1,10 +1,20 @@
 package totally.awesome.ctf;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Vector;
+
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -105,8 +115,9 @@ public class Battle extends Activity{
 	
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		info.battleInst = this;
 		
+		MediaPlayer mp = MediaPlayer.create(this, R.raw.battlestart);
+        mp.start();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.battle);
        // myOldHealth;
@@ -161,7 +172,9 @@ public class Battle extends Activity{
 
         attack0 = (Button)findViewById(R.id.attack0);
         attack0.setText(info.myPlayer.name0);
-
+        
+        info.battleInst = this;
+        
         if(!info.currentFight.myTurn)
         	attack0.setEnabled(false);
         attack0.setOnClickListener(new View.OnClickListener() {	
@@ -263,6 +276,59 @@ public class Battle extends Activity{
 				}
 			}
 		});
+        
+        Button item = (Button)findViewById(R.id.UseItem);
+        item.setOnClickListener(new View.OnClickListener() {			
+			public void onClick(View v) {      
+			    //CharSequence[] items = CharSequence[100];//{"Red", "Green", "Blue"};
+			    //final Vector<CharSequence> items = new Vector<CharSequence>();
+				final ArrayList<CharSequence> items = new ArrayList<CharSequence>();
+		        URL u;
+				try {
+					u = new URL("http://ctf.awins.info/item.php?token="+info.theAuth.getToken());
+					
+					HttpURLConnection h = (HttpURLConnection) u.openConnection();
+					h.setRequestMethod("GET");
+					h.connect();
+					if(h.getResponseCode()==200){
+						//Log.i("Inventory", ");
+						BufferedReader in = new BufferedReader(
+		                        new InputStreamReader(
+		                        h.getInputStream()));
+						String inputLine;
+						
+						while ((inputLine = in.readLine()) != null){
+							Log.i("Inventory", inputLine);
+							 items.add(inputLine);
+						}
+						   
+						in.close();
+					}
+					else{
+						Log.i("error", "URL connection errored with code: "+Integer.toString((h.getResponseCode())));
+						
+					}
+				} catch (Exception e){
+					
+				}
+			    Log.i("Inventory", Integer.toString(items.size()));
+			    //Integer ia[] = new Integer[al.size()];
+			    //ia = al.toArray(ia);
+				CharSequence tmp[] = new CharSequence[items.size()];
+				tmp = items.toArray(tmp);
+				//items.toArray(tmp);
+		        AlertDialog.Builder builder = new AlertDialog.Builder(Battle.this);
+		        
+		        builder.setTitle("Pick an item");
+		        builder.setItems(tmp, new DialogInterface.OnClickListener(){
+		            public void onClick(DialogInterface dialogInterface, int item) {
+		                Toast.makeText(getApplicationContext(), items.get(item), Toast.LENGTH_SHORT).show();
+		                return;
+		            }
+		        });
+		        builder.create().show();	
+			}
+        });
         
         Button back = (Button)findViewById(R.id.battleBack);
         back.setOnClickListener(new View.OnClickListener() {			

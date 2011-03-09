@@ -15,6 +15,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
@@ -117,6 +118,8 @@ public class MyIntentReceiver extends BroadcastReceiver {
 		
 		if(text.subSequence(0,3).equals("won"))
 		{
+			MediaPlayer mp = MediaPlayer.create(context, R.raw.ko);
+	        mp.start();
 			Log.i("Battle", "WINNER!!!!!!!!!!!!!!!!!!!!!!");
 			Toast toast2 = Toast.makeText(context, "Congrats, you won!", Toast.LENGTH_SHORT);
 			toast2.show();

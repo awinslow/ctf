@@ -19,6 +19,7 @@ import android.hardware.Camera.ShutterCallback;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Surface;
@@ -36,7 +37,8 @@ public class main extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         String registrationId;
-        
+        MediaPlayer mp = MediaPlayer.create(this, R.raw.fatality);
+        mp.start();
         
         SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
         final SharedPreferences.Editor editor = settings.edit();     
