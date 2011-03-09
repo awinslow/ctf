@@ -17,6 +17,9 @@ public class info {
 	static heartbeat h;
 	static ProgressDialog loading;
 	static boolean inMatchMaking;
+	static myTimer gameTimer;
+	static int attacknum;
+	
 	public static Drawable getPic(int id){
 		return myPicture;
 	}

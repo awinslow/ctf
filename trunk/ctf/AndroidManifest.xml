@@ -29,6 +29,11 @@
         </activity>
         <activity android:name=".adventure" android:screenOrientation="portrait">
         </activity>
+        <activity android:name=".minigames" android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".hacknumpad" android:screenOrientation="portrait"
+        	android:label="Enter the Code!">
+        </activity>
         <service android:name=".C2DMReceiver" />
         <receiver android:name="com.google.android.c2dm.C2DMBroadcastReceiver"
               android:permission="com.google.android.c2dm.permission.SEND">

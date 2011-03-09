@@ -60,6 +60,20 @@ public class select extends Activity{
 			}
 		});
         
+        Button miniG = (Button)findViewById(R.id.minigames);
+        miniG.setOnClickListener(new View.OnClickListener() {
+			
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				//requestWindowFeature(Window.FEATURE_NO_TITLE);
+				Intent i = new Intent();
+				i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.minigames");
+				startActivity(i);
+
+				finish();
+			}
+		});
+        
 	}
 }
   
