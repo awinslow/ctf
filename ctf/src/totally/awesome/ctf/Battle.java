@@ -56,6 +56,7 @@ public class Battle extends Activity{
 		super.onPause();
 		info.h.interrupt();
 		unregisterReceiver(intentReceiver);
+
 	}
 	
 	public void onResume(){
@@ -64,7 +65,8 @@ public class Battle extends Activity{
         intentReceiver = new MyIntentReceiver();
         IntentFilter intentFilter = new IntentFilter("totally.awesome.ctf.HI");
         intentFilter.setPriority(1);
-
+        info.h = new heartbeat();
+        info.h.start();
         registerReceiver(intentReceiver, intentFilter); 
 	}
 	static RefreshHandler mRedrawHandler = new RefreshHandler();
@@ -181,21 +183,37 @@ public class Battle extends Activity{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				
-				if (!info.myPlayer.attack0())
-				{
-					CharSequence text = "Attack message to server failed";
-					int duration = Toast.LENGTH_SHORT;
-	
-					Toast toast2 = Toast.makeText(getApplicationContext(), text, duration);
-					toast2.show();
-				}
-				else {
-					Log.i("Battle", "Attack sent");
-					
-					//Button attk = (Button)findViewById(R.id.attack);
-					//attk.setEnabled(false);
-					info.currentFight.myTurn = false;
-				}
+				info.attacknum = 0;
+				Intent i = new Intent();
+				i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.hacknumpad");
+				//i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+				i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//				Context context = getApplicationContext();
+//				context.startActivity(i);
+				startActivity(i);
+
+				
+//				while (!info.gameTimer.gameDone)
+//				{
+//					//I'm busy waiting because I suck dick
+//				}
+				//onPause();
+				
+//				if (!info.myPlayer.attack0())
+//				{
+//					CharSequence text = "Attack message to server failed";
+//					int duration = Toast.LENGTH_SHORT;
+//	
+//					Toast toast2 = Toast.makeText(getApplicationContext(), text, duration);
+//					toast2.show();
+//				}
+//				else {
+//					Log.i("Battle", "Attack sent");
+//					
+//					//Button attk = (Button)findViewById(R.id.attack);
+//					//attk.setEnabled(false);
+//					info.currentFight.myTurn = false;
+//				}
 			}
 		});
         
