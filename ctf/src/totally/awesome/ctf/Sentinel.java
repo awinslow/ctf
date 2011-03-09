@@ -5,7 +5,7 @@ public class Sentinel extends Player {
 	public Sentinel()
 	{
 		name1 = "Increase Agil";
-		name2 = "Sacfifice";
+		name2 = "Sacrifice";
 		name3 = "Sneak Attack";
 	}
 	
