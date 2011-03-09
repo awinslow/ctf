@@ -11,6 +11,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -31,6 +33,7 @@ public class signin extends Activity {
 	String password;
     @Override
     public void onCreate(Bundle savedInstanceState) {
+    	this.setVolumeControlStream(AudioManager.STREAM_MUSIC);  
     	requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.signin);
@@ -148,6 +151,8 @@ public class signin extends Activity {
 	    				CharSequence text = "Incorrect username or password";
 	    				if(!info.theAuth.getToken().equals("-1")
 	    						&& !info.theAuth.getToken().subSequence(0, 4).equals("User")){
+	    					MediaPlayer mp = MediaPlayer.create(context, R.raw.excelent);
+	    			        mp.start();
 	    					text = "You are now signed in";
 	    					//info.theAuth = null;
 	    					Intent i = new Intent();
