@@ -117,9 +117,10 @@ public class Battle extends Activity{
 	
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		
+		info.battleInst = this;
 		MediaPlayer mp = MediaPlayer.create(this, R.raw.battlestart);
         mp.start();
+        
         super.onCreate(savedInstanceState);
         setContentView(R.layout.battle);
        // myOldHealth;
@@ -175,7 +176,7 @@ public class Battle extends Activity{
         attack0 = (Button)findViewById(R.id.attack0);
         attack0.setText(info.myPlayer.name0);
         
-        info.battleInst = this;
+        
         
         if(!info.currentFight.myTurn)
         	attack0.setEnabled(false);

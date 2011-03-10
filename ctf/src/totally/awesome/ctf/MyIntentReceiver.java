@@ -177,14 +177,16 @@ public class MyIntentReceiver extends BroadcastReceiver {
 		{
 			if(text.subSequence(7, 8).equals("a")){
 				Log.i("Battle", "battle.a received");
-				
-				info.currentFight.setTurn(info.currentFight.myId);
+
 				Toast toast2 = Toast.makeText(context, "You are now in battle", Toast.LENGTH_SHORT);
 				toast2.show();
 				
 				Intent i = new Intent();
 				i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.Battle");
 			    context.startActivity(i);
+				Log.i("Battle",Integer.toString(info.currentFight.myId));
+				info.currentFight.setTurn(info.currentFight.myId);
+				Log.i("Battle", "Fight set up");
 			}else{
 				if(info.inMatchMaking){
 					info.loading.dismiss();
