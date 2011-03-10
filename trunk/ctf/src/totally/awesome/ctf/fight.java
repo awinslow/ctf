@@ -204,6 +204,11 @@ public class fight {
 		if(id == myId)
 		{
 			myTurn = true;
+			if(info.battleInst==null)
+				Log.i("setTurn", "battleinst is null");
+			else if (info.battleInst.attack0==null)
+				Log.i("setTurn", "button is null");
+			else Log.i("setTurn", "all quiet on the western front");
 			info.battleInst.attack0.setEnabled(true);
 			info.battleInst.attack1.setEnabled(true);
 			info.battleInst.attack2.setEnabled(true);
