@@ -1,6 +1,7 @@
 package totally.awesome.ctf;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -79,6 +80,17 @@ public class Battle extends Activity{
        	String dmg;
         	if (myOldHealth > info.currentFight.getMyHealth())
         	{
+    			MediaPlayer mp = MediaPlayer.create(info.battleInst, R.raw.hit);
+    			try {
+    				mp.prepare();
+    			} catch (IllegalStateException e1) {
+    				// TODO Auto-generated catch block
+    				e1.printStackTrace();
+    			} catch (IOException e1) {
+    				// TODO Auto-generated catch block
+    				e1.printStackTrace();
+    			}
+    	        mp.start();
         		dmg = Integer.toString(myOldHealth - info.currentFight.getMyHealth());
         		Log.i("SCREEN SHAKING","Screen should shake RIGHT NOWWWWW");
         		myOldHealth = info.currentFight.getMyHealth();

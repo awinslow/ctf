@@ -37,8 +37,8 @@ public class main extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         String registrationId;
-        MediaPlayer mp = MediaPlayer.create(this, R.raw.fatality);
-        mp.start();
+       // MediaPlayer mp = MediaPlayer.create(this, R.raw.fatality);
+       // mp.start();
         
         SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
         final SharedPreferences.Editor editor = settings.edit();     
