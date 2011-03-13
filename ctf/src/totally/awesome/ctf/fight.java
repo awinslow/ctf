@@ -31,6 +31,9 @@ public class fight {
 	int myDefenseVal;
 	int enemyDefenseVal;
 	
+	int curAP;
+	int APperTurn;
+	
 	boolean myTurn;
 	
 	fight(int eid){
@@ -127,7 +130,18 @@ public class fight {
 				    {
 				    	if(!isEnemy)
 				    	{
-				    		//info.setPlayerClass(Integer.parseInt(text.substring(6).trim()));
+				    		switch (Integer.parseInt(text.substring(6).trim()))
+				    		{
+				    			case 0: curAP = 3;
+				    					APperTurn = 3;
+				    				break;
+				    			case 1: curAP = 4;
+		    							APperTurn = 4;
+			    					break;
+				    			case 2: curAP = 5;
+		    							APperTurn = 5;
+			    					break;
+				    		}
 				    	}
 				    	else
 				    	{
@@ -175,7 +189,15 @@ public class fight {
 		enemyMaxHealth = h;
 	}
 	
-
+	void setMyAP(int ap)
+	{
+		curAP = ap;
+	}
+	
+	int getMyAP(int ap)
+	{
+		return curAP;
+	}
 	
 	void setMyHealth(int h)
 	{

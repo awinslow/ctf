@@ -274,6 +274,7 @@ public class MyIntentReceiver extends BroadcastReceiver {
 			Log.i("Battle", "Reached Check in");
 			String inText = "";
 			String inText2 = "";
+			String inText3 = "";
 			String inputLine = "input line";
 			
 			URL u;
@@ -324,6 +325,7 @@ public class MyIntentReceiver extends BroadcastReceiver {
 					    			Log.i("Battle", "ENEMYHEALTH: " + Integer.toString(enemyH));
 					    			info.currentFight.setEnemyHealth(enemyH);
 					    		}
+					    		
 					    	}
 					    	else if(info.currentFight.myId == uid)
 					    	{
@@ -342,6 +344,15 @@ public class MyIntentReceiver extends BroadcastReceiver {
 					    			int myH = (Integer.parseInt(inText2.substring(7).trim()));
 					    			Log.i("Battle", "MYHEALTH" + Integer.toString(myH));
 					    			info.currentFight.setMyHealth(myH);
+					    		}
+					    		
+					    		inText3 = in.readLine();
+					    		
+					    		if(inText3.indexOf("points:") != -1)
+					    		{
+					    			int myAP = (Integer.parseInt(inText2.substring(7).trim()));
+					    			Log.i("Battle", "ENEMYHEALTH: " + Integer.toString(myAP));
+					    			info.currentFight.setMyAP(myAP);
 					    		}
 					    	}
 					    	else
