@@ -196,6 +196,10 @@ public class MyIntentReceiver extends BroadcastReceiver {
 		    
 		    info.battleInst.finish();
 		}
+		else if(text.subSequence(0,5).equals("dodge"))
+		{
+			Toast.makeText(context, "Attack Missed!!!", Toast.LENGTH_SHORT).show();
+		}
 		else if(text.subSequence(0, 7).equals("battle."))
 		{
 			if(text.subSequence(7, 8).equals("a")){
@@ -294,10 +298,6 @@ public class MyIntentReceiver extends BroadcastReceiver {
 				}
 			}
 		} 
-		else if(text.subSequence(0,5).equals("dodge"))
-		{
-			Toast.makeText(context, "Attack Missed!!!", Toast.LENGTH_SHORT).show();
-		}
 		else if(text.subSequence(0, 7).equals("checkin"))//Ask server for updated stats
 		{
 			Log.i("Battle", "Reached Check in");

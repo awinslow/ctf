@@ -22,7 +22,7 @@ public abstract class Player {
 		//boolean output = false;
 		//Basic Attack
 		try {
-			URL u = new URL("http://ctf.awins.info/battle.php?attack=0&target="+Integer.toString(info.currentFight.enemyID)+"&token="+info.theAuth.getToken());
+			URL u = new URL("http://ctf.awins.info/battle.php?attack=0&target="+Integer.toString(info.currentFight.enemyID)+"&token="+info.theAuth.getToken()+"&class="+info.myClass);
 		
 			HttpURLConnection h = (HttpURLConnection) u.openConnection();
 			h.setRequestMethod("GET");
