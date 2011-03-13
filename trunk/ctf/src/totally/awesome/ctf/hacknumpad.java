@@ -1,9 +1,15 @@
 package totally.awesome.ctf;
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
+import java.net.URL;
+import java.util.ArrayList;
 import java.util.Random;
 
 import android.app.Activity;
-import android.content.Intent;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -16,17 +22,101 @@ public class hacknumpad extends Activity {
 	int counter;
 	TextView codeMsg, yourMsg;
 	String code, yourcode;
-	Integer codeArray[] = new Integer[9];
+	Integer codeArray[] = new Integer[5];
+	ArrayList<Button> bArray = new ArrayList<Button>();
+	
+	public void buttonSetup(int index,int n)
+	{
+		String indexString = Integer.toString(index);
+		Button b = null;
+		switch(n)
+		{
+		case 0:
+			b = (Button) findViewById(R.id.button1);
+			break;
+		case 1:
+			b = (Button) findViewById(R.id.button2);
+			break;
+		case 2:
+			b = (Button) findViewById(R.id.button3);
+			break;
+		case 3:
+			b = (Button) findViewById(R.id.button4);
+			break;
+		case 4:
+			b = (Button) findViewById(R.id.button5);
+			break;
+		case 5:
+			b = (Button) findViewById(R.id.button6);
+			break;
+		case 6:
+			b = (Button) findViewById(R.id.button7);
+			break;
+		case 7:
+			b = (Button) findViewById(R.id.button8);
+			break;
+		case 8:
+			b = (Button) findViewById(R.id.button9);
+			break;
+		}
+		
+		b.setText(indexString);
+		//final int value = Integer.parseInt((String) b.getText());
+		final int value = index;
+		b.setOnClickListener(new View.OnClickListener() {			
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				if (codeArray[counter]==value)
+				{
+					if (counter==4)
+					{
+						//success
+						yourcode+= value;
+						yourMsg.setText(yourcode);
+						info.gameTimer.gameDone = true;
+						info.gameTimer.gameWon = true;
+						finish();
+					}
+					else
+					{
+						scramble();
+						counter++;
+						yourcode+= value;
+						yourMsg.setText(yourcode);
+					}
+						
+				}
+				else
+				{
+					counter = 0;
+					yourcode = "Input Password: ";
+					yourMsg.setText(yourcode);
+				}
+				
+				
+			}
+        });
+		
+		bArray.add(b);
+	}
+	
 	
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
 	    setContentView(R.layout.hacknumpad);
 	    counter = 0;
-	    //rand = new Random();
+	    //Context context = getApplicationContext();
+	    //bArray = new ArrayList<Button>();
+	    bArray.clear();
+	    for (int i=0;i<9;i++)
+	    {
+	    	Log.i("hacknumpad","Button id is " + R.id.button1+i);
+	    	Log.i("hacknumpad","Button id1 should be " + R.id.button1);
+
+	    	buttonSetup(i+1, i);
+	    }
 	    
-	    //Integer codeArray[] = new Integer[9];
-	    
-	    while (counter<9)
+	    while (counter<5)
 	    {
 	    	int value = rand.nextInt(9)+1;
 	    	Log.i("VALUE MAY HAVE FUCKED UP","VALUE IS "+value);
@@ -35,7 +125,7 @@ public class hacknumpad extends Activity {
 	    }
 	    yourcode = "Input Password: ";
 	    code = "Code: ";
-	    for (int i=0;i<9;i++)
+	    for (int i=0;i<5;i++)
 	    	code+=codeArray[i].toString();
 	    
 	    codeMsg = (TextView)findViewById(R.id.CodeText);
@@ -47,303 +137,8 @@ public class hacknumpad extends Activity {
 	    
 	    counter = 0;
 	    
-        Button num1 = (Button)findViewById(R.id.button1);
-        num1.setText("1");
-        num1.setOnClickListener(new View.OnClickListener() {			
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				if (codeArray[counter]==1)
-				{
-					if (counter==8)
-					{
-						//success
-						info.gameTimer.gameDone = true;
-						info.gameTimer.gameWon = true;
-						finish();
-					}
-					else
-					{
-						counter++;
-						yourcode+=1;
-						yourMsg.setText(yourcode);
-					}
-						
-				}
-				else
-				{
-					counter = 0;
-					yourcode = "Input Password: ";
-					yourMsg.setText(yourcode);
-				}
-				
-				
-			}
-		});
         
-        Button num2 = (Button)findViewById(R.id.button2);
-        num2.setText("2");
-        num2.setOnClickListener(new View.OnClickListener() {			
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				if (codeArray[counter]==2)
-				{
-					if (counter==8)
-					{
-						//success
-						info.gameTimer.gameDone = true;
-						info.gameTimer.gameWon = true;
-						finish();
-					}
-					else
-					{
-						counter++;
-						yourcode+=2;
-						yourMsg.setText(yourcode);
-					}
-						
-				}
-				else
-				{
-					counter = 0;
-					yourcode = "Input Password: ";
-					yourMsg.setText(yourcode);
-				}
-				
-				
-			}
-		});
-        
-        Button num3 = (Button)findViewById(R.id.button3);
-        num3.setText("3");
-        num3.setOnClickListener(new View.OnClickListener() {			
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				if (codeArray[counter]==3)
-				{
-					if (counter==8)
-					{
-						//success
-						info.gameTimer.gameDone = true;
-						info.gameTimer.gameWon = true;
-						finish();
-					}
-					else
-					{
-						counter++;
-						yourcode+=3;
-						yourMsg.setText(yourcode);
-					}
-						
-				}
-				else
-				{
-					counter = 0;
-					yourcode = "Input Password: ";
-					yourMsg.setText(yourcode);
-				}
-				
-				
-			}
-		});
-        
-        Button num4 = (Button)findViewById(R.id.button4);
-        num4.setText("4");
-        num4.setOnClickListener(new View.OnClickListener() {			
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				if (codeArray[counter]==4)
-				{
-					if (counter==8)
-					{
-						//success
-						info.gameTimer.gameDone = true;
-						info.gameTimer.gameWon = true;
-						finish();
-					}
-					else
-					{
-						counter++;
-						yourcode+=4;
-						yourMsg.setText(yourcode);
-					}
-						
-				}
-				else
-				{
-					counter = 0;
-					yourcode = "Input Password: ";
-					yourMsg.setText(yourcode);
-				}
-				
-				
-			}
-		});
-        
-        Button num5 = (Button)findViewById(R.id.button5);
-        num5.setText("5");
-        num5.setOnClickListener(new View.OnClickListener() {			
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				if (codeArray[counter]==5)
-				{
-					if (counter==8)
-					{
-						//success
-						info.gameTimer.gameDone = true;
-						info.gameTimer.gameWon = true;
-						finish();
-					}
-					else
-					{
-						counter++;
-						yourcode+=5;
-						yourMsg.setText(yourcode);
-					}
-						
-				}
-				else
-				{
-					counter = 0;
-					yourcode = "Input Password: ";
-					yourMsg.setText(yourcode);
-				}
-				
-				
-			}
-		});
-	    
-        Button num6 = (Button)findViewById(R.id.button6);
-        num6.setText("6");
-        num6.setOnClickListener(new View.OnClickListener() {			
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				if (codeArray[counter]==6)
-				{
-					if (counter==8)
-					{
-						//success
-						info.gameTimer.gameDone = true;
-						info.gameTimer.gameWon = true;
-						finish();
-					}
-					else
-					{
-						counter++;
-						yourcode+=6;
-						yourMsg.setText(yourcode);
-					}
-						
-				}
-				else
-				{
-					counter = 0;
-					yourcode = "Input Password: ";
-					yourMsg.setText(yourcode);
-				}
-				
-				
-			}
-		});
-        
-        Button num7 = (Button)findViewById(R.id.button7);
-        num7.setText("7");
-        num7.setOnClickListener(new View.OnClickListener() {			
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				if (codeArray[counter]==7)
-				{
-					if (counter==8)
-					{
-						//success
-						info.gameTimer.gameDone = true;
-						info.gameTimer.gameWon = true;
-						finish();
-					}
-					else
-					{
-						counter++;
-						yourcode+=7;
-						yourMsg.setText(yourcode);
-					}
-						
-				}
-				else
-				{
-					counter = 0;
-					yourcode = "Input Password: ";
-					yourMsg.setText(yourcode);
-				}
-				
-				
-			}
-		});
-        
-        Button num8 = (Button)findViewById(R.id.button8);
-        num8.setText("8");
-        num8.setOnClickListener(new View.OnClickListener() {			
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				if (codeArray[counter]==8)
-				{
-					if (counter==8)
-					{
-						//success
-						info.gameTimer.gameDone = true;
-						info.gameTimer.gameWon = true;
-						finish();
-					}
-					else
-					{
-						counter++;
-						yourcode+=8;
-						yourMsg.setText(yourcode);
-					}
-						
-				}
-				else
-				{
-					counter = 0;
-					yourcode = "Input Password: ";
-					yourMsg.setText(yourcode);
-				}
-				
-				
-			}
-		});
-        
-        Button num9 = (Button)findViewById(R.id.button9);
-        num9.setText("9");
-        num9.setOnClickListener(new View.OnClickListener() {			
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				if (codeArray[counter]==9)
-				{
-					if (counter==8)
-					{
-						//success
-						info.gameTimer.gameDone = true;
-						info.gameTimer.gameWon = true;
-						finish();
-					}
-					else
-					{
-						counter++;
-						yourcode+=9;
-						yourMsg.setText(yourcode);
-					}
-						
-				}
-				else
-				{
-					counter = 0;
-					yourcode = "Input Password: ";
-					yourMsg.setText(yourcode);
-				}
-				
-				
-			}
-		});
-        
+	    scramble();
 	    info.gameTimer = new myTimer(30000, 1000, this);
 	    info.gameTimer.timeText = (TextView)findViewById(R.id.thetimer);
 	    info.gameTimer.start();
@@ -375,6 +170,33 @@ public class hacknumpad extends Activity {
 					//Button attk = (Button)findViewById(R.id.attack);
 					//attk.setEnabled(false);
 					info.currentFight.myTurn = false;
+					
+					try {
+						URL u = new URL("http://ctf.awins.info/battle.php?fail=1");
+					
+						HttpURLConnection h = (HttpURLConnection) u.openConnection();
+						h.setRequestMethod("GET");
+						h.connect();
+						
+						if(h.getResponseCode()==200)
+						{
+							Log.i("Hacknumpad","sending attackfail succeeded");
+						}
+						else
+							Log.i("Hacknumpad","sending attackfail died");
+					} catch (MalformedURLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+						Log.i("Battle", "Malformed URL in attack send");
+					} catch (ProtocolException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+						Log.i("Battle", "Protocol exception in attack send to server");
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+						Log.i("Battle", "IOException in attack send to server");
+					}
 				}
 			}
 			
@@ -385,6 +207,27 @@ public class hacknumpad extends Activity {
 			//do attack fail
 		}
 		super.onDestroy();
+	}
+	
+	public void scramble()
+	{
+//		for (int i=0;i<9;i++)
+//			buttonArray[i] = false;
+		
+		boolean buttonArray[] = new boolean[9];
+		int count = 0;
+		//int i=0;
+		bArray.clear();
+		while (count<9)
+		{
+			Integer index = rand.nextInt(9);
+			if (buttonArray[index]!=true)
+			{
+				buttonArray[index]=true;
+				buttonSetup(count+1, index);
+				count++;	
+			}
+		}
 	}
 	
 }

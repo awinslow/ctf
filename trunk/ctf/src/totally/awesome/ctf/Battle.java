@@ -46,6 +46,7 @@ public class Battle extends Activity{
     static LinearLayout screen;
 	public TextView enemh;
 	public TextView youh;
+	public static TextView apcount;
 	public static ImageView enemp;
 	ProgressBar youHBar;
 	ProgressBar enemyHBar;
@@ -106,7 +107,7 @@ public class Battle extends Activity{
         	}
         	else
         		enemOldHealth = info.currentFight.getEnemyHealth();
-        	
+            apcount.setText("AP: " + Integer.toString(info.currentFight.curAP));
 			info.battleInst.enemh.setText("Health: " + Integer.toString(info.currentFight.getEnemyHealth()) + " / " + Integer.toString(info.currentFight.enemyMaxHealth));
 			info.battleInst.youh.setText("Health: " + Integer.toString(info.currentFight.getMyHealth()) + " / " + Integer.toString(info.currentFight.myMaxHealth));
 			info.battleInst.enemyHBar.setProgress((int) (((float) info.currentFight.getEnemyHealth()/(float)info.currentFight.enemyMaxHealth)*100));
@@ -137,7 +138,8 @@ public class Battle extends Activity{
         youHBar = (ProgressBar)findViewById(R.id.MyHealthBar);
         youHBar.setProgress((int) (((float)info.currentFight.getMyHealth()/(float)info.currentFight.myMaxHealth)*100));
         
-        //youHBar.set
+        apcount = (TextView)findViewById(R.id.apcount);
+        apcount.setText("AP: " + Integer.toString(info.currentFight.curAP));
         
         
         Log.i("Battle", Integer.toString((int) (((float)info.currentFight.getEnemyHealth()/(float)info.currentFight.enemyMaxHealth)*100))); 

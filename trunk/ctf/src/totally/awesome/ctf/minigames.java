@@ -29,5 +29,19 @@ public class minigames extends Activity {
 				//finish();
 			}
 		});
+	    
+	    Button Firewall = (Button)findViewById(R.id.firewall);
+	    Firewall.setOnClickListener(new View.OnClickListener() {
+			
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				//requestWindowFeature(Window.FEATURE_NO_TITLE);
+				Intent i = new Intent();
+				i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.hacknumpad");
+				startActivity(i);
+
+				//finish();
+			}
+		});
 	}
 }

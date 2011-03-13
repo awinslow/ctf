@@ -335,6 +335,7 @@ public class Arena extends Activity{
 	String MaxH = "maxh";
 	String Attk = "attk";
 	String Def = "def";
+	String AP = "0";
 	MyIntentReceiver intentReceiver;
 	
 	public void onPause(){
@@ -396,6 +397,8 @@ public class Arena extends Activity{
     	attk.setText("Attack: " + Attk);
     	TextView def = (TextView)findViewById(R.id.Defense);
     	def.setText("Defense: " + Def);
+    	TextView APperTurn = (TextView)findViewById(R.id.APperTurn);
+    	APperTurn.setText("Attack Points per turn: " + AP);
     	ImageView icon = (ImageView)findViewById(R.id.userIcon);
     	icon.setImageDrawable(info.getPic(info.theAuth.id));
     	
@@ -604,6 +607,11 @@ public class Arena extends Activity{
 			    	else if(inText.indexOf("Class:") != -1)
 			    	{
 			    		//theClass = inText.substring(6).trim();
+			    		Log.i("Arena", "Class: " + inText.substring(6).trim());
+			    	}
+			    	else if(inText.indexOf("Points:") != -1)
+			    	{
+			    		AP = inText.substring(7).trim();
 			    		Log.i("Arena", "Class: " + inText.substring(6).trim());
 			    	}
 			    	else
