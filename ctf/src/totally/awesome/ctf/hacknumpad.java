@@ -174,7 +174,7 @@ public class hacknumpad extends Activity {
 			info.currentFight.myTurn = false;
 			
 			try {
-				URL u = new URL("http://ctf.awins.info/battle.php?fail=1");
+				URL u = new URL("http://ctf.awins.info/battle.php?token=" + info.theAuth.getToken() + "fail=1");
 			
 				HttpURLConnection h = (HttpURLConnection) u.openConnection();
 				h.setRequestMethod("GET");
