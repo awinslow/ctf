@@ -172,6 +172,21 @@ public class MyIntentReceiver extends BroadcastReceiver {
 		else if(text.subSequence(0, 4).equals("lost"))
 		{
 			Log.i("Battle", "LOSER!!!!!!!!!!!!!!!!!!!");
+			MediaPlayer mp = MediaPlayer.create(context, R.raw.death);
+			try {
+				mp.prepare();
+			} catch (IllegalStateException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+	        mp.start();
+	        mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+
+	        	public void onCompletion(MediaPlayer mp) {
+
 			Toast toast2 = Toast.makeText(context, "Sorry, you lost!", Toast.LENGTH_SHORT);
 			toast2.show();
     		try {
@@ -195,6 +210,8 @@ public class MyIntentReceiver extends BroadcastReceiver {
 		    context.startActivity(i);
 		    
 		    info.battleInst.finish();
+	        	}
+	        });
 		}
 		else if(text.subSequence(0,5).equals("dodge"))
 		{
