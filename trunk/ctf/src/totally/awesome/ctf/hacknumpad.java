@@ -139,7 +139,7 @@ public class hacknumpad extends Activity {
 	    
         
 	    scramble();
-	    info.gameTimer = new myTimer(30000, 1000, this);
+	    info.gameTimer = new myTimer(5000, 1000, this);
 	    info.gameTimer.timeText = (TextView)findViewById(R.id.thetimer);
 	    info.gameTimer.start();
 
@@ -153,50 +153,16 @@ public class hacknumpad extends Activity {
 		if (info.gameTimer.gameWon)
 		{
 			Log.i("HACKNUMPAD","GAME HAS BEEN WON");
-			if (info.attacknum == 0)
+			if (info.attacknum == 3)
 			{
 				Log.i("HACKNUMPAD","TRYING TO ATTACK0");
-				if (!info.myPlayer.attack0())
+				if (!info.myPlayer.attack3(-1))
 				{
 					CharSequence text = "Attack message to server failed";
 					int duration = Toast.LENGTH_SHORT;
 
 					Toast toast2 = Toast.makeText(getApplicationContext(), text, duration);
 					toast2.show();
-				}
-				else {
-					Log.i("Battle", "Attack sent");
-					
-					//Button attk = (Button)findViewById(R.id.attack);
-					//attk.setEnabled(false);
-					info.currentFight.myTurn = false;
-					
-					try {
-						URL u = new URL("http://ctf.awins.info/battle.php?fail=1");
-					
-						HttpURLConnection h = (HttpURLConnection) u.openConnection();
-						h.setRequestMethod("GET");
-						h.connect();
-						
-						if(h.getResponseCode()==200)
-						{
-							Log.i("Hacknumpad","sending attackfail succeeded");
-						}
-						else
-							Log.i("Hacknumpad","sending attackfail died");
-					} catch (MalformedURLException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-						Log.i("Battle", "Malformed URL in attack send");
-					} catch (ProtocolException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-						Log.i("Battle", "Protocol exception in attack send to server");
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-						Log.i("Battle", "IOException in attack send to server");
-					}
 				}
 			}
 			
@@ -205,6 +171,35 @@ public class hacknumpad extends Activity {
 		{
 			Log.i("HACKNUMPAD","GAME LOST BRO");
 			//do attack fail
+			info.currentFight.myTurn = false;
+			
+			try {
+				URL u = new URL("http://ctf.awins.info/battle.php?fail=1");
+			
+				HttpURLConnection h = (HttpURLConnection) u.openConnection();
+				h.setRequestMethod("GET");
+				h.connect();
+				
+				if(h.getResponseCode()==200)
+				{
+					Log.i("Hacknumpad","sending attackfail succeeded");
+				}
+				else
+					Log.i("Hacknumpad","sending attackfail died");
+			} catch (MalformedURLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				Log.i("Battle", "Malformed URL in attack send");
+			} catch (ProtocolException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				Log.i("Battle", "Protocol exception in attack send to server");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				Log.i("Battle", "IOException in attack send to server");
+			}
+			
 		}
 		super.onDestroy();
 	}

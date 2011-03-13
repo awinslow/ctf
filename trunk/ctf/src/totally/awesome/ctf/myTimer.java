@@ -26,6 +26,7 @@ public class myTimer extends CountDownTimer {
 //		Intent i = new Intent();
 //		i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.minigames");
 //		activity.startActivity(i);
+		timeText.setText("0:00");
 		gameDone = true;
 		gameWon = false;
 		activity.finish();
