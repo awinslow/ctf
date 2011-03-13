@@ -31,9 +31,10 @@ public class fight {
 	int myDefenseVal;
 	int enemyDefenseVal;
 	
-	int curAP;
 	int APperTurn;
+	int ap = 0;
 	
+
 	boolean myTurn;
 	
 	fight(int eid){
@@ -132,13 +133,13 @@ public class fight {
 				    	{
 				    		switch (Integer.parseInt(text.substring(6).trim()))
 				    		{
-				    			case 0: curAP = 3;
+				    			case 0: ap = 3;
 				    					APperTurn = 3;
 				    				break;
-				    			case 1: curAP = 4;
+				    			case 1: ap = 4;
 		    							APperTurn = 4;
 			    					break;
-				    			case 2: curAP = 5;
+				    			case 2: ap = 5;
 		    							APperTurn = 5;
 			    					break;
 				    		}
@@ -189,14 +190,14 @@ public class fight {
 		enemyMaxHealth = h;
 	}
 	
-	void setMyAP(int ap)
+	void setMyAP(int a)
 	{
-		curAP = ap;
+		ap = a;
 	}
 	
-	int getMyAP(int ap)
+	int getMyAP(int aa)
 	{
-		return curAP;
+		return ap;
 	}
 	
 	void setMyHealth(int h)
@@ -231,10 +232,12 @@ public class fight {
 			else if (info.battleInst.attack0==null)
 				Log.i("setTurn", "button is null");
 			else Log.i("setTurn", "all quiet on the western front");
+			//while(info.battleInst==null) Log.i("WAITING", "battle inst is still null bc its a little bitch");
 			info.battleInst.attack0.setEnabled(true);
 			info.battleInst.attack1.setEnabled(true);
 			info.battleInst.attack2.setEnabled(true);
 			info.battleInst.attack3.setEnabled(true);
+			info.battleInst.item.setEnabled(true);
 		}
 		else if(id == enemyID)
 		{
@@ -243,6 +246,7 @@ public class fight {
 			info.battleInst.attack1.setEnabled(false);
 			info.battleInst.attack2.setEnabled(false);
 			info.battleInst.attack3.setEnabled(false);
+			info.battleInst.item.setEnabled(false);
 		}
 	}
 }

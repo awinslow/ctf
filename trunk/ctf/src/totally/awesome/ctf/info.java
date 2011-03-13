@@ -19,6 +19,7 @@ public class info {
 	static boolean inMatchMaking;
 	static myTimer gameTimer;
 	static int attacknum;
+	static int myClass;
 	
 	public static Drawable getPic(int id){
 		return myPicture;
@@ -57,6 +58,7 @@ public class info {
 	
 	public static void setPlayerClass(int classNum)
 	{
+		myClass=classNum;
 		switch(classNum)
 		{
 			case 0:
