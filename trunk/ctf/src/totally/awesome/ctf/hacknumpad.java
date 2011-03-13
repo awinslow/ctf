@@ -139,7 +139,7 @@ public class hacknumpad extends Activity {
 	    
         
 	    scramble();
-	    info.gameTimer = new myTimer(5000, 1000, this);
+	    info.gameTimer = new myTimer(10000, 1000, this);
 	    info.gameTimer.timeText = (TextView)findViewById(R.id.thetimer);
 	    info.gameTimer.start();
 
@@ -171,11 +171,10 @@ public class hacknumpad extends Activity {
 		{
 			Log.i("HACKNUMPAD","GAME LOST BRO");
 			//do attack fail
-			info.currentFight.myTurn = false;
+			//info.currentFight.myTurn = false;
 			
 			try {
-				URL u = new URL("http://ctf.awins.info/battle.php?token=" + info.theAuth.getToken() + "&fail=1");
-			
+				URL u = new URL("http://ctf.awins.info/battle.php?token=" + info.theAuth.getToken() + "&fail=1&target="+info.currentFight.enemyID);
 				HttpURLConnection h = (HttpURLConnection) u.openConnection();
 				h.setRequestMethod("GET");
 				h.connect();
