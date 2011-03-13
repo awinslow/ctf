@@ -94,6 +94,7 @@ public class MyIntentReceiver extends BroadcastReceiver {
         @Override
         public void handleMessage(Message msg) {
 			Intent i = new Intent();
+			Log.i("Battle", "refresh handler battle start");
 			i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.Battle");
 			theContext.startActivity(i);	
 			
@@ -118,32 +119,54 @@ public class MyIntentReceiver extends BroadcastReceiver {
 		
 		if(text.subSequence(0,3).equals("won"))
 		{
-			MediaPlayer mp = MediaPlayer.create(context, R.raw.ko);
-	        mp.start();
 			Log.i("Battle", "WINNER!!!!!!!!!!!!!!!!!!!!!!");
-			Toast toast2 = Toast.makeText(context, "Congrats, you won!", Toast.LENGTH_SHORT);
-			toast2.show();
-    		try {
-    			URL u1 = new URL("http://ctf.awins.info/join.php?gid=-1&token="+info.theAuth.getToken());
-    			HttpURLConnection h = (HttpURLConnection) u1.openConnection();
-    			h.setRequestMethod("GET");
-    			h.connect();
-    			if(h.getResponseCode()!=200) Log.i("Arena", "The shit hit the fan while trying to add to game");
-    			h.disconnect();
-    		} catch (MalformedURLException e) {
-    			// TODO Auto-generated catch block
-    			e.printStackTrace();
-    		} catch (IOException e) {
-    			// TODO Auto-generated catch block
-    			e.printStackTrace();
-    		}
-			info.h.interrupt();
-			Log.i("Battle", "About to go to select");
-			Intent i = new Intent();
-			i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.select");
-		    context.startActivity(i);
-		    
-		    info.battleInst.finish();
+			MediaPlayer mp = MediaPlayer.create(context, R.raw.ko);
+			try {
+				mp.prepare();
+			} catch (IllegalStateException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+	        mp.start();
+	        mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+
+	        	public void onCompletion(MediaPlayer mp) {
+
+	        	Log.v("log_tag","Complete Video");
+	        	
+	        	
+				Toast toast2 = Toast.makeText(context, "Congrats, you won!", Toast.LENGTH_SHORT);
+				toast2.show();
+	    		try {
+	    			URL u1 = new URL("http://ctf.awins.info/join.php?gid=-1&token="+info.theAuth.getToken());
+	    			HttpURLConnection h = (HttpURLConnection) u1.openConnection();
+	    			h.setRequestMethod("GET");
+	    			h.connect();
+	    			if(h.getResponseCode()!=200) Log.i("Arena", "The shit hit the fan while trying to add to game");
+	    			h.disconnect();
+	    		} catch (MalformedURLException e) {
+	    			// TODO Auto-generated catch block
+	    			e.printStackTrace();
+	    		} catch (IOException e) {
+	    			// TODO Auto-generated catch block
+	    			e.printStackTrace();
+	    		}
+				info.h.interrupt();
+				Log.i("Battle", "About to go to select");
+				Intent i = new Intent();
+				i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.select");
+			    context.startActivity(i);
+			    
+			    info.battleInst.finish();
+
+	        	}
+
+	        	});
+			
+
 		    
 		}
 		else if(text.subSequence(0, 4).equals("lost"))
@@ -182,10 +205,11 @@ public class MyIntentReceiver extends BroadcastReceiver {
 				toast2.show();
 				
 				Intent i = new Intent();
+				Log.i("Battle", "battle.a battle starting");
 				i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.Battle");
 			    context.startActivity(i);
 				Log.i("Battle",Integer.toString(info.currentFight.myId));
-				info.currentFight.setTurn(info.currentFight.myId);
+				//info.currentFight.setTurn(info.currentFight.myId);
 				Log.i("Battle", "Fight set up");
 			}else{
 				if(info.inMatchMaking){
@@ -216,6 +240,7 @@ public class MyIntentReceiver extends BroadcastReceiver {
 		    				}
 		    				
 							Intent i = new Intent();
+							Log.i("Battle", "matchmaking battle starting");
 							i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.Battle");
 							context.startActivity(i);	
 							

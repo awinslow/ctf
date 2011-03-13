@@ -17,7 +17,7 @@ public class heartbeat extends Thread{
 	public void run(){
 		boolean go = true;
 		while(go){
-			if(this.isInterrupted()) break;
+			if(this.isInterrupted()) go=false;
 			Log.i("Battle", "Reached Check in");
 			String inText = "";
 			String inText2 = "";
@@ -92,15 +92,25 @@ public class heartbeat extends Thread{
 						    			Log.i("Battle", "MYHEALTH" + Integer.toString(myH));
 						    			info.currentFight.setMyHealth(myH);
 						    		}
+
 						    		
-						    		inText3 = in.readLine();
-						    		
-						    		if(inText3.indexOf("points:") != -1)
+						    		inputLine = in.readLine();
+						    		Log.i("Battle", "Input Line: " + inputLine);
+						    		if(inputLine == null)
 						    		{
-						    			int myAP = (Integer.parseInt(inText2.substring(7).trim()));
-						    			Log.i("Battle", "ENEMYHEALTH: " + Integer.toString(myAP));
-						    			info.currentFight.setMyAP(myAP);
+										Log.i("Battle", "Input Line null");
+										break;
+									}
+						    		
+						    		inText2 = inputLine;
+						    		
+						    		if(inText2.indexOf("points:") != -1)
+						    		{
+						    			int ap = (Integer.parseInt(inText2.substring(7).trim()));
+						    			Log.i("Battle", "MYAP" + Integer.toString(ap));
+						    			info.currentFight.ap=ap;
 						    		}
+
 						    	}
 						    	else
 						    	{

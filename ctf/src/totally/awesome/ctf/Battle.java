@@ -46,12 +46,13 @@ public class Battle extends Activity{
     static LinearLayout screen;
 	public TextView enemh;
 	public TextView youh;
-	public static TextView apcount;
+	//public static TextView apcount;
 	public static ImageView enemp;
 	ProgressBar youHBar;
 	ProgressBar enemyHBar;
-	Button attack0,attack1,attack2,attack3;
+	Button attack0,attack1,attack2,attack3, item;
 	MyIntentReceiver intentReceiver;
+	TextView apcount;
 
 	public void onPause(){		
 		super.onPause();
@@ -107,18 +108,20 @@ public class Battle extends Activity{
         	}
         	else
         		enemOldHealth = info.currentFight.getEnemyHealth();
-            apcount.setText("AP: " + Integer.toString(info.currentFight.curAP));
+           // apcount.setText("AP: " + Integer.toString(info.currentFight.curAP));
 			info.battleInst.enemh.setText("Health: " + Integer.toString(info.currentFight.getEnemyHealth()) + " / " + Integer.toString(info.currentFight.enemyMaxHealth));
 			info.battleInst.youh.setText("Health: " + Integer.toString(info.currentFight.getMyHealth()) + " / " + Integer.toString(info.currentFight.myMaxHealth));
 			info.battleInst.enemyHBar.setProgress((int) (((float) info.currentFight.getEnemyHealth()/(float)info.currentFight.enemyMaxHealth)*100));
 			info.battleInst.youHBar.setProgress((int) (((float) info.currentFight.getMyHealth()/(float)info.currentFight.myMaxHealth)*100));
 			info.currentFight.setTurn(info.currentFight.curTurn);
+			info.battleInst.apcount.setText("AP: "+Integer.toString(info.currentFight.ap));
         }
       };
 	
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		info.battleInst = this;
+		
 		MediaPlayer mp = MediaPlayer.create(this, R.raw.battlestart);
         mp.start();
         
@@ -139,7 +142,7 @@ public class Battle extends Activity{
         youHBar.setProgress((int) (((float)info.currentFight.getMyHealth()/(float)info.currentFight.myMaxHealth)*100));
         
         apcount = (TextView)findViewById(R.id.apcount);
-        apcount.setText("AP: " + Integer.toString(info.currentFight.curAP));
+        apcount.setText("AP: 0");// + Integer.toString(info.currentFight.curAP));
         
         
         Log.i("Battle", Integer.toString((int) (((float)info.currentFight.getEnemyHealth()/(float)info.currentFight.enemyMaxHealth)*100))); 
@@ -178,7 +181,8 @@ public class Battle extends Activity{
         attack0 = (Button)findViewById(R.id.attack0);
         attack0.setText(info.myPlayer.name0);
         
-        
+        apcount = (TextView)findViewById(R.id.apcount);
+        apcount.setText("AP: 0");
         
         if(!info.currentFight.myTurn)
         	attack0.setEnabled(false);
@@ -186,21 +190,26 @@ public class Battle extends Activity{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 
-				if (!info.myPlayer.attack0())
-				{
-					CharSequence text = "Attack message to server failed";
-					int duration = Toast.LENGTH_SHORT;
-	
-					Toast toast2 = Toast.makeText(getApplicationContext(), text, duration);
-					toast2.show();
+				if(info.currentFight.ap>=1){
+					if (!info.myPlayer.attack0())
+					{
+						CharSequence text = "Attack message to server failed";
+						int duration = Toast.LENGTH_SHORT;
+		
+						Toast toast2 = Toast.makeText(getApplicationContext(), text, duration);
+						toast2.show();
+					}
+					else {
+						Log.i("Battle", "Attack sent");
+						
+						//Button attk = (Button)findViewById(R.id.attack);
+						//attk.setEnabled(false);
+						info.currentFight.myTurn = false;
+					}
+				} else {
+					Toast.makeText(getApplicationContext(), "Sorry, you dont have enough AP to do that", Toast.LENGTH_SHORT).show();
 				}
-				else {
-					Log.i("Battle", "Attack sent");
-					
-					//Button attk = (Button)findViewById(R.id.attack);
-					//attk.setEnabled(false);
-					info.currentFight.myTurn = false;
-				}
+
 			}
 		});
         
@@ -211,21 +220,27 @@ public class Battle extends Activity{
         attack1.setOnClickListener(new View.OnClickListener() {	
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				
-				if (!info.myPlayer.attack1(-1))
-				{
-					CharSequence text = "Attack message to server failed";
-					int duration = Toast.LENGTH_SHORT;
-	
-					Toast toast2 = Toast.makeText(getApplicationContext(), text, duration);
-					toast2.show();
-				}
-				else {
-					Log.i("Battle", "Attack1 sent");
-					
-					//Button attk = (Button)findViewById(R.id.attack);
-					//attk.setEnabled(false);
-					info.currentFight.myTurn = false;
+				if((info.myClass == 0 && info.currentFight.ap>=3) ||
+						(info.myClass == 1 && info.currentFight.ap>=4) ||
+						(info.myClass == 2 && info.currentFight.ap>=5)){
+					if (!info.myPlayer.attack1(-1))
+					{
+						CharSequence text = "Attack message to server failed";
+						int duration = Toast.LENGTH_SHORT;
+		
+						Toast toast2 = Toast.makeText(getApplicationContext(), text, duration);
+						toast2.show();
+					}
+					else {
+						Log.i("Battle", "Attack1 sent");
+						
+						//Button attk = (Button)findViewById(R.id.attack);
+						//attk.setEnabled(false);
+						info.currentFight.myTurn = false;
+					}
+				} else {
+					Toast.makeText(getApplicationContext(), "Sorry, you dont have enough AP to do that", Toast.LENGTH_SHORT).show();
+
 				}
 			}
 		});
@@ -237,21 +252,27 @@ public class Battle extends Activity{
         attack2.setOnClickListener(new View.OnClickListener() {	
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				
-				if (!info.myPlayer.attack2(-1))
-				{
-					CharSequence text = "Attack message to server failed";
-					int duration = Toast.LENGTH_SHORT;
-	
-					Toast toast2 = Toast.makeText(getApplicationContext(), text, duration);
-					toast2.show();
-				}
-				else {
-					Log.i("Battle", "Attack2 sent");
-					
-					//Button attk = (Button)findViewById(R.id.attack);
-					//attk.setEnabled(false);
-					info.currentFight.myTurn = false;
+				if((info.myClass == 0 && info.currentFight.ap>=3) ||
+						(info.myClass == 1 && info.currentFight.ap>=6) ||
+						(info.myClass == 2 && info.currentFight.ap>=6)){
+					if (!info.myPlayer.attack2(-1))
+					{
+						CharSequence text = "Attack message to server failed";
+						int duration = Toast.LENGTH_SHORT;
+		
+						Toast toast2 = Toast.makeText(getApplicationContext(), text, duration);
+						toast2.show();
+					}
+					else {
+						Log.i("Battle", "Attack2 sent");
+						
+						//Button attk = (Button)findViewById(R.id.attack);
+						//attk.setEnabled(false);
+						info.currentFight.myTurn = false;
+					}
+				} else {
+					Toast.makeText(getApplicationContext(), "Sorry, you dont have enough AP to do that", Toast.LENGTH_SHORT).show();
+
 				}
 			}
 		});
@@ -263,35 +284,29 @@ public class Battle extends Activity{
         attack3.setOnClickListener(new View.OnClickListener() {	
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				
-				info.attacknum = 3;
-				Intent i = new Intent();
-				i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.hacknumpad");
-				i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-				startActivity(i);
-				
-//				if (!info.myPlayer.attack3(-1))
-//				{
-//					CharSequence text = "Attack message to server failed";
-//					int duration = Toast.LENGTH_SHORT;
-//	
-//					Toast toast2 = Toast.makeText(getApplicationContext(), text, duration);
-//					toast2.show();
-//				}
-//				else {
-//					Log.i("Battle", "Attack3 sent");
-//					
-//					//Button attk = (Button)findViewById(R.id.attack);
-//					//attk.setEnabled(false);
-//					info.currentFight.myTurn = false;
-//				}
+				if((info.myClass == 0 && info.currentFight.ap>=8) ||
+						(info.myClass == 1 && info.currentFight.ap>=8) ||
+						(info.myClass == 2 && info.currentFight.ap>=12)){
+					info.attacknum = 3;
+					Intent i = new Intent();
+					i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.hacknumpad");
+					i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+					startActivity(i);
+					
+				} else {
+					Toast.makeText(getApplicationContext(), "Sorry, you dont have enough AP to do that", Toast.LENGTH_SHORT).show();
+
+				}
+
 			}
 		});
         
-        Button item = (Button)findViewById(R.id.UseItem);
+        item = (Button)findViewById(R.id.UseItem);
         item.setOnClickListener(new View.OnClickListener() {			
 			public void onClick(View v) {      
+				
 			    //CharSequence[] items = CharSequence[100];//{"Red", "Green", "Blue"};
 			    //final Vector<CharSequence> items = new Vector<CharSequence>();
 				final ArrayList<CharSequence> items = new ArrayList<CharSequence>();
@@ -334,7 +349,27 @@ public class Battle extends Activity{
 		        builder.setTitle("Pick an item");
 		        builder.setItems(tmp, new DialogInterface.OnClickListener(){
 		            public void onClick(DialogInterface dialogInterface, int item) {
-		                Toast.makeText(getApplicationContext(), items.get(item), Toast.LENGTH_SHORT).show();
+		    	        URL u;
+		    	        info.battleInst.item.setEnabled(false);
+						try {
+							u = new URL("http://ctf.awins.info/item.php?use="+item+"&token="+info.theAuth.getToken());
+							
+							HttpURLConnection h = (HttpURLConnection) u.openConnection();
+							h.setRequestMethod("GET");
+							h.connect();
+							if(h.getResponseCode()==200){
+								Log.i("Item", "Used sucessfully");
+							}
+							else{
+								Log.i("error", "URL connection errored with code: "+Integer.toString((h.getResponseCode())));
+								
+							}
+						} catch (Exception e){
+							
+						}
+
+		            	
+		            	Toast.makeText(getApplicationContext(), items.get(item), Toast.LENGTH_SHORT).show();
 		                return;
 		            }
 		        });
@@ -355,7 +390,7 @@ public class Battle extends Activity{
 				
 			}
 		});
-        
+        info.currentFight.setTurn(info.currentFight.myId);
         info.h = new heartbeat();
        info.h.start();
 	}

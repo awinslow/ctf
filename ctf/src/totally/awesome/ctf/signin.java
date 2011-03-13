@@ -5,8 +5,11 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import totally.awesome.ctf.Arena.RefreshHandler;
+
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -14,6 +17,8 @@ import android.content.SharedPreferences;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -26,16 +31,106 @@ import android.widget.Toast;
 
 import com.google.android.c2dm.C2DMessaging;
 
+class login extends Thread{
+	String u;
+	String p;
+	
+	login(String uu, String pp){
+		u=uu;
+		p=pp;
+	}
+	
+	public void run(){
+		auth a = new auth(u, p);
+		info.theAuth=a;
+		signin.mRedrawHandler.sendMessage(new Message());
+	}
+}
+
 public class signin extends Activity {
     /** Called when the activity is first created. */
 	public static final String PREFS_NAME = "MyPrefsFile";
 	String user;
 	String password;
+	
+
+	static RefreshHandler mRedrawHandler;
+	class RefreshHandler extends Handler {
+	    @Override
+	    public void handleMessage(Message msg) {
+
+			String registrationId = C2DMessaging.getRegistrationId(getApplicationContext());
+			URL u;
+			try {
+				u = new URL("http://ctf.awins.info/c2dm.php?register=1&rid="+registrationId+"&token="+info.theAuth.getToken());
+				
+				HttpURLConnection h = (HttpURLConnection) u.openConnection();
+				h.setRequestMethod("GET");
+				h.connect();
+				if(h.getResponseCode()==200){
+					info.loading.dismiss();
+    				Context context = getApplicationContext();
+    				CharSequence text = "Incorrect username or password";
+    				if(!info.theAuth.getToken().equals("-1")
+    						&& !info.theAuth.getToken().subSequence(0, 4).equals("User")){
+    					MediaPlayer mp = MediaPlayer.create(context, R.raw.excelent);
+    			        mp.start();
+    					text = "You are now signed in";
+    					//info.theAuth = null;
+    					Intent i = new Intent();
+    					i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.select");
+    					startActivity(i);  
+    					
+    					finish();
+    				}
+    					 
+    				
+    				int duration = Toast.LENGTH_SHORT;
+
+    				Toast toast2 = Toast.makeText(context, text, duration);
+    				toast2.show();
+				}
+				else{
+					info.loading.dismiss();
+    				Context context = getApplicationContext();
+    				CharSequence text = "Error registering device";
+    				int duration = Toast.LENGTH_SHORT;
+
+    				Toast toast2 = Toast.makeText(context, text, duration);
+    				toast2.show();   					
+					
+				}
+				Log.i("a", new String(Integer.toString(h.getResponseCode())));
+	            Log.i("a","opened");
+	            //Log.i("a","http://141.212.113.248/c2dm.php?register=1&rid="+registrationId+"&a="+id);
+			} catch (MalformedURLException e1) {
+				// TODO Auto-generated catch block
+				Log.i("a","error");
+				e1.printStackTrace();
+			}catch (IOException e1) {
+				// TODO Auto-generated catch block
+				Log.i("a","error");
+				e1.printStackTrace();
+			}
+		
+			if(info.theAuth == null){
+				Intent i = new Intent();
+				i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.select");
+				startActivity(i);
+				
+				finish();
+			}
+
+	    	
+	    }	    
+	};
+	
     @Override
     public void onCreate(Bundle savedInstanceState) {
     	this.setVolumeControlStream(AudioManager.STREAM_MUSIC);  
     	requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
+        mRedrawHandler = new RefreshHandler();
         setContentView(R.layout.signin);
         SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
         final SharedPreferences.Editor editor = settings.edit();
@@ -116,8 +211,9 @@ public class signin extends Activity {
             	EditText uname = (EditText) findViewById(R.id.EditText01);
             	user=uname.getText().toString();
             	EditText pword = (EditText) findViewById(R.id.EditText02);
-            	password=pword.getText().toString();          
-            	auth a = new auth(user, password);
+            	password=pword.getText().toString();   
+        	
+            	
             	CheckBox c = (CheckBox)findViewById(R.id.CheckBox01);
             	if(c.isChecked()){
             		editor.putString("user", user);
@@ -126,78 +222,15 @@ public class signin extends Activity {
             		editor.remove("user");
             		editor.remove("password");
             	}
-            	editor.putString("token", a.getToken());
+            	//editor.putString("token", a.getToken());
             	editor.commit();
-            	info.theAuth=a;
-            
-            
-				//Context context = getApplicationContext();
-				//CharSequence text = a.getToken();
-				//int duration = Toast.LENGTH_SHORT;
-
-				Toast toast = Toast.makeText(getApplicationContext(), a.getToken(), Toast.LENGTH_SHORT);
-				//toast.show();
-				String registrationId = C2DMessaging.getRegistrationId(getApplicationContext());
-				URL u;
-    			try {
-    				u = new URL("http://ctf.awins.info/c2dm.php?register=1&rid="+registrationId+"&token="+a.getToken());
-    				
-    				HttpURLConnection h = (HttpURLConnection) u.openConnection();
-    				h.setRequestMethod("GET");
-    				h.connect();
-    				if(h.getResponseCode()==200){
-    					
-	    				Context context = getApplicationContext();
-	    				CharSequence text = "Incorrect username or password";
-	    				if(!info.theAuth.getToken().equals("-1")
-	    						&& !info.theAuth.getToken().subSequence(0, 4).equals("User")){
-	    					MediaPlayer mp = MediaPlayer.create(context, R.raw.excelent);
-	    			        mp.start();
-	    					text = "You are now signed in";
-	    					//info.theAuth = null;
-	    					Intent i = new Intent();
-	    					i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.select");
-	    					startActivity(i);  
-	    					
-	    					finish();
-	    				}
-	    					 
-	    				
-	    				int duration = Toast.LENGTH_SHORT;
-	
-	    				Toast toast2 = Toast.makeText(context, text, duration);
-	    				toast2.show();
-    				}
-    				else{
-	    				Context context = getApplicationContext();
-	    				CharSequence text = "Error registering device";
-	    				int duration = Toast.LENGTH_SHORT;
-	
-	    				Toast toast2 = Toast.makeText(context, text, duration);
-	    				toast2.show();   					
-    					
-    				}
-    				Log.i("a", new String(Integer.toString(h.getResponseCode())));
-    	            Log.i("a","opened");
-    	            //Log.i("a","http://141.212.113.248/c2dm.php?register=1&rid="+registrationId+"&a="+id);
-    			} catch (MalformedURLException e1) {
-    				// TODO Auto-generated catch block
-    				Log.i("a","error");
-    				e1.printStackTrace();
-    			}catch (IOException e1) {
-    				// TODO Auto-generated catch block
-    				Log.i("a","error");
-    				e1.printStackTrace();
-    			}
-			
-    			if(info.theAuth == null){
-					Intent i = new Intent();
-					i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.select");
-					startActivity(i);
-					
-					finish();
-    			}
-			}
+            	
+            	new login(user, password).start();
+            	
+            	info.loading = ProgressDialog.show(signin.this, "", 
+                        "Loging in...", true);
+            	
+ 			}
 		});
         Button cpass = (Button) findViewById(R.id.Signinchange);
         cpass.setOnClickListener(new View.OnClickListener() {
