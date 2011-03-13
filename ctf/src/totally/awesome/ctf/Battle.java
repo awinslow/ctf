@@ -369,7 +369,7 @@ public class Battle extends Activity{
 						}
 
 		            	
-		            	Toast.makeText(getApplicationContext(), items.get(item), Toast.LENGTH_SHORT).show();
+		            	Toast.makeText(getApplicationContext(), "You just used "+items.get(item), Toast.LENGTH_SHORT).show();
 		                return;
 		            }
 		        });
