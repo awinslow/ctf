@@ -15,7 +15,7 @@ public abstract class Player {
 	
 	public Player()
 	{
-		name0 = "Attack!";
+		name0 = "Attack! (0AP)";
 	}
 	boolean attack0()
 	{
