@@ -93,6 +93,7 @@
     			android:gravity="center_horizontal">
     		</TextView>
     		<Button
+    		    android:textColor="#000000" 
     			android:background="#33CC00" android:typeface="monospace" 
     			android:text="Attack 0"
     			android:layout_width="0dip" 
@@ -103,6 +104,7 @@
     			android:gravity="center_horizontal" android:id="@+id/attack0">
     		</Button>
     		<Button
+    		    android:textColor="#000000" 
     			android:background="#33CC00" android:typeface="monospace" 
     			android:text="Attack 1"
     			android:layout_width="0dip" 
@@ -116,6 +118,7 @@
     	</TableRow>
     	<TableRow>
     		<Button
+    		    android:textColor="#000000" 
     			android:background="#33CC00" android:typeface="monospace" 
     			android:text="Use Item"
     			android:layout_width="0dip" 
@@ -126,6 +129,7 @@
     			android:gravity="center_horizontal" android:id="@+id/UseItem">
     		</Button>
     		<Button
+    		    android:textColor="#000000" 
     			android:background="#33CC00" android:typeface="monospace" 
     		    android:text="Attack 2"
     			android:layout_width="0dip" 
@@ -136,6 +140,7 @@
     			android:gravity="center_horizontal" android:id="@+id/attack2">
     		</Button>
     		<Button
+    		    android:textColor="#000000" 
     			android:background="#33CC00" android:typeface="monospace" 
     			android:text="Attack 3"
     			android:layout_width="0dip" 
@@ -148,6 +153,7 @@
     	</TableRow>
     	<TableRow>
     		<Button
+    		    android:textColor="#000000" 
     			android:background="#33CC00" android:typeface="monospace" 
 				android:text="Back"
 				android:layout_width="0dip"
