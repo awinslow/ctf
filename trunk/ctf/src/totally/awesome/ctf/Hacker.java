@@ -6,7 +6,7 @@ public class Hacker extends Player {
 	{
 		name1 = "Steal AP (5AP)";
 		name2 = "Steal Health (6AP)";
-		name3 = "Disable Move (12AP)";
+		name3 = "Reflect (12AP)";
 	}
 
 	@Override
