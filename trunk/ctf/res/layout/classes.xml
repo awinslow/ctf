@@ -7,6 +7,7 @@
 	<TableLayout android:id="@+id/TableLayout1" android:layout_height="match_parent" android:layout_width="fill_parent">
 		<TableRow>
 			<Button
+			    android:textColor="#000000" 
 			    android:typeface="monospace"
 				android:text="Soldier"
 				android:layout_width="0dip"
@@ -35,6 +36,7 @@
 		</TableRow>
 		<TableRow>
 			<Button
+			    android:textColor="#000000" 
 				android:text="Sentinel"
 				android:layout_width="0dip"
 				android:layout_height="wrap_content"
@@ -63,6 +65,7 @@
 		</TableRow>
 		<TableRow>
 			<Button
+			    android:textColor="#000000" 
 				android:text="Hacker"
 				android:layout_width="0dip"
 				android:layout_height="wrap_content"
