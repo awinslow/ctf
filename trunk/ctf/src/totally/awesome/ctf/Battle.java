@@ -121,8 +121,8 @@ public class Battle extends Activity{
         	else
         		enemOldHealth = info.currentFight.getEnemyHealth();
            // apcount.setText("AP: " + Integer.toString(info.currentFight.curAP));
-			info.battleInst.enemh.setText("Health: " + Integer.toString(info.currentFight.getEnemyHealth()) + " / " + Integer.toString(info.currentFight.enemyMaxHealth));
-			info.battleInst.youh.setText("Health: " + Integer.toString(info.currentFight.getMyHealth()) + " / " + Integer.toString(info.currentFight.myMaxHealth));
+			info.battleInst.enemh.setText("Health: " + Integer.toString(info.currentFight.getEnemyHealth()) + "/" + Integer.toString(info.currentFight.enemyMaxHealth));
+			info.battleInst.youh.setText("Health: " + Integer.toString(info.currentFight.getMyHealth()) + "/" + Integer.toString(info.currentFight.myMaxHealth));
 			info.battleInst.enemyHBar.setProgress((int) (((float) info.currentFight.getEnemyHealth()/(float)info.currentFight.enemyMaxHealth)*100));
 			info.battleInst.youHBar.setProgress((int) (((float) info.currentFight.getMyHealth()/(float)info.currentFight.myMaxHealth)*100));
 			info.currentFight.setTurn(info.currentFight.curTurn);
@@ -247,21 +247,24 @@ public class Battle extends Activity{
         attack1.setOnClickListener(new View.OnClickListener() {	
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-    			MediaPlayer mp = MediaPlayer.create(info.battleInst, R.raw.attack);
-    			try {
-    				mp.prepare();
-    			} catch (IllegalStateException e1) {
-    				// TODO Auto-generated catch block
-    				e1.printStackTrace();
-    			} catch (IOException e1) {
-    				// TODO Auto-generated catch block
-    				e1.printStackTrace();
-    			}
-    	        mp.start();
+
     	        
 				if((info.myClass == 0 && info.currentFight.ap>=3) ||
 						(info.myClass == 1 && info.currentFight.ap>=4) ||
 						(info.myClass == 2 && info.currentFight.ap>=5)){
+					
+	    			MediaPlayer mp = MediaPlayer.create(info.battleInst, R.raw.attack);
+	    			try {
+	    				mp.prepare();
+	    			} catch (IllegalStateException e1) {
+	    				// TODO Auto-generated catch block
+	    				e1.printStackTrace();
+	    			} catch (IOException e1) {
+	    				// TODO Auto-generated catch block
+	    				e1.printStackTrace();
+	    			}
+	    	        mp.start();
+					
 					if (!info.myPlayer.attack1(-1))
 					{
 						CharSequence text = "Attack message to server failed";
@@ -291,21 +294,24 @@ public class Battle extends Activity{
         attack2.setBackgroundColor(0xFFFF0000);
         attack2.setOnClickListener(new View.OnClickListener() {	
 			public void onClick(View v) {
-    			MediaPlayer mp = MediaPlayer.create(info.battleInst, R.raw.attack);
-    			try {
-    				mp.prepare();
-    			} catch (IllegalStateException e1) {
-    				// TODO Auto-generated catch block
-    				e1.printStackTrace();
-    			} catch (IOException e1) {
-    				// TODO Auto-generated catch block
-    				e1.printStackTrace();
-    			}
-    	        mp.start();
+
 				// TODO Auto-generated method stub
 				if((info.myClass == 0 && info.currentFight.ap>=3) ||
 						(info.myClass == 1 && info.currentFight.ap>=6) ||
 						(info.myClass == 2 && info.currentFight.ap>=6)){
+					
+	    			MediaPlayer mp = MediaPlayer.create(info.battleInst, R.raw.attack);
+	    			try {
+	    				mp.prepare();
+	    			} catch (IllegalStateException e1) {
+	    				// TODO Auto-generated catch block
+	    				e1.printStackTrace();
+	    			} catch (IOException e1) {
+	    				// TODO Auto-generated catch block
+	    				e1.printStackTrace();
+	    			}
+	    	        mp.start();
+					
 					if (!info.myPlayer.attack2(-1))
 					{
 						CharSequence text = "Attack message to server failed";
@@ -336,20 +342,23 @@ public class Battle extends Activity{
         attack3.setOnClickListener(new View.OnClickListener() {	
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-    			MediaPlayer mp = MediaPlayer.create(info.battleInst, R.raw.attack);
-    			try {
-    				mp.prepare();
-    			} catch (IllegalStateException e1) {
-    				// TODO Auto-generated catch block
-    				e1.printStackTrace();
-    			} catch (IOException e1) {
-    				// TODO Auto-generated catch block
-    				e1.printStackTrace();
-    			}
-    	        mp.start();
+
 				if((info.myClass == 0 && info.currentFight.ap>=8) ||
 						(info.myClass == 1 && info.currentFight.ap>=8) ||
 						(info.myClass == 2 && info.currentFight.ap>=12)){
+					
+	    			MediaPlayer mp = MediaPlayer.create(info.battleInst, R.raw.attack);
+	    			try {
+	    				mp.prepare();
+	    			} catch (IllegalStateException e1) {
+	    				// TODO Auto-generated catch block
+	    				e1.printStackTrace();
+	    			} catch (IOException e1) {
+	    				// TODO Auto-generated catch block
+	    				e1.printStackTrace();
+	    			}
+	    	        mp.start();
+					
 					info.attacknum = 3;
 					Intent i = new Intent();
 					i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.hacknumpad");
@@ -449,7 +458,7 @@ public class Battle extends Activity{
 			}
         });
         
-        Button back = (Button)findViewById(R.id.battleBack);
+      /*  Button back = (Button)findViewById(R.id.battleBack);
         back.setOnClickListener(new View.OnClickListener() {			
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
@@ -461,7 +470,7 @@ public class Battle extends Activity{
 				finish();
 				
 			}
-		});
+		});*/
         info.currentFight.setTurn(info.currentFight.myId);
         info.h = new heartbeat();
        info.h.start();
