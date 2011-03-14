@@ -123,18 +123,18 @@ public class MyIntentReceiver extends BroadcastReceiver {
 			MediaPlayer mp = null;
 			try {
 				mp = MediaPlayer.create(context, R.raw.ko);
-				mp.prepare();
+				//mp.prepare();
 			} catch (IllegalStateException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
-			} catch (IOException e1) {
+			} /*catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
-			}
-	        
-	        mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-
-	        	public void onCompletion(MediaPlayer mp) {
+			}*/
+	      
+	      //  mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+//
+	      //  	public void onCompletion(MediaPlayer mp) {
 
 	        	Log.v("log_tag","Complete Video");
 	        	
@@ -163,9 +163,9 @@ public class MyIntentReceiver extends BroadcastReceiver {
 			    
 			    info.battleInst.finish();
 
-	        	}
+	        	//}
 
-	        	});
+	        	//});
 	        mp.start();
 
 		    
@@ -174,19 +174,19 @@ public class MyIntentReceiver extends BroadcastReceiver {
 		{
 			Log.i("Battle", "LOSER!!!!!!!!!!!!!!!!!!!");
 			MediaPlayer mp = MediaPlayer.create(context, R.raw.death);
-			try {
-				mp.prepare();
+			/*try {
+				//mp.prepare();
 			} catch (IllegalStateException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
-			}
+			}*/
 	        mp.start();
-	        mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+	  //      mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
 
-	        	public void onCompletion(MediaPlayer mp) {
+	  //     	public void onCompletion(MediaPlayer mp) {
 
 			Toast toast2 = Toast.makeText(context, "Sorry, you lost!", Toast.LENGTH_SHORT);
 			toast2.show();
@@ -211,8 +211,8 @@ public class MyIntentReceiver extends BroadcastReceiver {
 		    context.startActivity(i);
 		    
 		    info.battleInst.finish();
-	        	}
-	        });
+	        	//}
+	       // });
 		}
 		else if(text.subSequence(0,5).equals("dodge"))
 		{
