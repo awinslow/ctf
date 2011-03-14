@@ -120,8 +120,9 @@ public class MyIntentReceiver extends BroadcastReceiver {
 		if(text.subSequence(0,3).equals("won"))
 		{
 			Log.i("Battle", "WINNER!!!!!!!!!!!!!!!!!!!!!!");
-			MediaPlayer mp = MediaPlayer.create(context, R.raw.ko);
+			MediaPlayer mp = null;
 			try {
+				mp = MediaPlayer.create(context, R.raw.ko);
 				mp.prepare();
 			} catch (IllegalStateException e1) {
 				// TODO Auto-generated catch block
@@ -130,7 +131,7 @@ public class MyIntentReceiver extends BroadcastReceiver {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-	        mp.start();
+	        
 	        mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
 
 	        	public void onCompletion(MediaPlayer mp) {
@@ -165,7 +166,7 @@ public class MyIntentReceiver extends BroadcastReceiver {
 	        	}
 
 	        	});
-			
+	        mp.start();
 
 		    
 		}
@@ -294,9 +295,42 @@ public class MyIntentReceiver extends BroadcastReceiver {
 	            
 				}else{
 					Log.i("Battle", "Entering Battle accept dialog");
+					String name = "idk";
+					try{
+						URL u = new URL("http://ctf.awins.info/stats.php?uid=" + text.subSequence(7, text.length()));
+	
+						HttpURLConnection h = (HttpURLConnection) u.openConnection();
+						h.setRequestMethod("GET");
+						h.connect();
+						if(h.getResponseCode()==200){
+	
+							BufferedReader in = new BufferedReader(
+			                        new InputStreamReader(
+			                        h.getInputStream()));
+							
+							String inputLine;
+							while ((inputLine = in.readLine()) != null)
+							{
+					    		if(inputLine.indexOf("Username:") != -1)
+					    		{
+					    			name = inputLine.substring(9).trim();
+					    			Log.i("NAME", name);
+					
+					    		}
+							}
+						}
+					} catch (MalformedURLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+						Log.i("URL BREAKING SHIT", "Malformed URL");
+					} catch (IOException e){
+						e.printStackTrace();
+						Log.i("IO", "IO exception in fight constructor");
+					}
+					
 					final AlertDialog.Builder alert = new AlertDialog.Builder(context);
 			        alert.setTitle("Battle Challenge");
-			        alert.setMessage(text.subSequence(7, text.length())+" Has challenged you to battle! Accept?");
+			        alert.setMessage(name+" Has challenged you to battle! Accept?");
 			        alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 			            public void onClick(DialogInterface dialog, int whichButton) {
 			            	info.loading=ProgressDialog.show(context, "", 
