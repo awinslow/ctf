@@ -228,7 +228,7 @@ public class signin extends Activity {
             	new login(user, password).start();
             	
             	info.loading = ProgressDialog.show(signin.this, "", 
-                        "Loging in...", true);
+                        "Logging in...", true);
             	
  			}
 		});
