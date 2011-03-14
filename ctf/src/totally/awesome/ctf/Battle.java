@@ -198,6 +198,7 @@ public class Battle extends Activity{
         
         if(!info.currentFight.myTurn)
         	attack0.setEnabled(false);
+        attack0.setBackgroundColor(0xFFFF0000);
         attack0.setOnClickListener(new View.OnClickListener() {	
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
@@ -242,6 +243,7 @@ public class Battle extends Activity{
         attack1.setText(info.myPlayer.name1);
         if(!info.currentFight.myTurn)
         	attack1.setEnabled(false);
+        attack1.setBackgroundColor(0xFFFF0000);
         attack1.setOnClickListener(new View.OnClickListener() {	
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
@@ -286,6 +288,7 @@ public class Battle extends Activity{
         attack2.setText(info.myPlayer.name2);
         if(!info.currentFight.myTurn)
         	attack2.setEnabled(false);
+        attack2.setBackgroundColor(0xFFFF0000);
         attack2.setOnClickListener(new View.OnClickListener() {	
 			public void onClick(View v) {
     			MediaPlayer mp = MediaPlayer.create(info.battleInst, R.raw.attack);
@@ -329,6 +332,7 @@ public class Battle extends Activity{
         attack3.setText(info.myPlayer.name3);
         if(!info.currentFight.myTurn)
         	attack3.setEnabled(false);
+        attack3.setBackgroundColor(0xFFFF0000);
         attack3.setOnClickListener(new View.OnClickListener() {	
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
