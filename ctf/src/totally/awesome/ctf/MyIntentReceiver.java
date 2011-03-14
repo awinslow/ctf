@@ -229,7 +229,7 @@ public class MyIntentReceiver extends BroadcastReceiver {
 				Intent i = new Intent();
 				Log.i("Battle", "battle.a battle starting");
 				i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.Battle");
-			    context.startActivity(i);
+			    //context.startActivity(i);
 				Log.i("Battle",Integer.toString(info.currentFight.myId));
 				//info.currentFight.setTurn(info.currentFight.myId);
 				Log.i("Battle", "Fight set up");
