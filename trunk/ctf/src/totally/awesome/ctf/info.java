@@ -20,6 +20,9 @@ public class info {
 	static myTimer gameTimer;
 	static int attacknum;
 	static int myClass;
+	static boolean haveSomeone;
+	static boolean mmbitch;
+	static int target;
 	
 	public static Drawable getPic(int id){
 		return myPicture;
