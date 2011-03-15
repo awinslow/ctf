@@ -218,6 +218,16 @@ public class MyIntentReceiver extends BroadcastReceiver {
 		{
 			Toast.makeText(context, "Attack Missed!!!", Toast.LENGTH_SHORT).show();
 		}
+		else if(text.subSequence(0,6).equals("match."))
+		{			
+			if(text.subSequence(0,7).equals("match.b")){
+				info.mmbitch = true;
+				info.target = Integer.parseInt((String) text.subSequence(12, text.length()));
+			} else{
+				info.target = Integer.parseInt((String) text.subSequence(6, text.length()));
+			}
+			info.haveSomeone=true;
+		}
 		else if(text.subSequence(0, 7).equals("battle."))
 		{
 			if(text.subSequence(7, 8).equals("a")){

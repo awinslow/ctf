@@ -59,12 +59,13 @@ class findPlayer extends Thread{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		boolean haveSomeone = false;
+		info.haveSomeone = false;
+		info.mmbitch = false;
 		boolean cancel = false;
-		int target = -1;
+		info.target = -1;
 		URL u;
 		if(ID==-1){		
-			while(!haveSomeone){
+			while(!info.haveSomeone){
             	if(!info.loading.isShowing()){
             		Log.i("Match Making", "User canceled loading...");
             		info.inMatchMaking=false;
@@ -85,82 +86,10 @@ class findPlayer extends Thread{
             		cancel=true;
             		break;
             	}
-				try {
-					u = new URL("http://ctf.awins.info/match.php?token="+info.theAuth.getToken());
-					
-					//int eid = Integer.parseInt(input.getText().toString().trim());
-					//info.currentFight = new fight(eid);
-					
-					HttpURLConnection h = (HttpURLConnection) u.openConnection();
-					h.setRequestMethod("GET");
-					h.connect();
-					if(h.getResponseCode()==200){
-						//CharSequence text = "challenge sent";
-						//Context context = message.this;
-						BufferedReader in = new BufferedReader(
-			                    new InputStreamReader(
-			                    h.getInputStream()));
-						String inputLine;
-						
-						inputLine = in.readLine();
-						   
-						in.close();
-						
-						if (!inputLine.equals("No players are in arena mode")){
-							haveSomeone=true;
-							int end=0;
-							for(int a = inputLine.indexOf("ID:")+4; a<inputLine.length();a++){
-								if(inputLine.charAt(a) == ' ') {
-									end = a;
-									break;
-								}
-							}
-							target=(Integer.parseInt(inputLine.substring(inputLine.indexOf("ID:")+4,end).trim()));
-						} else{
-							//info.loading.dismiss();
-							//Message m = new Message();
-							//m.arg1=0;
-							//Arena.startBattle.sendMessage(m);
-							
-						}
-						
-						//Toast myToast = Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG);
-						//myToast.show();
-						
-						//int duration = Toast.LENGTH_SHORT;
-					//if(text.subSequence(0, 3).equals("id")) text = "challenge sent";
-						//Toast toast2 = Toast.makeText(getApplicationContext(), text, duration);
-						//toast2.show();
-					}
-					else{
-						//Context context = getApplicationContext();
-						CharSequence text = "Error";
-						int duration = Toast.LENGTH_SHORT;
-						Log.i("Match Making", "Noone to fight...");
-						//Toast toast2 = Toast.makeText(getApplicationContext(), text, duration);
-						//toast2.show();   					
-						
-					}
-					//Log.i("a", new String(Integer.toString(h.getResponseCode())));
-			        //Log.i("a","opened");
-			        //Log.i("a","http://141.212.113.248/c2dm.php?register=1&rid="+registrationId+"&a="+id);
-			
-			        
-			        //Go to Battle!
-			        //Intent i = new Intent();
-					//i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.Battle");
-					//startActivity(i);
-					
-					//finish();
-				} catch (MalformedURLException e1) {
-					// TODO Auto-generated catch block
-					Log.i("Arena","Malformed URL Exception: " + e1);
-					e1.printStackTrace();
-				}catch (IOException e1) {
-					// TODO Auto-generated catch block
-					Log.i("Arena","IOException: " + e1);
-					e1.printStackTrace();
-				}
+
+            	//Waiting for server to match up
+            	
+            	
 				try {
 					Thread.sleep(1000);
 				} catch (InterruptedException e) {
@@ -169,17 +98,17 @@ class findPlayer extends Thread{
 				}
 			}
 		} else {
-			target=ID;
-			haveSomeone=true;				
+			info.target=ID;
+			info.haveSomeone=true;				
 		}
 	
-		if(haveSomeone)
+		if(info.haveSomeone && !info.mmbitch)
 		{
 			Log.i("Match Making", "Found a target...");
 			try {
-				u = new URL("http://ctf.awins.info/battle.php?challenge=1&target="+target+"&token="+info.theAuth.getToken());
+				u = new URL("http://ctf.awins.info/battle.php?challenge=1&target="+info.target+"&token="+info.theAuth.getToken());
 				
-				int eid = target;
+				int eid = info.target;
 				info.currentFight = new fight(eid);
 				
 				HttpURLConnection h = (HttpURLConnection) u.openConnection();
