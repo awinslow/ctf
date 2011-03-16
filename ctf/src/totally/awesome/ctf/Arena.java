@@ -88,7 +88,20 @@ class findPlayer extends Thread{
             	}
 
             	//Waiting for server to match up
-            	
+            	try {
+        			URL u1 = new URL("http://ctf.awins.info/nodie.php?token="+info.theAuth.getToken());
+        			HttpURLConnection h = (HttpURLConnection) u1.openConnection();
+        			h.setRequestMethod("GET");
+        			h.connect();
+        			if(h.getResponseCode()!=200) Log.i("Arena", "The shit hit the fan while trying to add to game");
+        			h.disconnect();
+        		} catch (MalformedURLException e) {
+        			// TODO Auto-generated catch block
+        			e.printStackTrace();
+        		} catch (IOException e) {
+        			// TODO Auto-generated catch block
+        			e.printStackTrace();
+        		}
             	
 				try {
 					Thread.sleep(1000);
