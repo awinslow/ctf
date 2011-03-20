@@ -1,9 +1,12 @@
 package totally.awesome.ctf;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Vector;
 
 import com.google.android.c2dm.C2DMessaging;
 
@@ -22,6 +25,7 @@ import android.location.LocationManager;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Message;
 import android.util.Log;
 import android.view.Surface;
 import android.view.View;
@@ -180,12 +184,16 @@ public class main extends Activity {
 					h.setRequestMethod("GET");
 					h.connect();
 					if(h.getResponseCode()==200){
+						//Call update location here
+						UpdateLocation(h);
+						
 						Context context = getApplicationContext();
 						CharSequence text = "You are now signed in";
 						int duration = Toast.LENGTH_SHORT;
 	
 						Toast toast2 = Toast.makeText(context, text, duration);
 						Log.i("LOCATION", "update good");
+
 					}
 					else{
 						Context context = getApplicationContext();
@@ -201,7 +209,7 @@ public class main extends Activity {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			}else Log.i("dffsogropergfp", "fuckers");
+			}else Log.i("Location", "The auth is null on location update attempt");
             }
 
             public void onStatusChanged(String provider, int status, Bundle extras) {}
@@ -213,5 +221,95 @@ public class main extends Activity {
 
         // Register the listener with the Location Manager to receive location updates
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);   
+    }
+    
+    public void UpdateLocation(HttpURLConnection h)
+    {
+    	try{
+	    	Log.i("Location", "Connection made response code 200");
+			BufferedReader in = new BufferedReader(
+	                new InputStreamReader(
+	                h.getInputStream()));
+			String inputLine = "Initial Input line for Location update";
+			String inText = "";
+			Vector<LatitudeLongitude> tempLocations = new Vector<LatitudeLongitude>();
+			boolean locationsExist = false;
+			while (inputLine != null)
+			{
+				////////////////////////PID
+					inputLine = in.readLine();
+					if(inputLine == null)
+					{
+						Log.i("Location", "Input Line null");
+						break;
+					}
+				    inText=inputLine;
+				    if(inText.indexOf("pid:") == -1)
+				    {
+				    	Log.i("Location", "Pid not read correctly: " + inText);
+				    	break;
+				    }
+			    	int pid = (Integer.parseInt(inText.substring(4).trim()));
+			    	Log.i("Location", "PID: " + Integer.toString(pid));
+			    //////////////////////////
+			    ////////////Lat
+			    	inputLine = in.readLine();
+					if(inputLine == null)
+					{
+						Log.i("Location", "Input Line null");
+						break;
+					}
+			    	inText = inputLine;
+			    	if(inText.indexOf("lat") == -1)
+			    	{
+			    		Log.i("Location", "lat not read correctly on pid: " + pid);
+			    		break;
+			    	}
+			    	float lat = (Float.parseFloat(inText.substring(4).trim()));
+			    	Log.i("Location", "Lat: " + lat);
+			    	
+			    /////////////////////////////
+			    //////////////Lon
+			    	inputLine = in.readLine();
+					if(inputLine == null)
+					{
+						Log.i("Location", "Input Line null");
+						break;
+					}
+			    	inText = inputLine;
+			    	if(inText.indexOf("lon") == -1)
+			    	{
+			    		Log.i("Location", "lon not read correctly on pid: " + pid);
+			    		break;
+			    	}
+			    	float lon = (Float.parseFloat(inText.substring(4).trim()));
+			    	Log.i("Location", "Lon: " + lon);
+			    	
+			    	LatitudeLongitude thisLoc = new LatitudeLongitude(pid, lat, lon);
+			    	tempLocations.add(thisLoc);
+			    	locationsExist = true;
+			}
+			if(locationsExist)
+			{
+				info.EnemyLocations = tempLocations;
+				for(int i = 0; i < tempLocations.size(); i++)
+				{
+					Log.i("Location", "Added Location Pid: " + tempLocations.elementAt(i).pid + " Lat: " + tempLocations.elementAt(i).lat + " Lon: " + tempLocations.elementAt(i).lon);
+				}
+			}
+			else
+			{
+				Log.i("Location", "No Locations found");
+			}
+			in.close();
+    	}catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Log.i("Location", "Malformed URL Exception: " + e);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Log.i("Location", "IOException: " + e);
+		}
     }
 }
