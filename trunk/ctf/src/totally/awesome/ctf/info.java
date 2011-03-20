@@ -2,6 +2,7 @@ package totally.awesome.ctf;
 
 import java.io.InputStream;
 import java.net.URL;
+import java.util.Vector;
 
 import android.app.ProgressDialog;
 import android.graphics.drawable.Drawable;
@@ -23,7 +24,7 @@ public class info {
 	static boolean haveSomeone;
 	static boolean mmbitch;
 	static int target;
-	
+	public static Vector<LatitudeLongitude> EnemyLocations;
 	public static Drawable getPic(int id){
 		return myPicture;
 	}
