@@ -1,20 +1,33 @@
 package totally.awesome.ctf;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
+import android.location.Criteria;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Window;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.ItemizedOverlay;
 import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapController;
 import com.google.android.maps.MapView;
+import com.google.android.maps.MyLocationOverlay;
+import com.google.android.maps.Overlay;
 import com.google.android.maps.OverlayItem;
 
 class InterestingLocations extends ItemizedOverlay<OverlayItem>{
@@ -22,19 +35,31 @@ class InterestingLocations extends ItemizedOverlay<OverlayItem>{
 	  private List<OverlayItem> locations = 
 	   new ArrayList<OverlayItem>();
 	  private Drawable marker;
+	  Context mContext;
 
-	  public InterestingLocations(Drawable defaultMarker, 
-	    int LatitudeE6, int LongitudeE6) {
-	   super(defaultMarker);
-	   // TODO Auto-generated constructor stub
-	   this.marker=defaultMarker;
-	   // create locations of interest
-	   GeoPoint myPlace = new GeoPoint(LatitudeE6,LongitudeE6);
-	   locations.add(new OverlayItem(myPlace , 
-	     "My Place", "My Place"));
-	   populate();
+	  public InterestingLocations(Drawable defaultMarker) {
+		  super(boundCenterBottom(defaultMarker));
 	  }
+	  public InterestingLocations(Drawable defaultMarker, Context context) {
+		  super(boundCenterBottom(defaultMarker));
+		  mContext = context;
+		}
 
+	  @Override
+	  protected boolean onTap(int index) {
+	    OverlayItem item = locations.get(index);
+	    AlertDialog.Builder dialog = new AlertDialog.Builder(mContext);
+	    dialog.setTitle(item.getTitle());
+	    dialog.setMessage(item.getSnippet());
+	    dialog.show();
+	    return true;
+	  }
+	  
+	  public void addOverlay(OverlayItem overlay) {
+		  locations.add(overlay);
+		  populate();
+		}
+	  
 	  @Override
 	  protected OverlayItem createItem(int i) {
 	   // TODO Auto-generated method stub
@@ -47,39 +72,95 @@ class InterestingLocations extends ItemizedOverlay<OverlayItem>{
 	   return locations.size();
 	  }
 
-	  @Override
+	/*  @Override
 	  public void draw(Canvas canvas, MapView mapView, 
 	    boolean shadow) {
 	   // TODO Auto-generated method stub
 	   super.draw(canvas, mapView, shadow);
 	   
 	   boundCenterBottom(marker);
-	  }
+	  }*/
 	 }
 
 public class adventure extends MapActivity{
 	 public void onCreate(Bundle savedInstanceState) {
 		 requestWindowFeature(Window.FEATURE_NO_TITLE);
 	        super.onCreate(savedInstanceState);
+	        LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+	        String provider = locationManager.getBestProvider(new Criteria(), false);
 	        setContentView(R.layout.adventure); 
 	        LinearLayout linearLayout;
 	        MapView mapView;
 	        mapView = (MapView) findViewById(R.id.mapview);
 	        mapView.setBuiltInZoomControls(true);
 	        mapView.setSatellite(true);
-	        MapController myMapController;
+	        final MapController myMapController;
 	        myMapController = mapView.getController(); 
-	        myMapController.animateTo(new GeoPoint(42287318,-83701588));
+	        myMapController.animateTo(new GeoPoint((int) (1000000*locationManager.getLastKnownLocation(provider).getLatitude()),(int) (1000000*locationManager.getLastKnownLocation(provider).getLongitude())));
 	        myMapController.setZoom(19);
 
-	        Drawable marker=getResources().getDrawable(
-	          android.R.drawable.ic_menu_myplaces);
-	        marker.setBounds(0, 0, marker.getIntrinsicWidth(), 
-	          marker.getIntrinsicHeight());
-	        mapView.getOverlays().add(new InterestingLocations(marker, 
-	        		42287318, -83701588));
-	       
+	        List<Overlay> mapOverlays = mapView.getOverlays();
+	        Drawable drawable = this.getResources().getDrawable(R.drawable.green);
+	        InterestingLocations itemizedoverlay = new InterestingLocations(drawable, this);	 
+	        
 
+			HttpURLConnection h;
+			try {
+				URL u = new URL("http://ctf.awins.info/checkin.php?&token="+info.theAuth.getToken()+"&lat="+locationManager.getLastKnownLocation(provider).getLatitude()+"&lon="+locationManager.getLastKnownLocation(provider).getLongitude());
+				Log.i("UPDATING LOCATION", "http://ctf.awins.info/checkin.php?&token="+info.theAuth.getToken()+"&lat="+locationManager.getLastKnownLocation(provider).getLatitude()+"&lon"+locationManager.getLastKnownLocation(provider).getLongitude());
+				h = (HttpURLConnection) u.openConnection();
+				h.setRequestMethod("GET");
+				h.connect();
+				if(h.getResponseCode()==200){
+					BufferedReader in = new BufferedReader(
+	                        new InputStreamReader(
+	                        h.getInputStream()));
+					String inputLine;
+					
+					while ((inputLine = in.readLine()) != null){
+						String name = inputLine;
+						inputLine = in.readLine();
+						int lat = (int) (Float.parseFloat(inputLine.substring(5))*1000000); //(degrees * 1E6)
+						Log.i("LOCATION", "lat: "+lat);
+						inputLine = in.readLine();
+						int lon = (int) (Float.parseFloat(inputLine.substring(5))*1000000); //(degrees * 1E6)
+						Log.i("LOCATION", "lon: "+lon);
+						itemizedoverlay.addOverlay(new OverlayItem(new GeoPoint(lat, lon), "Userid: "+name, "FINISH HIM!!!"));
+					}
+					    
+					in.close();
+					Log.i("LOCATION", "update good");
+				}
+				else{
+
+					Log.i("LOCATION", "update failed");
+					
+				}
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		//}else Log.i("dffsogropergfp", "fuckers");
+       // }
+	        
+	        
+	        
+	//        GeoPoint point = new GeoPoint(42287318, -83701588);
+	 //       OverlayItem overlayitem = new OverlayItem(point, "Hola, Mundo!", "I'm in Mexico City!");
+	 //       GeoPoint point2 = new GeoPoint(35410000, 139460000);
+	//        OverlayItem overlayitem2 = new OverlayItem(point2, "Sekai, konichiwa!", "I'm in Japan!");
+	//        itemizedoverlay.addOverlay(overlayitem);
+	        //itemizedoverlay.addOverlay(overlayitem2);
+			final MyLocationOverlay myLocation = new MyLocationOverlay(this, mapView);
+			mapOverlays.add(myLocation);
+	        mapOverlays.add(itemizedoverlay);
+	        myLocation.enableCompass();
+	        myLocation.enableMyLocation();
+	        myLocation.runOnFirstFix(new Runnable() {
+	            public void run() {
+	            	myMapController.animateTo(myLocation.getMyLocation());
+	            }
+	        });
 	 }
 
 	@Override
