@@ -128,7 +128,7 @@ public class main extends Activity {
 		});
         
         Button battle = (Button)findViewById(R.id.battle); //id is button 1
-        if(info.theAuth==null) battle.setEnabled(false);
+        //if(info.theAuth==null) battle.setEnabled(false);
         battle.setOnClickListener(new View.OnClickListener() {
 			
 			public void onClick(View v) {

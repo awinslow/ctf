@@ -1,23 +1,13 @@
 package totally.awesome.ctf;
 
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
 
 public class select extends Activity{
 	//MyIntentReceiver intentReceiver;
@@ -70,7 +60,51 @@ public class select extends Activity{
 				i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.minigames");
 				startActivity(i);
 
-				finish();
+				//finish();
+			}
+		});
+        
+        
+		AlertDialog.Builder builder = new AlertDialog.Builder(select.this);
+		builder.setMessage("How would you like to set your picture?");
+		builder.setPositiveButton("Take a picture!", new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int id) {
+				//switch intents
+					Intent i = new Intent();
+					i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.myCamera");
+					startActivity(i);
+					
+				}
+			});
+		builder.setNeutralButton("Use a picture!", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int id) {
+			//switch intents
+				Intent i = new Intent();
+				i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.selectPic");
+				startActivity(i);
+			}
+		});
+		builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+		           public void onClick(DialogInterface dialog, int id) {
+		                dialog.cancel();
+		           }
+		       });
+		final AlertDialog alert = builder.create();
+        
+        Button pict = (Button)findViewById(R.id.pict);
+        pict.setOnClickListener(new View.OnClickListener() {
+			
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				//requestWindowFeature(Window.FEATURE_NO_TITLE);
+//				Intent i = new Intent();
+//				i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.minigames");
+//				startActivity(i);
+//
+//				finish();
+				alert.show();
+				
+
 			}
 		});
         
