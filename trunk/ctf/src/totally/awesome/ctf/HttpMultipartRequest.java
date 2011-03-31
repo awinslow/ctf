@@ -77,15 +77,15 @@ public class HttpMultipartRequest
 		{
 			hc = (HttpURLConnection) u.openConnection();
 			hc.setRequestMethod("POST");
-			hc.connect();
+			hc.setDoOutput(true);
 			hc.setRequestProperty("Content-Type", "multipart/form-data; boundary=" + getBoundaryString());
- 
+			
 			//hc.setRequestMethod(HttpConnection.POST);
  
 			OutputStream dout = hc.getOutputStream();
- 
+			//hc.connect();
 			dout.write(postBytes);
- 
+			dout.flush();
 			dout.close();
  
 			int ch;

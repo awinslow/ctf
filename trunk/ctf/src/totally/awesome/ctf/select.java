@@ -14,6 +14,7 @@ public class select extends Activity{
 	
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		//info.loading.dismiss();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.select);
         //intentReceiver = new MyIntentReceiver();

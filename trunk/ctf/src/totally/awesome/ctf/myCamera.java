@@ -7,6 +7,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.hardware.Camera;
@@ -18,6 +19,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 public class myCamera extends Activity {
 
@@ -25,6 +27,7 @@ public class myCamera extends Activity {
 		Preview preview;
 		Button buttonClick;
 		String thisPic;
+		byte[] theData;
 		
 		/** Called when the activity is first created. */
 		@Override
@@ -46,7 +49,7 @@ public class myCamera extends Activity {
 			Button use = (Button) findViewById(R.id.usepic);
 			use.setOnClickListener(new OnClickListener() {
 				public void onClick(View v) {
-					
+	/*				
 					URL u;
 					try {
 						u = new URL("http://www.google.com");
@@ -78,11 +81,21 @@ public class myCamera extends Activity {
 //						Log.i("myCamera", "IO Exception: " + e);
 //					}
 					
-					
-					
+			*/		
+					//info.loading = ProgressDialog.show(myCamera.this, "", 
+	                //        "Please wait while your profile picture is uploaded", true);
+
+					try {
+						info.theAuth.setPic(theData);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					info.setPic(info.theAuth.id, false);
+					Toast.makeText(myCamera.this, "Profile pic set", Toast.LENGTH_SHORT).show();
 					Intent i = new Intent();
 					i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.select");
+					
 					startActivity(i);
 				}
 			});
@@ -133,14 +146,9 @@ public class myCamera extends Activity {
 					outStream.flush();
 					outStream.close();
 					*/
-					info.theAuth.setPic(data);
+					theData = data;
+					//info.theAuth.setPic(data);
 					Log.i("Pic", "onPictureTaken - wrote bytes: " + data.length);
-				} catch (FileNotFoundException e) {
-					e.printStackTrace();
-					Log.i("Pic", "FIle not found");
-				} catch (IOException e) {
-					e.printStackTrace();
-					Log.i("Pic", "IO Exception");
 				} catch (Exception e) {
 					e.printStackTrace();
 					Log.i("Pic", "Exception: " + e);
