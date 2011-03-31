@@ -7,8 +7,7 @@
 		android:textSize="24sp" android:gravity="center"/>
 
 	<FrameLayout android:id="@+id/preview"
-		android:layout_weight="1" android:layout_width="fill_parent"
-		android:layout_height="fill_parent">
+		android:layout_weight="1" android:layout_height="fill_parent" android:layout_width="300dip" android:layout_gravity="center">
 	</FrameLayout>
 	<LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/linearLayout1" android:layout_gravity="center|bottom">
 		<Button android:layout_width="wrap_content" android:text="Take Picture!" android:id="@+id/buttonClick" android:layout_gravity="center" android:layout_height="wrap_content"></Button>
