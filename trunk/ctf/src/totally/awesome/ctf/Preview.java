@@ -40,20 +40,9 @@ class Preview extends SurfaceView implements SurfaceHolder.Callback {
 			camera.setPreviewCallback(new PreviewCallback() {
 
 				public void onPreviewFrame(byte[] data, Camera arg1) {
-					FileOutputStream outStream = null;
-					try {
-						outStream = new FileOutputStream(String.format(
-								"/sdcard/%d.jpg", System.currentTimeMillis()));
-						outStream.write(data);
-						outStream.close();
-						Log.d(TAG, "onPreviewFrame - wrote bytes: "
-								+ data.length);
-					} catch (FileNotFoundException e) {
-						e.printStackTrace();
-					} catch (IOException e) {
-						e.printStackTrace();
-					} finally {
-					}
+
+					Log.i(TAG, "onPreviewFrame called at: " + System.currentTimeMillis());
+
 					Preview.this.invalidate();
 				}
 			});
@@ -73,18 +62,18 @@ class Preview extends SurfaceView implements SurfaceHolder.Callback {
 	public void surfaceChanged(SurfaceHolder holder, int format, int w, int h) {
 		// Now that the size is known, set up the camera parameters and begin
 		// the preview.
-		Camera.Parameters parameters = camera.getParameters();
-		parameters.setPreviewSize(w, h);
-		camera.setParameters(parameters);
+//		Camera.Parameters parameters = camera.getParameters();
+//		parameters.setPreviewSize(w, h);
+//		camera.setParameters(parameters);
 		camera.startPreview();
 	}
 
-	@Override
-	public void draw(Canvas canvas) {
-		super.draw(canvas);
-		Paint p = new Paint(Color.RED);
-		Log.d(TAG, "draw");
-		canvas.drawText("PREVIEW", canvas.getWidth() / 2,
-				canvas.getHeight() / 2, p);
-	}
+//	@Override
+//	public void draw(Canvas canvas) {
+//		super.draw(canvas);
+//		Paint p = new Paint(Color.RED);
+//		Log.d(TAG, "draw");
+//		canvas.drawText("PREVIEW", canvas.getWidth() / 2,
+//				canvas.getHeight() / 2, p);
+//	}
 }
