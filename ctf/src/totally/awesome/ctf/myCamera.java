@@ -132,14 +132,14 @@ public class myCamera extends Activity {
 					
 					outStream.write(data);
 					outStream.close();
-					Log.d(TAG, "onPictureTaken - wrote bytes: " + data.length);
+					Log.i(TAG, "onPictureTaken - wrote bytes: " + data.length);
 				} catch (FileNotFoundException e) {
 					e.printStackTrace();
 				} catch (IOException e) {
 					e.printStackTrace();
 				} finally {
 				}
-				Log.d(TAG, "onPictureTaken - jpeg");
+				Log.i(TAG, "onPictureTaken - jpeg");
 			}
 
 		};	
