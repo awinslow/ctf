@@ -350,7 +350,8 @@ public class auth {
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public void setPic(byte[] fileBytes) throws Exception{		 
+	public void setPic(byte[] fileBytes) throws Exception{
+		Log.i("Pic", "Set Pic Called...");
 		Hashtable params = new Hashtable();
 		params.put("token", token);
 		//params.put("custom_param2", "param_value2");
@@ -360,7 +361,7 @@ public class auth {
 			params,
 			"file", "pic.jpg", "image/jpeg", fileBytes
 		);
-		 
+		Log.i("Pic", "Sending to: " + "http://ctf.awins.info/auth.php?pic=1" + params +"file" + "pic.jpg"+ "image/jpeg"+ fileBytes);
 		@SuppressWarnings("unused")
 		byte[] response = req.send();
 	}
