@@ -8,6 +8,7 @@ import java.net.URL;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.hardware.Camera;
 import android.hardware.Camera.PictureCallback;
 import android.hardware.Camera.ShutterCallback;
@@ -127,10 +128,10 @@ public class myCamera extends Activity {
 //					outStream = new FileOutputStream(String.format(
 //							"/sdcard/%d.jpg", System.currentTimeMillis()));
 					thisPic = String.format("%d.jpg",System.currentTimeMillis());
-					outStream =
-					myCamera.this.openFileOutput(thisPic, 0);
+					outStream = myCamera.this.openFileOutput(thisPic, 0);
 					
 					outStream.write(data);
+					outStream.flush();
 					outStream.close();
 					Log.i(TAG, "onPictureTaken - wrote bytes: " + data.length);
 				} catch (FileNotFoundException e) {

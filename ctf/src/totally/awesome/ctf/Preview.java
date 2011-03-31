@@ -3,10 +3,13 @@ package totally.awesome.ctf;
 import java.io.IOException;
 
 import android.content.Context;
+import android.content.pm.ActivityInfo;
 import android.graphics.PixelFormat;
 import android.hardware.Camera;
 import android.hardware.Camera.PreviewCallback;
 import android.util.Log;
+import android.view.Display;
+import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
@@ -60,7 +63,6 @@ class Preview extends SurfaceView implements SurfaceHolder.Callback {
 		// Now that the size is known, set up the camera parameters and begin
 		// the preview.
 		Camera.Parameters parameters = camera.getParameters();
-		parameters.setPreviewSize(w, h);
 		parameters.setPictureFormat(PixelFormat.JPEG);
 		camera.setParameters(parameters);
 		try {
