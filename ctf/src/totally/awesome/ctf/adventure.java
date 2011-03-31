@@ -100,11 +100,50 @@ public class adventure extends MapActivity{
 	        myMapController.setZoom(19);
 
 	        List<Overlay> mapOverlays = mapView.getOverlays();
-	        Drawable drawable = this.getResources().getDrawable(R.drawable.green);
+	        Drawable drawable = this.getResources().getDrawable(R.drawable.red);
 	        InterestingLocations itemizedoverlay = new InterestingLocations(drawable, this);	 
-	        
-
+	        Drawable drawable2 = this.getResources().getDrawable(R.drawable.yellow);
+	        InterestingLocations itemsOverlay = new InterestingLocations(drawable2, this);	
+	        Drawable drawable3 = this.getResources().getDrawable(R.drawable.green);
+	        InterestingLocations close = new InterestingLocations(drawable3, this);	
 			HttpURLConnection h;
+			
+			try {
+				URL u = new URL("http://ctf.awins.info/checkin.php?red=1&token="+info.theAuth.getToken()+"&lat="+locationManager.getLastKnownLocation(provider).getLatitude()+"&lon="+locationManager.getLastKnownLocation(provider).getLongitude());
+				Log.i("UPDATING LOCATION", "http://ctf.awins.info/checkin.php?&token="+info.theAuth.getToken()+"&lat="+locationManager.getLastKnownLocation(provider).getLatitude()+"&lon"+locationManager.getLastKnownLocation(provider).getLongitude());
+				h = (HttpURLConnection) u.openConnection();
+				h.setRequestMethod("GET");
+				h.connect();
+				if(h.getResponseCode()==200){
+					BufferedReader in = new BufferedReader(
+	                        new InputStreamReader(
+	                        h.getInputStream()));
+					String inputLine;
+					
+					while ((inputLine = in.readLine()) != null){
+						String name = inputLine;
+						inputLine = in.readLine();
+						int lat = (int) (Float.parseFloat(inputLine.substring(5))*1000000); //(degrees * 1E6)
+						Log.i("LOCATION", "lat: "+lat);
+						inputLine = in.readLine();
+						int lon = (int) (Float.parseFloat(inputLine.substring(5))*1000000); //(degrees * 1E6)
+						Log.i("LOCATION", "lon: "+lon);
+						close.addOverlay(new OverlayItem(new GeoPoint(lat, lon), "Userid: "+name, "FINISH HIM!!!"));
+					}
+					    
+					in.close();
+					Log.i("LOCATION", "update good");
+				}
+				else{
+
+					Log.i("LOCATION", "update failed");
+					
+				}
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 			try {
 				URL u = new URL("http://ctf.awins.info/checkin.php?&token="+info.theAuth.getToken()+"&lat="+locationManager.getLastKnownLocation(provider).getLatitude()+"&lon="+locationManager.getLastKnownLocation(provider).getLongitude());
 				Log.i("UPDATING LOCATION", "http://ctf.awins.info/checkin.php?&token="+info.theAuth.getToken()+"&lat="+locationManager.getLastKnownLocation(provider).getLatitude()+"&lon"+locationManager.getLastKnownLocation(provider).getLongitude());
@@ -140,20 +179,49 @@ public class adventure extends MapActivity{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		//}else Log.i("dffsogropergfp", "fuckers");
-       // }
-	        
-	        
-	        
-	//        GeoPoint point = new GeoPoint(42287318, -83701588);
-	 //       OverlayItem overlayitem = new OverlayItem(point, "Hola, Mundo!", "I'm in Mexico City!");
-	 //       GeoPoint point2 = new GeoPoint(35410000, 139460000);
-	//        OverlayItem overlayitem2 = new OverlayItem(point2, "Sekai, konichiwa!", "I'm in Japan!");
-	//        itemizedoverlay.addOverlay(overlayitem);
-	        //itemizedoverlay.addOverlay(overlayitem2);
+
+			//HttpURLConnection h;
+			try {
+				URL u = new URL("http://ctf.awins.info/item.php?&token="+info.theAuth.getToken()+"&list=1");
+				//Log.i("UPDATING LOCATION", "http://ctf.awins.info/checkin.php?&token="+info.theAuth.getToken()+"&lat="+locationManager.getLastKnownLocation(provider).getLatitude()+"&lon"+locationManager.getLastKnownLocation(provider).getLongitude());
+				h = (HttpURLConnection) u.openConnection();
+				h.setRequestMethod("GET");
+				h.connect();
+				if(h.getResponseCode()==200){
+					BufferedReader in = new BufferedReader(
+	                        new InputStreamReader(
+	                        h.getInputStream()));
+					String inputLine;
+					
+					while ((inputLine = in.readLine()) != null){
+						String name = inputLine;
+						inputLine = in.readLine();
+						int lat = (int) (Float.parseFloat(inputLine.substring(5))*1000000); //(degrees * 1E6)
+						Log.i("LOCATION", "lat: "+lat);
+						inputLine = in.readLine();
+						int lon = (int) (Float.parseFloat(inputLine.substring(5))*1000000); //(degrees * 1E6)
+						Log.i("LOCATION", "lon: "+lon);
+						itemsOverlay.addOverlay(new OverlayItem(new GeoPoint(lat, lon), "Itemid: "+name, "FINISH HIM!!!"));
+					}
+					    
+					in.close();
+					Log.i("LOCATION", "update good");
+				}
+				else{
+
+					Log.i("LOCATION", "update failed");
+					
+				}
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 			final MyLocationOverlay myLocation = new MyLocationOverlay(this, mapView);
 			mapOverlays.add(myLocation);
-	        mapOverlays.add(itemizedoverlay);
+			if (itemizedoverlay.size() != 0) mapOverlays.add(itemizedoverlay);
+	        if (itemsOverlay.size() != 0) mapOverlays.add(itemsOverlay);
+	        if (close.size() != 0) mapOverlays.add(close);
 	        myLocation.enableCompass();
 	        myLocation.enableMyLocation();
 	        myLocation.runOnFirstFix(new Runnable() {
