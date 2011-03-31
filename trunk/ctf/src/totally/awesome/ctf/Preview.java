@@ -1,14 +1,10 @@
 package totally.awesome.ctf;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 
 import android.content.Context;
+import android.graphics.PixelFormat;
 import android.hardware.Camera;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
 import android.hardware.Camera.PreviewCallback;
 import android.util.Log;
 import android.view.SurfaceHolder;
@@ -56,15 +52,23 @@ class Preview extends SurfaceView implements SurfaceHolder.Callback {
 		// Because the CameraDevice object is not a shared resource, it's very
 		// important to release it when the activity is paused.
 		camera.stopPreview();
+		camera.release();
 		camera = null;
 	}
 
 	public void surfaceChanged(SurfaceHolder holder, int format, int w, int h) {
 		// Now that the size is known, set up the camera parameters and begin
 		// the preview.
-//		Camera.Parameters parameters = camera.getParameters();
-//		parameters.setPreviewSize(w, h);
-//		camera.setParameters(parameters);
+		Camera.Parameters parameters = camera.getParameters();
+		parameters.setPreviewSize(w, h);
+		parameters.setPictureFormat(PixelFormat.JPEG);
+		camera.setParameters(parameters);
+		try {
+			camera.setPreviewDisplay(holder);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		camera.startPreview();
 	}
 
