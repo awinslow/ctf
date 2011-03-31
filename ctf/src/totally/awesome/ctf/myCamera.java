@@ -20,8 +20,7 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 
 public class myCamera extends Activity {
-	
-		private static final String TAG = "CameraDemo";
+
 		Camera camera;
 		Preview preview;
 		Button buttonClick;
@@ -97,28 +96,27 @@ public class myCamera extends Activity {
 				}
 			});
 
-			Log.d(TAG, "onCreate'd");
+			Log.d("Pic", "onCreate'd");
 		}
 		
 		
 
 		ShutterCallback shutterCallback = new ShutterCallback() {
 			public void onShutter() {
-				Log.d(TAG, "onShutter'd");
+				Log.i("Pic", "onShutter'd");
 			}
 		};
 
 		/** Handles data for raw picture */
 		PictureCallback rawCallback = new PictureCallback() {
 			public void onPictureTaken(byte[] data, Camera camera) {
-				Log.d(TAG, "onPictureTaken - raw");
+				Log.i("Pic", "onPictureTaken - raw");
 			}
 		};
 
 		/** Handles data for jpeg picture */
 		PictureCallback jpegCallback = new PictureCallback() {
 			public void onPictureTaken(byte[] data, Camera camera) {
-				FileOutputStream outStream = null;
 				try {
 					// write to local sandbox file system
 					// outStream =
@@ -127,20 +125,28 @@ public class myCamera extends Activity {
 					// Or write to sdcard
 //					outStream = new FileOutputStream(String.format(
 //							"/sdcard/%d.jpg", System.currentTimeMillis()));
+					/*
 					thisPic = String.format("%d.jpg",System.currentTimeMillis());
 					outStream = myCamera.this.openFileOutput(thisPic, 0);
 					
 					outStream.write(data);
 					outStream.flush();
 					outStream.close();
-					Log.i(TAG, "onPictureTaken - wrote bytes: " + data.length);
+					*/
+					info.theAuth.setPic(data);
+					Log.i("Pic", "onPictureTaken - wrote bytes: " + data.length);
 				} catch (FileNotFoundException e) {
 					e.printStackTrace();
+					Log.i("Pic", "FIle not found");
 				} catch (IOException e) {
 					e.printStackTrace();
+					Log.i("Pic", "IO Exception");
+				} catch (Exception e) {
+					e.printStackTrace();
+					Log.i("Pic", "Exception: " + e);
 				} finally {
 				}
-				Log.i(TAG, "onPictureTaken - jpeg");
+				Log.i("Pic", "onPictureTaken - jpeg");
 			}
 
 		};	
