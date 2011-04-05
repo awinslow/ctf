@@ -1,16 +1,27 @@
 package totally.awesome.ctf;
 
+import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.provider.MediaStore.Images.Media;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 
 public class select extends Activity{
 	//MyIntentReceiver intentReceiver;
+	
+	String selectedImagePath;
 	
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -80,9 +91,16 @@ public class select extends Activity{
 		builder.setNeutralButton("Use a picture!", new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int id) {
 			//switch intents
-				Intent i = new Intent();
-				i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.selectPic");
-				startActivity(i);
+//				Intent i = new Intent();
+//				i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.selectPic");
+//				startActivity(i);
+				
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(Intent.createChooser(intent,
+                        "Select Picture"), 1);
+
 			}
 		});
 		builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -110,5 +128,43 @@ public class select extends Activity{
 		});
         
 	}
+	
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+	    if (resultCode == RESULT_OK) {
+	        if (requestCode == 1) {
+	            Uri selectedImageUri = data.getData();
+	            selectedImagePath = getPath(selectedImageUri);
+	            try {
+					Bitmap bitmap = Media.getBitmap(getContentResolver(), selectedImageUri);
+					ByteArrayOutputStream baos = new ByteArrayOutputStream();
+					bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+					byte[] b = baos.toByteArray();
+					info.theAuth.setPic(b);
+					info.setPic(info.theAuth.id, false);
+					
+	            } catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+	        }
+	    }
+	}
+
+	public String getPath(Uri uri) {
+	    String[] projection = { MediaStore.Images.Media.DATA };
+	    Cursor cursor = managedQuery(uri, projection, null, null, null);
+	    int column_index = cursor
+	            .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+	    cursor.moveToFirst();
+	    return cursor.getString(column_index);
+	}
+
+	
 }
   
