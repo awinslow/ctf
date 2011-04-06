@@ -10,6 +10,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -136,8 +137,15 @@ public class select extends Activity{
 	            selectedImagePath = getPath(selectedImageUri);
 	            try {
 					Bitmap bitmap = Media.getBitmap(getContentResolver(), selectedImageUri);
+					Matrix m = new Matrix();
+					m.postRotate(90.0f);
+					Bitmap fixed = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), m, true);
+					
 					ByteArrayOutputStream baos = new ByteArrayOutputStream();
-					bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+					fixed.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+					
+					
+					
 					byte[] b = baos.toByteArray();
 					info.theAuth.setPic(b);
 					info.setPic(info.theAuth.id, false);
