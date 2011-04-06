@@ -13,10 +13,11 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.provider.MediaStore.Images.Media;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -136,7 +137,8 @@ public class select extends Activity{
 	    if (resultCode == RESULT_OK) {
 	        if (requestCode == 1) {
 	            Uri selectedImageUri = data.getData();
-	            selectedImagePath = getPath(selectedImageUri);
+	            //selectedImagePath = getPath(selectedImageUri);
+	            selectedImagePath = selectedImageUri.getPath();
 	            
 	            BitmapFactory.Options options = new BitmapFactory.Options();
 	            options.inSampleSize = 8;
@@ -146,6 +148,11 @@ public class select extends Activity{
 	            Bitmap bitmap = null;
 	            try {
 	            	
+	            	ExifInterface exif = new ExifInterface(selectedImagePath);
+	            	String orient = exif.getAttribute(ExifInterface.TAG_ORIENTATION);
+	            	Log.i("SELECT","orient is "+orient);
+	            	
+	            	
 	            	afd = this.getContentResolver().openAssetFileDescriptor(selectedImageUri, "r");
 	            	
 					//Bitmap bitmap = Media.getBitmap(getContentResolver(), selectedImageUri);
@@ -153,7 +160,9 @@ public class select extends Activity{
 	            	afd.close();
 	            	
 	            	Matrix m = new Matrix();
-					m.postRotate(90.0f);
+	            	if (orient == "portrait")
+	            		m.postRotate(90.0f);
+	            	
 					Bitmap fixed = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), m, true);
 					
 					ByteArrayOutputStream baos = new ByteArrayOutputStream();
