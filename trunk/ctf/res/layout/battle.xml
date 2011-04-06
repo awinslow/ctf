@@ -87,7 +87,6 @@
     			android:id="@+id/apcount" 
     			android:layout_width="0px" 
     			android:layout_height="80px" 
-    			android:padding="10px" 
     			android:layout_weight="1" 
     			android:layout_margin="4px"
     			android:gravity="center">
@@ -97,8 +96,7 @@
     			android:background="#33CC00" android:typeface="monospace" 
     			android:text="Attack 0"
     			android:layout_width="0px" 
-    			android:layout_height="80px" 
-    			android:padding="10px" 
+    			android:layout_height="match_parent" 
     			android:layout_weight="1" 
     			android:layout_margin="4px"
     			android:gravity="center" android:id="@+id/attack0">
@@ -108,8 +106,7 @@
     			android:background="#33CC00" android:typeface="monospace" 
     			android:text="Attack 1"
     			android:layout_width="0px" 
-    			android:layout_height="80px" 
-    			android:padding="10px" 
+    			android:layout_height="match_parent" 
     			android:layout_weight="1" 
     			android:layout_margin="4px"
     			android:gravity="center" android:id="@+id/attack1">
@@ -123,7 +120,6 @@
     			android:text="Use Item"
     			android:layout_width="0px" 
     			android:layout_height="80px" 
-    			android:padding="10px" 
     			android:layout_weight="1" 
     			android:layout_margin="4px"
     			android:gravity="center" android:id="@+id/UseItem">
@@ -133,8 +129,7 @@
     			android:background="#33CC00" android:typeface="monospace" 
     		    android:text="Attack 2"
     			android:layout_width="0px" 
-    			android:layout_height="80px" 
-    			android:padding="10px" 
+    			android:layout_height="match_parent" 
     			android:layout_weight="1" 
     			android:layout_margin="4px"
     			android:gravity="center" android:id="@+id/attack2">
@@ -144,8 +139,7 @@
     			android:background="#33CC00" android:typeface="monospace" 
     			android:text="Attack 3"
     			android:layout_width="0px" 
-    			android:layout_height="80px" 
-    			android:padding="10px" 
+    			android:layout_height="match_parent" 
     			android:layout_weight="1" 
     			android:layout_margin="4px"
     			android:gravity="center" android:id="@+id/attack3">
