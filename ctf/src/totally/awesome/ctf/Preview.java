@@ -64,7 +64,7 @@ class Preview extends SurfaceView implements SurfaceHolder.Callback {
 		// the preview.
 		Camera.Parameters parameters = camera.getParameters();
 		parameters.setPictureFormat(PixelFormat.JPEG);
-		parameters.setJpegQuality(15);
+		parameters.setJpegQuality(25);
 		parameters.setPictureSize(640, 480);
 		camera.setParameters(parameters);
 		try {
