@@ -8,8 +8,10 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.AssetFileDescriptor;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Bundle;
@@ -135,20 +137,36 @@ public class select extends Activity{
 	        if (requestCode == 1) {
 	            Uri selectedImageUri = data.getData();
 	            selectedImagePath = getPath(selectedImageUri);
+	            
+	            BitmapFactory.Options options = new BitmapFactory.Options();
+	            options.inSampleSize = 8;
+	            
+	            AssetFileDescriptor afd;
+	            
+	            Bitmap bitmap = null;
 	            try {
-					Bitmap bitmap = Media.getBitmap(getContentResolver(), selectedImageUri);
-					Matrix m = new Matrix();
+	            	
+	            	afd = this.getContentResolver().openAssetFileDescriptor(selectedImageUri, "r");
+	            	
+					//Bitmap bitmap = Media.getBitmap(getContentResolver(), selectedImageUri);
+					bitmap = BitmapFactory.decodeFileDescriptor(afd.getFileDescriptor(), null, options);
+	            	afd.close();
+	            	
+	            	Matrix m = new Matrix();
 					m.postRotate(90.0f);
 					Bitmap fixed = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), m, true);
 					
 					ByteArrayOutputStream baos = new ByteArrayOutputStream();
-					fixed.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+					fixed.compress(Bitmap.CompressFormat.JPEG, 40, baos);
 					
 					
 					
 					byte[] b = baos.toByteArray();
 					info.theAuth.setPic(b);
 					info.setPic(info.theAuth.id, false);
+					
+					//bitmap = null;
+					//fixed = null;
 					
 	            } catch (FileNotFoundException e) {
 					// TODO Auto-generated catch block
