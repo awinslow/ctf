@@ -4,7 +4,7 @@
       android:versionCode="1"
       android:versionName="1.0">
     <uses-permission android:name="android.permission.VIBRATE"></uses-permission>
-    <application android:icon="@drawable/icon" android:label="@string/app_name">
+    <application android:icon="@drawable/caicon" android:label="@string/app_name">
     	<uses-library android:name="com.google.android.maps" />
         <activity android:name=".main"
         		android:screenOrientation="portrait"
@@ -32,6 +32,8 @@
         </activity>
         <activity android:name=".minigames" android:screenOrientation="portrait">
         </activity>
+         <activity android:name=".adventureperson" android:screenOrientation="portrait">
+        </activity>       
         <activity android:name=".hacknumpad" android:screenOrientation="portrait"
         	android:label="Enter the Code!">
         </activity>
