@@ -11,6 +11,7 @@ import java.util.List;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.location.Criteria;
@@ -48,10 +49,14 @@ class InterestingLocations extends ItemizedOverlay<OverlayItem>{
 	  @Override
 	  protected boolean onTap(int index) {
 	    OverlayItem item = locations.get(index);
-	    AlertDialog.Builder dialog = new AlertDialog.Builder(mContext);
+	    /*AlertDialog.Builder dialog = new AlertDialog.Builder(mContext);
 	    dialog.setTitle(item.getTitle());
 	    dialog.setMessage(item.getSnippet());
-	    dialog.show();
+	    dialog.show();*/
+		    info.checkingOutPlayer = Integer.parseInt(item.getTitle());
+			Intent i = new Intent();
+			i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.adventureperson");
+			mContext.startActivity(i);
 	    return true;
 	  }
 	  
@@ -89,14 +94,14 @@ public class adventure extends MapActivity{
 	        LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
 	        String provider = locationManager.getBestProvider(new Criteria(), false);
 	        setContentView(R.layout.adventure); 
-	        LinearLayout linearLayout;
+	      // LinearLayout linearLayout;
 	        MapView mapView;
 	        mapView = (MapView) findViewById(R.id.mapview);
 	        mapView.setBuiltInZoomControls(true);
 	        mapView.setSatellite(true);
 	        final MapController myMapController;
 	        myMapController = mapView.getController(); 
-	        myMapController.animateTo(new GeoPoint((int) (1000000*locationManager.getLastKnownLocation(provider).getLatitude()),(int) (1000000*locationManager.getLastKnownLocation(provider).getLongitude())));
+	        if (provider != null && locationManager != null && locationManager.getLastKnownLocation(provider) != null) myMapController.animateTo(new GeoPoint((int) (1000000*locationManager.getLastKnownLocation(provider).getLatitude()),(int) (1000000*locationManager.getLastKnownLocation(provider).getLongitude())));
 	        myMapController.setZoom(19);
 
 	        List<Overlay> mapOverlays = mapView.getOverlays();
@@ -128,7 +133,7 @@ public class adventure extends MapActivity{
 						inputLine = in.readLine();
 						int lon = (int) (Float.parseFloat(inputLine.substring(5))*1000000); //(degrees * 1E6)
 						Log.i("LOCATION", "lon: "+lon);
-						close.addOverlay(new OverlayItem(new GeoPoint(lat, lon), "Userid: "+name, "FINISH HIM!!!"));
+						close.addOverlay(new OverlayItem(new GeoPoint(lat, lon), name.substring(5), "FINISH HIM!!!"));
 					}
 					    
 					in.close();
@@ -164,7 +169,7 @@ public class adventure extends MapActivity{
 						inputLine = in.readLine();
 						int lon = (int) (Float.parseFloat(inputLine.substring(5))*1000000); //(degrees * 1E6)
 						Log.i("LOCATION", "lon: "+lon);
-						itemizedoverlay.addOverlay(new OverlayItem(new GeoPoint(lat, lon), "Userid: "+name, "FINISH HIM!!!"));
+						itemizedoverlay.addOverlay(new OverlayItem(new GeoPoint(lat, lon), name.substring(5), "FINISH HIM!!!"));
 					}
 					    
 					in.close();

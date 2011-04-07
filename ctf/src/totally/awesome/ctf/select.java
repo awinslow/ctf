@@ -137,19 +137,22 @@ public class select extends Activity{
 	    if (resultCode == RESULT_OK) {
 	        if (requestCode == 1) {
 	            Uri selectedImageUri = data.getData();
-	            //selectedImagePath = getPath(selectedImageUri);
-	            selectedImagePath = selectedImageUri.getPath();
+
+	            selectedImagePath = getPath(selectedImageUri);//selectedImageUri.getPath()+".jpg";
+	            
+	            Log.i("Chads thing", selectedImagePath);
 	            
 	            BitmapFactory.Options options = new BitmapFactory.Options();
 	            options.inSampleSize = 8;
 	            
 	            AssetFileDescriptor afd;
-	            
+	            String penisInChadsMouth = getPath(selectedImageUri);
+	            Log.i("Chads thing", penisInChadsMouth);
 	            Bitmap bitmap = null;
 	            try {
 	            	
 	            	ExifInterface exif = new ExifInterface(selectedImagePath);
-	            	String orient = exif.getAttribute(ExifInterface.TAG_ORIENTATION);
+	            	int orient = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_UNDEFINED);
 	            	Log.i("SELECT","orient is "+orient);
 	            	
 	            	
@@ -160,16 +163,17 @@ public class select extends Activity{
 	            	afd.close();
 	            	
 	            	Matrix m = new Matrix();
-	            	if (orient == "portrait")
+	            	Log.i("Chads thing", Integer.toString(bitmap.getWidth()));
+	            	Log.i("Chads thing", Integer.toString(bitmap.getHeight()));
+	            	if (orient == 6)
 	            		m.postRotate(90.0f);
 	            	
 					Bitmap fixed = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), m, true);
 					
 					ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
 					fixed.compress(Bitmap.CompressFormat.JPEG, 40, baos);
-					
-					
-					
+
 					byte[] b = baos.toByteArray();
 					info.theAuth.setPic(b);
 					info.setPic(info.theAuth.id, false);

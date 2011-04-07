@@ -21,6 +21,7 @@ public class info {
 	static myTimer gameTimer;
 	static int attacknum;
 	static int myClass;
+	static int checkingOutPlayer;
 	static boolean haveSomeone;
 	static boolean mmbitch;
 	static int target;

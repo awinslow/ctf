@@ -246,7 +246,8 @@ class findPlayer extends Thread{
 		            info.loading.dismiss();
 		            Message m = new Message();
 		            m.arg1=1;
-		            Arena.startBattle.sendMessage(m);
+		            if(Arena.startBattle != null) Arena.startBattle.sendMessage(m);
+		            else adventureperson.startBattle.sendMessage(m);
 	            }
 			} catch (MalformedURLException e1) {
 				// TODO Auto-generated catch block
