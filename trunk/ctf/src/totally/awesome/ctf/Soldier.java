@@ -1,5 +1,9 @@
 package totally.awesome.ctf;
 
+import java.io.IOException;
+
+import android.media.MediaPlayer;
+
 public class Soldier extends Player {
 
 	public Soldier() {
@@ -12,6 +16,36 @@ public class Soldier extends Player {
 	@Override
 	boolean attack1(int type) {
 		return super.attack1(getNumber());
+	}
+	
+	void soundAttack1(){
+		MediaPlayer mp = MediaPlayer.create(info.battleInst, R.raw.powerup);
+		try {
+			mp.prepare();
+		} catch (IllegalStateException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+        mp.start();
+	}
+	void soundAttack2(){
+		MediaPlayer mp = MediaPlayer.create(info.battleInst, R.raw.powerup);
+		try {
+			mp.prepare();
+		} catch (IllegalStateException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+        mp.start();
+	}
+	void soundAttack3(){
+		
 	}
 
 	@Override

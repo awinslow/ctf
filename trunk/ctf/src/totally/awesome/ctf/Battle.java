@@ -202,21 +202,8 @@ public class Battle extends Activity{
         attack0.setOnClickListener(new View.OnClickListener() {	
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-
 				if(info.currentFight.ap>=1){
-					
-	    			MediaPlayer mp = MediaPlayer.create(info.battleInst, R.raw.attack);
-	    			try {
-	    				mp.prepare();
-	    			} catch (IllegalStateException e1) {
-	    				// TODO Auto-generated catch block
-	    				e1.printStackTrace();
-	    			} catch (IOException e1) {
-	    				// TODO Auto-generated catch block
-	    				e1.printStackTrace();
-	    			}
-	    	        mp.start();
-					
+					info.myPlayer.SoundAttack0();
 					if (!info.myPlayer.attack0())
 					{
 						CharSequence text = "Attack message to server failed";
@@ -253,17 +240,7 @@ public class Battle extends Activity{
 						(info.myClass == 1 && info.currentFight.ap>=4) ||
 						(info.myClass == 2 && info.currentFight.ap>=5)){
 					
-	    			MediaPlayer mp = MediaPlayer.create(info.battleInst, R.raw.attack);
-	    			try {
-	    				mp.prepare();
-	    			} catch (IllegalStateException e1) {
-	    				// TODO Auto-generated catch block
-	    				e1.printStackTrace();
-	    			} catch (IOException e1) {
-	    				// TODO Auto-generated catch block
-	    				e1.printStackTrace();
-	    			}
-	    	        mp.start();
+					info.myPlayer.soundAttack1();
 					
 					if (!info.myPlayer.attack1(-1))
 					{
@@ -300,17 +277,7 @@ public class Battle extends Activity{
 						(info.myClass == 1 && info.currentFight.ap>=6) ||
 						(info.myClass == 2 && info.currentFight.ap>=6)){
 					
-	    			MediaPlayer mp = MediaPlayer.create(info.battleInst, R.raw.attack);
-	    			try {
-	    				mp.prepare();
-	    			} catch (IllegalStateException e1) {
-	    				// TODO Auto-generated catch block
-	    				e1.printStackTrace();
-	    			} catch (IOException e1) {
-	    				// TODO Auto-generated catch block
-	    				e1.printStackTrace();
-	    			}
-	    	        mp.start();
+					info.myPlayer.soundAttack2();
 					
 					if (!info.myPlayer.attack2(-1))
 					{
@@ -347,17 +314,7 @@ public class Battle extends Activity{
 						(info.myClass == 1 && info.currentFight.ap>=8) ||
 						(info.myClass == 2 && info.currentFight.ap>=12)){
 					
-	    			MediaPlayer mp = MediaPlayer.create(info.battleInst, R.raw.attack);
-	    			try {
-	    				mp.prepare();
-	    			} catch (IllegalStateException e1) {
-	    				// TODO Auto-generated catch block
-	    				e1.printStackTrace();
-	    			} catch (IOException e1) {
-	    				// TODO Auto-generated catch block
-	    				e1.printStackTrace();
-	    			}
-	    	        mp.start();
+					info.myPlayer.soundAttack3();
 					
 					info.attacknum = 3;
 					Intent i = new Intent();

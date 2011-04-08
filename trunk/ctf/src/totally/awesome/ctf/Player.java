@@ -6,6 +6,7 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 
+import android.media.MediaPlayer;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -146,6 +147,24 @@ public abstract class Player {
 		return false;
 	}
 	
+	void SoundAttack0()
+	{
+		MediaPlayer mp = MediaPlayer.create(info.battleInst, R.raw.attack);
+		try {
+			mp.prepare();
+		} catch (IllegalStateException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+        mp.start();
+	}
+	
+	abstract void soundAttack1();
+	abstract void soundAttack2();
+	abstract void soundAttack3();
 	abstract String getName();
 	
 	abstract int getNumber();
