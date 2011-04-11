@@ -19,10 +19,30 @@ public class Hacker extends Player {
 	}
 	
 	void soundAttack1(){
-		
+		MediaPlayer mp = MediaPlayer.create(info.battleInst, R.raw.whip);
+		try {
+			mp.prepare();
+		} catch (IllegalStateException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+        mp.start();
 	}
 	void soundAttack2(){
-		
+		MediaPlayer mp = MediaPlayer.create(info.battleInst, R.raw.lasergun);
+		try {
+			mp.prepare();
+		} catch (IllegalStateException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+        mp.start();
 	}
 	void soundAttack3(){
 		MediaPlayer mp = MediaPlayer.create(info.battleInst, R.raw.hacking);
