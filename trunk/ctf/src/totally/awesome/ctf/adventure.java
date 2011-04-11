@@ -12,6 +12,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.location.Criteria;
@@ -88,6 +89,24 @@ class InterestingLocations extends ItemizedOverlay<OverlayItem>{
 	 }
 
 public class adventure extends MapActivity{
+	MyIntentReceiver intentReceiver;	
+	
+	public void onPause(){
+		super.onPause();
+		unregisterReceiver(intentReceiver);
+	}
+	
+	public void onResume(){
+		super.onResume();
+		info.inMatchMaking=false;
+        intentReceiver = new MyIntentReceiver();
+        IntentFilter intentFilter = new IntentFilter("totally.awesome.ctf.HI");
+        intentFilter.setPriority(1);
+
+        registerReceiver(intentReceiver, intentFilter); 
+	}
+	
+	
 	 public void onCreate(Bundle savedInstanceState) {
 		 requestWindowFeature(Window.FEATURE_NO_TITLE);
 	        super.onCreate(savedInstanceState);
