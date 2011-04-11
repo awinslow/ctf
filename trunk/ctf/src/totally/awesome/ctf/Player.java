@@ -149,7 +149,7 @@ public abstract class Player {
 	
 	void SoundAttack0()
 	{
-		MediaPlayer mp = MediaPlayer.create(info.battleInst, R.raw.attack);
+		MediaPlayer mp = MediaPlayer.create(info.battleInst, R.raw.lasercannon);
 		try {
 			mp.prepare();
 		} catch (IllegalStateException e1) {

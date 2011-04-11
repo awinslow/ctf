@@ -31,10 +31,30 @@ public class Sentinel extends Player {
         mp.start();
 	}
 	void soundAttack2(){
-		
+		MediaPlayer mp = MediaPlayer.create(info.battleInst, R.raw.sniperifle);
+		try {
+			mp.prepare();
+		} catch (IllegalStateException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+        mp.start();
 	}
 	void soundAttack3(){
-		
+		MediaPlayer mp = MediaPlayer.create(info.battleInst, R.raw.raygun);
+		try {
+			mp.prepare();
+		} catch (IllegalStateException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+        mp.start();
 	}
 	@Override
 	boolean attack2(int type) {
