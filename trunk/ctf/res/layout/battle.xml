@@ -94,7 +94,7 @@
     		<Button
     		    android:textColor="#000000" 
     			android:background="#33CC00" android:typeface="monospace" 
-    			android:text="Attack 0"
+    			android:text="Attack 1"
     			android:layout_width="0px" 
     			android:layout_height="match_parent" 
     			android:layout_weight="1" 
