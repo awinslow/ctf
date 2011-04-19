@@ -59,7 +59,7 @@ public class Battle extends Activity{
 		super.onPause();
 		info.h.interrupt();
 		unregisterReceiver(intentReceiver);
-
+		info.stopBackgroundSound();
 	}
 	
 	public void onResume(){
@@ -71,6 +71,7 @@ public class Battle extends Activity{
         info.h = new heartbeat();
         info.h.start();
         registerReceiver(intentReceiver, intentFilter); 
+        info.playBackgroundSong();
 	}
 	static RefreshHandler mRedrawHandler = new RefreshHandler();
     static class RefreshHandler extends Handler {
