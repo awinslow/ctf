@@ -8,8 +8,9 @@
     <TableLayout android:id="@+id/tableLayout1" android:layout_height="match_parent" android:layout_width="fill_parent">
     	<TableRow>
     		<TextView
-    			android:textColor="#33CC00" android:typeface="monospace" 
+    			android:textColor="#FF0000" android:typeface="monospace" 
     			android:text="Enemy"
+    			android:textSize="25dp"
     			android:layout_width="0dip"
     			android_layout_height="wrap_content"
     			android:padding="10dip"
@@ -18,8 +19,9 @@
     			android:gravity="center_horizontal" android:id="@+id/enemyName">
     		</TextView>
     		<TextView
-    			android:textColor="#33CC00" android:typeface="monospace" 
+    			android:textColor="#3399FF" android:typeface="monospace" 
     		    android:text="You"
+    		    android:textSize="25dp"
     			android:layout_width="0dip"
     			android_layout_height="wrap_content"
     			android:padding="10dip"
@@ -30,8 +32,9 @@
     	</TableRow>
     	    <TableRow>
     		<TextView
-    			android:textColor="#33CC00" android:typeface="monospace" 
+    			android:textColor="#FF0000" android:typeface="monospace" 
     			android:text="Enemy Class"
+    			android:textSize="25dp"
     			android:layout_width="0dip"
     			android_layout_height="wrap_content"
     			android:padding="10dip"
@@ -40,8 +43,9 @@
     			android:gravity="center_horizontal" android:id="@+id/enemyClass">
     		</TextView>
     		<TextView
-    			android:textColor="#33CC00" android:typeface="monospace" 
+    			android:textColor="#3399FF" android:typeface="monospace" 
     		    android:text="Your Class"
+    		    android:textSize="25dp"
     			android:layout_width="0dip"
     			android_layout_height="wrap_content"
     			android:padding="10dip"
@@ -77,13 +81,14 @@
 			<ProgressBar android:layout_width="0dip" android:layout_height="wrap_content" android:padding="10dip" android:layout_weight="1" android:layout_margin="4dip" style="?android:attr/progressBarStyleHorizontal" android:id="@+id/MyHealthBar" android:adjustViewBounds="true"></ProgressBar>
 		</TableRow>
 		<TableRow>
-			<TextView android:textColor="#33CC00" android:typeface="monospace" android:id="@+id/enemyHealth" android:padding="10dip" android:layout_weight="1" android:layout_width="0dip" android:gravity="center_horizontal" android:layout_margin="4dip" android:text="Health: %" android:layout_height="wrap_content"></TextView>
-			<TextView android:textColor="#33CC00" android:typeface="monospace" android:id="@+id/yourHealth" android:padding="10dip" android:layout_weight="1" android:layout_width="0dip" android:gravity="center_horizontal" android:layout_margin="4dip" android:text="Health: %" android:layout_height="wrap_content"></TextView>
+			<TextView android:textColor="#FF0000" android:textSize="15dp" android:typeface="monospace" android:id="@+id/enemyHealth" android:padding="10dip" android:layout_weight="1" android:layout_width="0dip" android:gravity="center_horizontal" android:layout_margin="4dip" android:text="Health: %" android:layout_height="wrap_content"></TextView>
+			<TextView android:textColor="#3399FF" android:textSize="15dp" android:typeface="monospace" android:id="@+id/yourHealth" android:padding="10dip" android:layout_weight="1" android:layout_width="0dip" android:gravity="center_horizontal" android:layout_margin="4dip" android:text="Health: %" android:layout_height="wrap_content"></TextView>
 		</TableRow>
     	<TableRow>
     		<TextView 
-    			android:textColor="#33CC00" android:typeface="monospace" 
+    			android:textColor="#3399FF" android:typeface="monospace" 
     			android:text="AP:" 
+    			android:textSize="25dp"
     			android:id="@+id/apcount" 
     			android:layout_width="0px" 
     			android:layout_height="80px" 

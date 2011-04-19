@@ -16,7 +16,7 @@
 				android:layout_weight="1"
 				android:layout_margin="4dip"
 				android:textSize="20dp"
-				android:background="#33CC00"
+				android:background="@drawable/rounded_button"
 				android:gravity="center_horizontal" android:id="@+id/soldier">
 			</Button>
 		</TableRow>
@@ -29,7 +29,7 @@
     			android:padding="10dip" 
     			android:layout_weight="1" 
     			android:layout_margin="4dip"
-    			android:textColor="#33CC00"
+    			android:textColor="#3399FF"
     			android:typeface="monospace"
     			android:gravity="center_horizontal">
     		</TextView>
@@ -45,7 +45,7 @@
 				android:layout_margin="4dip"
 				android:typeface="monospace"
 				android:textSize="20dp"
-				android:background="#33CC00"
+				android:background="@drawable/rounded_button"
 				android:gravity="center_horizontal" android:id="@+id/sentinel">
 			</Button>
 		</TableRow>
@@ -57,7 +57,7 @@
     			android:layout_height="wrap_content" 
     			android:padding="10dip" 
     			android:layout_weight="1" 
-    			android:textColor="#33CC00"
+    			android:textColor="#3399FF"
     			android:layout_margin="4dip"
     			android:typeface="monospace"
     			android:gravity="center_horizontal">
@@ -73,7 +73,7 @@
 				android:layout_weight="1"
 				android:layout_margin="4dip"
 				android:textSize="20dp"
-				android:background="#33CC00"
+				android:background="@drawable/rounded_button"
 				android:typeface="monospace"
 				android:gravity="center_horizontal" android:id="@+id/hacker">
 			</Button>
@@ -87,7 +87,7 @@
     			android:padding="10dip" 
     			android:layout_weight="1" 
     			android:typeface="monospace"
-    			android:textColor="#33CC00"
+    			android:textColor="#3399FF"
     			android:layout_margin="4dip"
     			android:gravity="center_horizontal">
     		</TextView>
