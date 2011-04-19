@@ -4,15 +4,15 @@
   android:layout_width="match_parent"
   android:background="@drawable/supernovap"
   android:layout_height="match_parent" android:orientation="vertical">
-    <TextView android:textColor="#33CC00" android:typeface="monospace" android:text="TextView" android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/username"></TextView>
-    <TextView android:textColor="#33CC00" android:typeface="monospace" android:text="Class Here" android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/Classme"></TextView>
+    <TextView android:textColor="#3399FF" android:typeface="monospace" android:text="TextView" android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/username"></TextView>
+    <TextView android:textColor="#3399FF" android:typeface="monospace" android:text="Class Here" android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/Classme"></TextView>
     <ImageView android:layout_width="wrap_content" android:src="@drawable/icon" android:layout_height="120dip" android:id="@+id/userIcon" android:adjustViewBounds="true"></ImageView>
-    <TextView android:textColor="#33CC00" android:typeface="monospace" android:text="TextView" android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/level"></TextView>
-    <TextView android:textColor="#33CC00" android:typeface="monospace" android:text="TextView" android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/Experience"></TextView>
-    <TextView android:textColor="#33CC00" android:typeface="monospace" android:text="TextView" android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/maxHealth"></TextView>
-    <TextView android:textColor="#33CC00" android:typeface="monospace" android:text="TextView" android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/Attack"></TextView>
-    <TextView android:textColor="#33CC00" android:typeface="monospace" android:text="TextView" android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/Defense"></TextView>
-    <TextView android:textColor="#33CC00" android:typeface="monospace" android:text="TextView" android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/APperTurn"></TextView>
-    <Button android:textColor="#000000" android:layout_margin="2dip" android:padding="10dip" android:textSize="20dp" android:background="#33CC00" android:typeface="monospace" android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/StartBattle" android:text="Start Battle by Matchmaking"></Button>
-	<Button android:textColor="#000000" android:layout_margin="2dip" android:padding="10dip" android:textSize="20dp" android:background="#33CC00" android:typeface="monospace" android:text="Start Battle by ID" android:id="@+id/StartBattleID" android:layout_width="match_parent" android:layout_height="wrap_content"></Button>
+    <TextView android:textColor="#3399FF" android:typeface="monospace" android:text="TextView" android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/level"></TextView>
+    <TextView android:textColor="#3399FF" android:typeface="monospace" android:text="TextView" android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/Experience"></TextView>
+    <TextView android:textColor="#3399FF" android:typeface="monospace" android:text="TextView" android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/maxHealth"></TextView>
+    <TextView android:textColor="#3399FF" android:typeface="monospace" android:text="TextView" android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/Attack"></TextView>
+    <TextView android:textColor="#3399FF" android:typeface="monospace" android:text="TextView" android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/Defense"></TextView>
+    <TextView android:textColor="#3399FF" android:typeface="monospace" android:text="TextView" android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/APperTurn"></TextView>
+    <Button android:textColor="#000000" android:layout_margin="2dip" android:padding="10dip" android:textSize="20dp" android:background="@drawable/rounded_button" android:typeface="monospace" android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/StartBattle" android:text="Start Battle by Matchmaking"></Button>
+	<Button android:textColor="#000000" android:layout_margin="2dip" android:padding="10dip" android:textSize="20dp" android:background="@drawable/rounded_button" android:typeface="monospace" android:text="Start Battle by ID" android:id="@+id/StartBattleID" android:layout_width="match_parent" android:layout_height="wrap_content"></Button>
 </LinearLayout>
