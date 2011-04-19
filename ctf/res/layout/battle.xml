@@ -10,7 +10,7 @@
     		<TextView
     			android:textColor="#FF0000" android:typeface="monospace" 
     			android:text="Enemy"
-    			android:textSize="25dp"
+    			android:textSize="18dp"
     			android:layout_width="0dip"
     			android_layout_height="wrap_content"
     			android:padding="10dip"
@@ -21,7 +21,7 @@
     		<TextView
     			android:textColor="#3399FF" android:typeface="monospace" 
     		    android:text="You"
-    		    android:textSize="25dp"
+    		    android:textSize="18dp"
     			android:layout_width="0dip"
     			android_layout_height="wrap_content"
     			android:padding="10dip"
@@ -34,7 +34,7 @@
     		<TextView
     			android:textColor="#FF0000" android:typeface="monospace" 
     			android:text="Enemy Class"
-    			android:textSize="25dp"
+    			android:textSize="18dp"
     			android:layout_width="0dip"
     			android_layout_height="wrap_content"
     			android:padding="10dip"
@@ -45,7 +45,7 @@
     		<TextView
     			android:textColor="#3399FF" android:typeface="monospace" 
     		    android:text="Your Class"
-    		    android:textSize="25dp"
+    		    android:textSize="18dp"
     			android:layout_width="0dip"
     			android_layout_height="wrap_content"
     			android:padding="10dip"
@@ -88,7 +88,7 @@
     		<TextView 
     			android:textColor="#3399FF" android:typeface="monospace" 
     			android:text="AP:" 
-    			android:textSize="25dp"
+    			android:textSize="18dp"
     			android:id="@+id/apcount" 
     			android:layout_width="0px" 
     			android:layout_height="80px" 
