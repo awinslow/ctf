@@ -50,7 +50,7 @@ class InterestingLocations extends ItemizedOverlay<OverlayItem>{
 		}
 
 	  @Override
-	  protected boolean onTap(int index) {
+	  protected boolean onTap(final int index) {
 	    final OverlayItem item = locations.get(index);
 	    /*AlertDialog.Builder dialog = new AlertDialog.Builder(mContext);
 	    dialog.setTitle(item.getTitle());
@@ -117,17 +117,8 @@ class InterestingLocations extends ItemizedOverlay<OverlayItem>{
 	    				h.setRequestMethod("GET");
 	    				h.connect();
 	    				if(h.getResponseCode()==200){
-	    					BufferedReader in = new BufferedReader(
-	    	                        new InputStreamReader(
-	    	                        h.getInputStream()));
-	    					String inputLine;
-	    					
-	    					while ((inputLine = in.readLine()) != null){
-	    						//name = inputLine;
 
-	    					}
-	    					    
-	    					in.close();
+	    					removeOverlay(index);
 	    					Log.i("LOCATION", "update good");
 	    				}
 	    				else{
@@ -163,6 +154,11 @@ class InterestingLocations extends ItemizedOverlay<OverlayItem>{
 		  locations.add(overlay);
 		  populate();
 		}
+	  
+	  public void removeOverlay(int location){
+		  locations.remove(location);
+		  populate();
+	  }
 	  
 	  @Override
 	  protected OverlayItem createItem(int i) {
