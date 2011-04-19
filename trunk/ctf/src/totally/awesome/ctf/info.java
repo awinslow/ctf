@@ -1,11 +1,13 @@
 package totally.awesome.ctf;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.Vector;
 
 import android.app.ProgressDialog;
 import android.graphics.drawable.Drawable;
+import android.media.MediaPlayer;
 import android.util.Log;
 
 public class info {
@@ -29,6 +31,7 @@ public class info {
 	public static Drawable getPic(int id){
 		return myPicture;
 	}
+	private static MediaPlayer battleSong;
        
 	
 	public static void setPic(int id, boolean isEnemy)
@@ -78,6 +81,24 @@ public class info {
 				myPlayer = new Hacker();
 				break;
 		}
+	}
+	
+	public static void playBackgroundSong(){
+		battleSong = MediaPlayer.create(info.battleInst, R.raw.battlesongfinal);
+		battleSong.setLooping(true);
+		try {
+			battleSong.prepare();
+		} catch (IllegalStateException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+        battleSong.start();
+	}
+	public static void stopBackgroundSound(){
+		battleSong.pause();
 	}
 }
 	
