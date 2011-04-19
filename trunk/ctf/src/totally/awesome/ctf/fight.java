@@ -234,29 +234,29 @@ public class fight {
 			else Log.i("setTurn", "all quiet on the western front");
 			//while(info.battleInst==null) Log.i("WAITING", "battle inst is still null bc its a little bitch");
 			info.battleInst.attack0.setEnabled(true);
-			info.battleInst.attack0.setBackgroundColor(0xFF33CC00);
+			info.battleInst.attack0.setBackgroundResource(R.drawable.rounded_button);
 			info.battleInst.attack1.setEnabled(true);
-			info.battleInst.attack1.setBackgroundColor(0xFF33CC00);
+			info.battleInst.attack1.setBackgroundResource(R.drawable.rounded_button);
 			info.battleInst.attack2.setEnabled(true);
-			info.battleInst.attack2.setBackgroundColor(0xFF33CC00);
+			info.battleInst.attack2.setBackgroundResource(R.drawable.rounded_button);
 			info.battleInst.attack3.setEnabled(true);
-			info.battleInst.attack3.setBackgroundColor(0xFF33CC00);
+			info.battleInst.attack3.setBackgroundResource(R.drawable.rounded_button);
 			info.battleInst.item.setEnabled(true);
-			info.battleInst.item.setBackgroundColor(0xFF33CC00);
+			info.battleInst.item.setBackgroundResource(R.drawable.rounded_button);
 		}
 		else if(id == enemyID)
 		{
 			myTurn = false;
 			info.battleInst.attack0.setEnabled(false);
-			info.battleInst.attack0.setBackgroundColor(0xFFFF0000);
+			info.battleInst.attack0.setBackgroundResource(R.drawable.rounded_button1);
 			info.battleInst.attack1.setEnabled(false);
-			info.battleInst.attack1.setBackgroundColor(0xFFFF0000);
+			info.battleInst.attack1.setBackgroundResource(R.drawable.rounded_button1);
 			info.battleInst.attack2.setEnabled(false);
-			info.battleInst.attack2.setBackgroundColor(0xFFFF0000);
+			info.battleInst.attack2.setBackgroundResource(R.drawable.rounded_button1);
 			info.battleInst.attack3.setEnabled(false);
-			info.battleInst.attack3.setBackgroundColor(0xFFFF0000);
+			info.battleInst.attack3.setBackgroundResource(R.drawable.rounded_button1);
 			info.battleInst.item.setEnabled(false);
-			info.battleInst.item.setBackgroundColor(0xFFFF0000);
+			info.battleInst.item.setBackgroundResource(R.drawable.rounded_button1);
 		}
 	}
 }
