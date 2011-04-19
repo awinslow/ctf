@@ -86,6 +86,7 @@ public class info {
 	public static void playBackgroundSong(){
 		battleSong = MediaPlayer.create(info.battleInst, R.raw.battlesongfinal);
 		battleSong.setLooping(true);
+		battleSong.setVolume(0.4f, 0.4f);
 		try {
 			battleSong.prepare();
 		} catch (IllegalStateException e1) {
