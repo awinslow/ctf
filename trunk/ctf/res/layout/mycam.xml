@@ -4,15 +4,37 @@
 	android:layout_height="fill_parent" android:id="@+id/layout">
 	<TextView android:layout_width="fill_parent"
 		android:layout_height="wrap_content" android:text="Camera!"
-		android:textSize="24sp" android:gravity="center"/>
+		android:textSize="18sp" android:gravity="center"
+		android:textColor="#3399FF"/>
 
 	<FrameLayout android:id="@+id/preview"
 		android:layout_weight="1" android:layout_height="fill_parent" android:layout_width="300dip" android:layout_gravity="center">
 	</FrameLayout>
-	<LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/linearLayout1" android:layout_gravity="center|bottom">
-		<Button android:layout_width="wrap_content" android:text="Take Picture!" android:id="@+id/buttonClick" android:layout_gravity="center" android:layout_height="wrap_content"></Button>
-		<Button android:layout_width="wrap_content" android:text="Use This Picture!" android:id="@+id/usepic" android:layout_height="wrap_content"></Button>
-		<Button android:layout_width="wrap_content" android:text="Back" android:layout_height="wrap_content" android:id="@+id/back"></Button>
-	</LinearLayout>
+	<TableRow android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/linearLayout1" android:layout_gravity="center|bottom">
+		<Button 
+				android:textColor="#000000" 
+    			android:background="@drawable/rounded_button" android:typeface="monospace"  
+    			android:layout_weight="1" 
+    			android:padding="5px"
+    			android:layout_margin="4px"
+    			android:gravity="center"
+				android:text="Take Picture!" android:id="@+id/buttonClick"></Button>
+		<Button 
+				android:textColor="#000000" 
+    			android:background="@drawable/rounded_button" android:typeface="monospace" 
+    			android:layout_weight="1" 
+    			android:padding="5px"
+    			android:layout_margin="4px"
+    			android:gravity="center"
+				android:text="Use This Picture!" android:id="@+id/usepic"></Button>
+		<Button 
+				android:textColor="#000000" 
+    			android:background="@drawable/rounded_button" android:typeface="monospace" 
+    			android:layout_weight="1" 
+    			android:padding="5px"
+    			android:layout_margin="4px"
+    			android:gravity="center"
+				android:text="Back" android:id="@+id/back"></Button>
+	</TableRow>
 
 </LinearLayout>

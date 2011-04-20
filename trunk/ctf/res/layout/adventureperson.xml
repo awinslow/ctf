@@ -1,10 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<AbsoluteLayout
+<LinearLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
-  android:layout_width="match_parent"
-  android:layout_height="match_parent">
-    <Button android:id="@+id/apbattle" android:text="Battle" android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_x="38dip" android:layout_y="286dip"></Button>
-    <Button android:id="@+id/apback" android:text="Back" android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_x="176dip" android:layout_y="282dip"></Button>
-    <TextView android:layout_height="wrap_content" android:id="@+id/apname" android:text="TextView" android:layout_width="wrap_content" android:layout_x="120dip" android:layout_y="10dip"></TextView>
-    <ImageView android:layout_height="120dip" android:adjustViewBounds="true" android:layout_width="wrap_content" android:id="@+id/appic" android:src="@drawable/icon" android:layout_x="69dip" android:layout_y="33dip"></ImageView>
-</AbsoluteLayout>
+  android:layout_width="fill_parent"
+  android:background="@drawable/stars"
+  android:layout_height="fill_parent" android:orientation="vertical" android:stretchColumns="*">
+  <TableLayout android:id="@+id/TableLayout1" android:layout_height="match_parent" android:layout_width="match_parent">
+  <TableRow>
+  	<TextView 
+  	android:textColor="#3399FF" android:typeface="monospace" 
+    			android:textSize="18dp"
+    			android:layout_width="0dip"
+    			android_layout_height="wrap_content"
+    			android:padding="10dip"
+    			android:layout_weight="1"
+    			android:layout_margin="4dip"
+    			android:gravity="center_horizontal" android:id="@+id/apname" android:text="TextView" ></TextView>
+  </TableRow>
+  <TableRow>
+  	<ImageView 
+  	android:layout_height="200dip" android:padding="10dip" android:layout_weight="1" android:layout_margin="4dip" android:src="@drawable/icon" android:id="@+id/appic" android:adjustViewBounds="true"
+  	></ImageView>
+  </TableRow>
+  <TableRow>
+  	<Button 
+  				    android:textColor="#000000" 
+			    android:typeface="monospace"
+				android:layout_width="0dip"
+				android:layout_height="wrap_content"
+				android:padding="10dip"
+				android:layout_weight="1"
+				android:layout_margin="4dip"
+				android:textSize="20dp"
+				android:background="@drawable/rounded_button"
+				android:gravity="center_horizontal"
+  	
+  	android:id="@+id/apbattle" android:text="Battle" ></Button>
+  </TableRow>
+  <TableRow>
+  	<Button 
+  	  				    android:textColor="#000000" 
+			    android:typeface="monospace"
+				android:layout_width="0dip"
+				android:layout_height="wrap_content"
+				android:padding="10dip"
+				android:layout_weight="1"
+				android:layout_margin="4dip"
+				android:textSize="20dp"
+				android:background="@drawable/rounded_button"
+				android:gravity="center_horizontal"
+  	
+  	android:id="@+id/apback" android:text="Back"></Button>
+  </TableRow>
+  </TableLayout>
+    
+</LinearLayout>
