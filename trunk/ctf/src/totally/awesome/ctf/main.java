@@ -127,20 +127,20 @@ public class main extends Activity {
 			}
 		});
         
-        Button battle = (Button)findViewById(R.id.battle); //id is button 1
+      //  Button battle = (Button)findViewById(R.id.battle); //id is button 1
         //if(info.theAuth==null) battle.setEnabled(false);
-        battle.setOnClickListener(new View.OnClickListener() {
+      //  battle.setOnClickListener(new View.OnClickListener() {
 			
-			public void onClick(View v) {
+	//		public void onClick(View v) {
 				// TODO Auto-generated method stub
 				//requestWindowFeature(Window.FEATURE_NO_TITLE);
-				Intent i = new Intent();
-				i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.select");
-				startActivity(i);
+		//		Intent i = new Intent();
+		//		i.setClassName("totally.awesome.ctf", "totally.awesome.ctf.select");
+		//		startActivity(i);
 				
-				finish();
-			}
-		});
+		//		finish();
+		//	}
+	//	});
         
         registrationId = C2DMessaging.getRegistrationId(this);
         if(registrationId != null && !"".equals(registrationId)){
