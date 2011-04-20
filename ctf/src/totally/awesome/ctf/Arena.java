@@ -330,10 +330,10 @@ public class Arena extends Activity{
     	uname.setText("User Name: " + Uname);
     	TextView uClass = (TextView)findViewById(R.id.Classme);
     	uClass.setText("User Class: " + info.myPlayer.getName());
-    	TextView exp = (TextView)findViewById(R.id.Experience);
-    	exp.setText("Experience: " + Exp);
-    	TextView lvl = (TextView)findViewById(R.id.level);
-    	lvl.setText("Level: " + Lvl);
+    	//TextView exp = (TextView)findViewById(R.id.Experience);
+    	//exp.setText("Experience: " + Exp);
+    	//TextView lvl = (TextView)findViewById(R.id.level);
+    	//lvl.setText("Level: " + Lvl);
     	TextView maxH = (TextView)findViewById(R.id.maxHealth);
     	maxH.setText("Health: " + MaxH);
     	TextView attk = (TextView)findViewById(R.id.Attack);
